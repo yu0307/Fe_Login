@@ -1,0 +1,23 @@
+{
+    "name": "fei/fe_login",
+    "description": "Authentication pkg offers login form,link. authentication through Oauth,password, etc",
+    "type": "library",
+    "require": {
+        "laravel/socialite": "^5.0@dev"
+    },
+    "require-dev": {
+        "laravel/socialite": "^5.0@dev"
+    },
+    "authors": [
+        {
+            "name": "Lucas F. Lu",
+            "email": "yu0307@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "FeI\\Fe_Login\\": "src/"
+        }
+    }
+}

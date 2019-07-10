@@ -1,6 +1,6 @@
 <?php
 
-namespace FeI\Fe_Login\http\controllers;
+namespace FeIron\Fe_Login\http\controllers;
 
 use App\Http\Controllers\Controller;
 

@@ -1,5 +1,5 @@
 <?php
-    namespace FeI\Fe_Login;
+    namespace FeIron\Fe_Login;
     use Illuminate\Support\ServiceProvider;
 
     class Fe_LoginServiceProvider extends ServiceProvider{

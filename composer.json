@@ -1,5 +1,5 @@
 {
-    "name": "fei/fe_login",
+    "name": "feiron/fe_login",
     "description": "Authentication pkg offers login form,link. authentication through Oauth,password, etc",
     "type": "library",
     "require": {
@@ -17,7 +17,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "FeI\\Fe_Login\\": "src/"
+            "FeIron\\Fe_Login\\": "src/"
         }
     }
 }

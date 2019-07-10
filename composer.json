@@ -2,6 +2,7 @@
     "name": "feiron/fe_login",
     "description": "Authentication pkg offers login form,link. authentication through Oauth,password, etc",
     "type": "library",
+    "license": "Apache-2.0",
     "require": {
         "laravel/socialite": "^5.0@dev"
     },

@@ -33,11 +33,24 @@ class FeLoginController extends Controller
 
     public function index()
     {
-        return $this->RenderLoginWindow();
+        return $this->RenderLoginForm();
+    }
+
+    public function RenderLoginForm()
+    {
+        return view('Fe_Login::LoginForm');
     }
 
     public function RenderLoginWindow(){
-        return view('Fe_Login::LoginForm');
+        return view('Fe_Login::LoginWindow');
+    }
+
+    public function TryLogin($AuthType = null){
+        if (!isset($AuthType)) {
+            return redirect()->route('Fe_LoginWindow');
+        } else {
+            return 'waiting';
+        }
     }
 
     // public function redirectToProvider()

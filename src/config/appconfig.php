@@ -2,10 +2,11 @@
 
     return [
         'DefaultLoginProviders'=>['google','twitter','facebook'],
-        'HasRegister'=>false,
+        'HasRegister'=>true,
         'HasFormLogin'=>true,
-        'HasForgotPassword'=>false,
-        'HasSocialSignin'=>true
+        'HasForgotPassword'=>true,
+        'HasSocialSignin'=>true,
+        'HasTermURL'=>null
     ];
 
 ?>

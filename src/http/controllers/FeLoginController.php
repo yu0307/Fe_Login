@@ -36,15 +36,16 @@ class FeLoginController extends Controller
         return $this->RenderLoginForm();
     }
 
-    public function RenderLoginForm()
-    {
-        return view('Fe_Login::LoginForm');
-    }
-
+    
     public function RenderLoginWindow(){
         return view('Fe_Login::LoginWindow');
     }
-
+    
+    // public function RenderLoginForm()
+    // {
+    //     return view('Fe_Login::LoginForm');
+    // }
+    
     public function TryLogin($AuthType = null){
         if (!isset($AuthType)) {
             return redirect()->route('Fe_LoginWindow');

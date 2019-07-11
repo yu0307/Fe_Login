@@ -1,4 +1,3 @@
-@include('Fe_Login::LoginForm')
 <!DOCTYPE html>
 <html>
 
@@ -7,12 +6,24 @@
     <title>@yield('title','Login')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta content="FeIron" name="Lucas.F.Lu" />
-    @stack('Fe_styles')
 </head>
 
 <body class="usr_login_form" data-page="login">
-    @yield('Fe_LoginWindow')
-    @stack('Fe_scripts')
+    @Fe_LoginForm
+    @slot('SignInTitle')
+    Please <strong>Sign</strong> In Here ...
+    @endslot
+    Choose the options from the right to login ...
+    @endFe_LoginForm
+
+    @stack('Fe_Login_public')
+    @stack('Fe_Login_styles')
+    @stack('Fe_Login_scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#Fe_login-block').fadeIn(700, 'linear');
+        });
+    </script>
 </body>
 
 </html>

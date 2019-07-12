@@ -2,11 +2,7 @@
 
     return [
         'DefaultLoginProviders'=>[
-            'google'=>[
-                'client_id'=>'',
-                'client_secret'=>'',
-                'redirect'=>'http://devs.lvh.me/login/google/callback'
-            ],
+            'google'=>[],
             'twitter'=>[],
             'facebook'=>[]
         ],

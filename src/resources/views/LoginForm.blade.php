@@ -46,7 +46,7 @@
                             @if (config('fe_login_appconfig.HasSocialSignin'))
                             <div class="form-footer" id="SocialSignIn">
                                 <div class="social-btn">
-                                    @foreach (config('fe_login_appconfig.DefaultLoginProviders') as $provider)
+                                    @foreach (config('fe_login_appconfig.DefaultLoginProviders') as $provider=>$configs)
                                     <a href="{{route('Fe_LoginControl', ['AuthType' => $provider])}}"><img src="{{ asset('FeIron/Fe_Login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
                                     @endforeach
                                 </div>

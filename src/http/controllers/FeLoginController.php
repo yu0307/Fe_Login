@@ -8,6 +8,7 @@ use TheSeer\Tokenizer\Exception;
 use FeIron\Fe_Login\models\fe_users;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Hash;
 
 class FeLoginController extends Controller
 {
@@ -49,10 +50,11 @@ class FeLoginController extends Controller
             return redirect()->route('Fe_LoginWindow');
         } else {
             try {
-                return Socialite::driver($AuthType)->redirect();
-            } catch (Exception $e) {
-                return 'Authentication Error'.(config('app.debug')===false?'':('<br/>'.$e));
-            }
+                    config([('services.'.$AuthType)=>config('fe_login_appconfig.DefaultLoginProviders.'.$AuthType)]);
+                    return Socialite::driver($AuthType)->redirect();
+                } catch (Exception $e) {
+                    return 'Authentication Error'.(config('app.debug')===false?'':('<br/>'.$e));
+                }
         }
         return false;
     }
@@ -69,6 +71,7 @@ class FeLoginController extends Controller
             return redirect()->route('Fe_LoginWindow');
         } else {
             try {
+                    config([('services.'.$AuthType)=>config('fe_login_appconfig.DefaultLoginProviders.'.$AuthType)]);
                     $user = Socialite::driver($AuthType)->user();
                     $existingUser = fe_users::where('email', $user->email)->first();
                     if ($existingUser) {
@@ -89,6 +92,9 @@ class FeLoginController extends Controller
                     }
                     return redirect(Route::has('home') ? route('home') : (URL::to('/')));
                 } catch (\Exception $e) {
+                    if(config('app.debug')!==false){
+                        dd($e);
+                    }
                     return redirect()->route('Fe_LoginWindow');
                 }
         }

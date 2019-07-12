@@ -1,7 +1,15 @@
 <?php
 
     return [
-        'DefaultLoginProviders'=>['google','twitter','facebook'],
+        'DefaultLoginProviders'=>[
+            'google'=>[
+                'client_id'=>'',
+                'client_secret'=>'',
+                'redirect'=>'http://devs.lvh.me/login/google/callback'
+            ],
+            'twitter'=>[],
+            'facebook'=>[]
+        ],
         'HasRegister'=>true,
         'HasFormLogin'=>true,
         'HasForgotPassword'=>true,

@@ -79,15 +79,9 @@
                         <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}">
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
                             <div class="row">
-                                <div class="col-md-6 col-sm-12">
+                                <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="FirstName" class="form-control form-white" placeholder="First Name" required>
-                                        <i class="fas fa-user-plus"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="append-icon m-b-20">
-                                        <input type="text" name="LastName" class="form-control form-white" placeholder="Last Name" required>
+                                        <input type="text" name="Name" class="form-control form-white" placeholder="Name ..." required>
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                 </div>
@@ -95,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_email" class="form-control form-white" placeholder="Email" required>
+                                        <input type="text" name="usr_email" class="form-control form-white" placeholder="Email ..." required>
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                 </div>
@@ -103,7 +97,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password" class="form-control form-white" placeholder="Password" required>
+                                        <input type="text" name="usr_password" class="form-control form-white" placeholder="Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>
@@ -111,7 +105,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password_cfm" class="form-control form-white" placeholder="Confirm Password" required>
+                                        <input type="text" name="usr_password_cfm" class="form-control form-white" placeholder="Confirm Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>

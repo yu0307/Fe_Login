@@ -1,20 +1,23 @@
 <?php
 
-namespace MyVendor\Contactform\Models;
+namespace FeIron\Fe_Login\models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class fe_users extends Authenticatable
 {
-    protected $guarded = [];
-    protected $table = 'User';
+    use Notifiable;
+
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
+    protected $guarded = [
+        'remember_token','updated_at'
     ];
 
     /**
@@ -35,6 +38,7 @@ class User extends Model
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'last_login' => 'datetime',
     ];
 }
 

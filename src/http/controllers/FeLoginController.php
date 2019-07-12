@@ -3,7 +3,11 @@
 namespace FeIron\Fe_Login\http\controllers;
 
 use App\Http\Controllers\Controller;
-
+use Socialite;
+use TheSeer\Tokenizer\Exception;
+use FeIron\Fe_Login\models\fe_users;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 class FeLoginController extends Controller
 {
@@ -33,48 +37,61 @@ class FeLoginController extends Controller
 
     public function index()
     {
-        return $this->RenderLoginWindow();
+        return $this->RenderLoginForm();
     }
-
+    
     public function RenderLoginWindow(){
-        return view('Fe_Login::LoginForm');
+        return view('Fe_Login::LoginWindow');
+    }
+    
+    public function TryLogin($AuthType = null){
+        if (!isset($AuthType)) {
+            return redirect()->route('Fe_LoginWindow');
+        } else {
+            try {
+                return Socialite::driver($AuthType)->redirect();
+            } catch (Exception $e) {
+                return 'Authentication Error'.(config('app.debug')===false?'':('<br/>'.$e));
+            }
+        }
+        return false;
+    }
+    
+    public function logout()
+    {
+        auth()->logout();
+        return redirect(Route::has('home')?route('home'): (URL::to('/')));
     }
 
-    // public function redirectToProvider()
-    // {
-    //     return Socialite::driver('google')->redirect();
-    // }
-
-    // public function logout()
-    // {
-    //     auth()->logout();
-    //     return redirect('/');
-    // }
-
-    // public function handleProviderCallback()
-    // {
-    //     try {
-    //         $user = Socialite::driver('google')->user();
-    //     } catch (\Exception $e) {
-    //         return redirect('/');
-    //     }
-    //     $existingUser = User::where('email', $user->email)->first();
-
-    //     if ($existingUser) {
-    //         // log them in
-    //         auth()->login($existingUser, true);
-    //     } else {
-    //         // create a new user
-    //         $newUser                  = new User;
-    //         $newUser->name            = $user->name;
-    //         $newUser->email           = $user->email;
-    //         $newUser->google_id       = $user->id;
-    //         $newUser->password        = Hash::make(str_random(16));
-    //         // $newUser->avatar          = $user->avatar;
-    //         // $newUser->avatar_original = $user->avatar_original;
-    //         $newUser->save();
-    //         auth()->login($newUser, true);
-    //     }
-    //     return redirect()->to('/');
-    // }
+    public function handleProviderCallback($AuthType=null)
+    {
+        if (!isset($AuthType)) {
+            return redirect()->route('Fe_LoginWindow');
+        } else {
+            try {
+                    $user = Socialite::driver($AuthType)->user();
+                    $existingUser = fe_users::where('email', $user->email)->first();
+                    if ($existingUser) {
+                        $existingUser->last_login=now();
+                        $existingUser->save();
+                        auth()->login($existingUser, true);
+                    } else {
+                        // create a new user
+                        $newUser                  = new fe_users;
+                        $newUser->name            = $user->name;
+                        $newUser->email           = $user->email;
+                        $newUser->provider_id     = $user->id;
+                        $newUser->provider_type   = $AuthType;
+                        $newUser->last_login      = now();
+                        $newUser->password        = Hash::make(str_random(16));
+                        $newUser->save();
+                        auth()->login($newUser, true);
+                    }
+                    return redirect(Route::has('home') ? route('home') : (URL::to('/')));
+                } catch (\Exception $e) {
+                    return redirect()->route('Fe_LoginWindow');
+                }
+        }
+        return false;
+    }
 }

@@ -2,9 +2,17 @@
 
     return [
         'DefaultLoginProviders'=>[
-            'google'=>[],
-            'twitter'=>[],
-            'facebook'=>[]
+            'google'=>[
+                'client_id' => '',
+                'client_secret' => '',
+                'redirect' => '/login/google/callback'
+            ],
+            'twitter'=>[
+                'redirect' => '/login/twitter/callback'
+            ],
+            'facebook'=>[
+                'redirect' => '/login/facebook/callback'
+            ]
         ],
         'HasRegister'=>true,
         'HasFormLogin'=>true,

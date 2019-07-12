@@ -3,12 +3,16 @@
     return [
         'DefaultLoginProviders'=>[
             'google'=>[
-                'client_id'=>'',
-                'client_secret'=>'',
-                'redirect'=>'http://devs.lvh.me/login/google/callback'
+                'client_id' => '',
+                'client_secret' => '',
+                'redirect' => '/login/google/callback'
             ],
-            'twitter'=>[],
-            'facebook'=>[]
+            'twitter'=>[
+                'redirect' => '/login/twitter/callback'
+            ],
+            'facebook'=>[
+                'redirect' => '/login/facebook/callback'
+            ]
         ],
         'HasRegister'=>true,
         'HasFormLogin'=>true,

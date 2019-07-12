@@ -50,7 +50,7 @@ class FeLoginController extends Controller
             return redirect()->route('Fe_LoginWindow');
         } else {
             try {
-                    config([('services.'.$AuthType)=>config('fe_login_appconfig.DefaultLoginProviders.'.$AuthType)]);
+                    config([('services.'.$AuthType)=>config('Fe_Login.appconfig.DefaultLoginProviders.'.$AuthType)]);
                     return Socialite::driver($AuthType)->redirect();
                 } catch (Exception $e) {
                     return 'Authentication Error'.(config('app.debug')===false?'':('<br/>'.$e));
@@ -71,7 +71,7 @@ class FeLoginController extends Controller
             return redirect()->route('Fe_LoginWindow');
         } else {
             try {
-                    config([('services.'.$AuthType)=>config('fe_login_appconfig.DefaultLoginProviders.'.$AuthType)]);
+                    config([('services.'.$AuthType)=>config('Fe_Login.appconfig.DefaultLoginProviders.'.$AuthType)]);
                     $user = Socialite::driver($AuthType)->user();
                     $existingUser = fe_users::where('email', $user->email)->first();
                     if ($existingUser) {

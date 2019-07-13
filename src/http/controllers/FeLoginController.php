@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Socialite;
 use TheSeer\Tokenizer\Exception;
 use FeIron\Fe_Login\models\fe_users;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
+
 
 class FeLoginController extends Controller
 {
@@ -44,17 +46,44 @@ class FeLoginController extends Controller
     public function RenderLoginWindow(){
         return view('Fe_Login::LoginWindow');
     }
-    
-    public function TryLogin($AuthType = null){
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email cannot be empty',
+            'email.E-Mail' => 'Not a valid email form',
+            'password.required'  => 'Password is required',
+        ];
+    }
+
+    public function TryLogin($AuthType = null, Request $request){
         if (!isset($AuthType)) {
             return redirect()->route('Fe_LoginWindow');
         } else {
-            try {
-                    config([('services.'.$AuthType)=>config('Fe_Login.appconfig.DefaultLoginProviders.'.$AuthType)]);
+            $customMessages = [
+                'email.required' => 'Email cannot be empty',
+                'email.E-Mail' => 'Not a valid email form',
+                'password.required'  => 'Password is required',
+            ];
+            if($AuthType== 'webform'){
+                $validatedData = $request->validate([
+                    'email' => 'required|E-Mail',
+                    'password' => 'required',
+                ], $customMessages);
+                dd($request->input());
+                $credentials = $request->only('email', 'password');
+                if (Auth::attempt($credentials)) {
+                    Auth::user()->last_login = now();
+                    Auth::user()->save();
+                    return redirect()->intended('home','/');
+                }
+            }else{
+                try {
+                    config([('services.' . $AuthType) => config('Fe_Login.appconfig.DefaultLoginProviders.' . $AuthType)]);
                     return Socialite::driver($AuthType)->redirect();
                 } catch (Exception $e) {
-                    return 'Authentication Error'.(config('app.debug')===false?'':('<br/>'.$e));
+                    return 'Authentication Error' . (config('app.debug') === false ? '' : ('<br/>' . $e));
                 }
+            }
         }
         return false;
     }

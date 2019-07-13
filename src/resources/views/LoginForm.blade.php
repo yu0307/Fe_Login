@@ -18,9 +18,10 @@
                         <div id="Fe_Login_container">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
                             <form class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
+                                @csrf
                                 <h3>{!! (isset($SignInTitle)?$SignInTitle:"<strong>Sign in</strong> to your account") !!} </h3>
                                 <div class="append-icon m-b-20">
-                                    <input type="text" name="username" aria-label="Username" aria-describedby="Fe_ctrl_usr" id="Fe_login_name" class="form-control form-white username" placeholder="Username" required>
+                                    <input type="text" name="email" aria-label="email" aria-describedby="Fe_ctrl_usr" id="Fe_login_name" class="form-control form-white username" placeholder="Email ..." required>
                                     <i class="far fa-user-circle"></i>
                                 </div>
 
@@ -56,6 +57,7 @@
 
                         @if(config('Fe_Login.appconfig.HasForgotPassword'))
                         <form class="form-password" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordReset')}}">
+                            @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
                             <div class="append-icon m-b-20">
                                 <input type="text" name="reset_email" class="form-control form-white" placeholder="Email" required>
@@ -77,6 +79,7 @@
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
                         <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}">
+                            @csrf
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
                             <div class="row">
                                 <div class="col-md-12">
@@ -137,22 +140,33 @@
             </div>
         </div>
     </div>
-
+    <div class="row justify-content-md-center" id="info_Section">
+        <div class="col col-md-auto col-md-7 col-sm-12">
+            @if ($errors->any())
+            <div class="alert alert-danger info">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
+    </div>
 </div>
 
-@push('Fe_Login_public')
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+@push('Fe_Login_scripts')
+@if (file_exists(public_path('css/app.css')))
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
+@endif
+
+@if (file_exists(public_path('js/app.js')))
+<script src="{{asset('js/app.js')}}"></script>
+@else
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}" rel="stylesheet">
-@endpush
-
-@push('Fe_Login_styles')
-<link href="{{asset('FeIron/Fe_Login/css/Fe_Login.css')}}" rel="stylesheet">
-<link href="{{asset('FeIron/Fe_Login/ThirdParty/fontawesome5.9.0/css/all.min.css')}}" rel="stylesheet">
-@endpush
-
-@push('Fe_Login_scripts')
+@endif
+<link rel="stylesheet" href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}">
+<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_bootstrap.js')}}"></script>
 <script src="{{asset('FeIron/Fe_Login/js/Fe_Login.js')}}"></script>
 @endpush

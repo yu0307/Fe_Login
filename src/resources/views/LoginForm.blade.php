@@ -84,7 +84,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="Name" class="form-control form-white" placeholder="Name ..." required>
+                                        <input type="text" name="usr_name" class="form-control form-white" placeholder="Name ..." required>
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_email" class="form-control form-white" placeholder="Email ..." required>
+                                        <input type="text" name="email" class="form-control form-white" placeholder="Email ..." required>
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password" class="form-control form-white" placeholder="Password ..." required>
+                                        <input type="password" name="password" class="form-control form-white" placeholder="Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password_cfm" class="form-control form-white" placeholder="Confirm Password ..." required>
+                                        <input type="password" name="password_confirmation " class="form-control form-white" placeholder="Confirm Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>

@@ -510,3 +510,10 @@ body {
     background: snow;
     box-shadow: 0px 5px 5px #adadad;
 }
+
+#Fe_login-block #info_Section ul{
+  padding: 0px;
+}
+#Fe_login-block #info_Section li{
+  list-style: none;
+}

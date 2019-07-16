@@ -44,7 +44,7 @@ class FeLoginController extends Controller
         return $this->RenderLoginForm();
     }
     
-    public function RenderLoginWindow(){
+    public function RenderLoginWindow(Request $request){
         return view('Fe_Login::LoginWindow');
     }
 

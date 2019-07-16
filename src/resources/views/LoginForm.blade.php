@@ -1,4 +1,3 @@
-@section('title', 'Login Window')
 <div class="container" id="Fe_login-block" style="display:none">
     <div class="row justify-content-md-center">
         <div class="col-md-auto col-md-7 col-sm-12">
@@ -15,7 +14,7 @@
                 </div>
                 <div class="col-md-7 col-sm-12 col">
                     <div class="account-form">
-                        <div id="Fe_Login_container">
+                        <div id="Fe_Login_container" style="display:{{ ( (app('request')->has('target') || session('target') )?'none':'block') }}">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
                             <form class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
                                 @csrf
@@ -56,7 +55,17 @@
                         </div>
 
                         @if(config('Fe_Login.appconfig.HasForgotPassword'))
-                        <form class="form-password" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordReset')}}">
+                        <form class="form-password" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordReset')}}" style="display:{{ 
+                            ( 
+                                (   session('target')=='getpassword' 
+                                    || 
+                                    (
+                                        app('request')->has('target') 
+                                        && 
+                                        app('request')->input('target')=='getpassword'
+                                    )
+                                )?'block':'none'
+                            ) }}">
                             @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
                             <div class="append-icon m-b-20">
@@ -78,13 +87,24 @@
                         @endif
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
-                        <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}">
+                        <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
+                            ( 
+                                (
+                                    session('target')=='register' 
+                                    || 
+                                    (
+                                        app('request')->has('target') 
+                                        && 
+                                        app('request')->input('target')=='register'
+                                    )
+                                ) ?'block':'none'
+                            ) }}">
                             @csrf
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_name" class="form-control form-white" placeholder="Name ..." required>
+                                        <input type="text" name="usr_name" class="form-control form-white" placeholder="Name ..." required value="{{ old('usr_name') }}">
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                 </div>
@@ -92,7 +112,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="email" class="form-control form-white" placeholder="Email ..." required>
+                                        <input type="text" name="email" class="form-control form-white" placeholder="Email ..." required required value="{{ old('email') }}">
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                 </div>
@@ -108,7 +128,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="password" name="password_confirmation " class="form-control form-white" placeholder="Confirm Password ..." required>
+                                        <input type="password" name="password_confirmation" class="form-control form-white" placeholder="Confirm Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>
@@ -154,6 +174,8 @@
         </div>
     </div>
 </div>
+
+@section('title', 'Login Window')
 
 @push('Fe_Login_scripts')
 @if (file_exists(public_path('css/app.css')))

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 
 class FeSignupController extends Controller
 {
@@ -58,12 +59,17 @@ class FeSignupController extends Controller
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+        $validator= $this->validator($request->all());
+        if($validator->fails()){
+            return redirect()
+                    ->back()
+                    ->withInput($request->only('usr_name', 'email'))
+                    ->with('target', 'register')
+                    ->withErrors($validator);
+        }
 
         event(new Registered($user = $this->create($request->all())));
-
         $this->guard()->login($user);
-
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }
@@ -91,10 +97,11 @@ class FeSignupController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return fe_users::create([
             'name' => $data['usr_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'provider_type' => 'Local',
             'created_at'=>now(),
             'updated_at'=>now()
         ]);

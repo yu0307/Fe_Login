@@ -8,7 +8,9 @@
         //Registration
         Route::get('register', 'FeSignupController@register')->name('Fe_SignUp');
         //Password reset
-        Route::get('passreset', 'FeLoginController@reset')->name('Fe_PasswordReset');
+        Route::get('sentResetEmail', 'FePasswordRetrieval@sendResetLinkEmail')->name('Fe_PasswordResetEmail');
+        Route::get('passreset', 'FePasswordRetrieval@passreset')->name('Fe_PasswordReset');
+        Route::get('login/?target=reset&token={token}', 'FePasswordReset@ResetPassword')->name('password.reset');
         
         Route::get('logout', 'FeLoginController@logout')->name('Fe_Logout');
     });

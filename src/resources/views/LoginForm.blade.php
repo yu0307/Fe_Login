@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-7 col-sm-12 col">
                     <div class="account-form">
-                        <div id="Fe_Login_container" style="display:{{ ( (app('request')->has('target') || session('target') )?'none':'block') }}">
+                        <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( (app('request')->has('target') || session('target') )?'none':'block') }}">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
                             <form class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
                                 @csrf
@@ -32,12 +32,12 @@
                                 <div id="Fe_sub_controls" class="Fe_sub_controls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
                                     <div class="sub_trls">
-                                        <a href="#" class="fe_btn_signup">Sign up</a>
+                                        <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">Sign up</a>
                                     </div>
                                     @endif
                                     @if(config('Fe_Login.appconfig.HasForgotPassword'))
                                     <div class="sub_trls">
-                                        <span class="forgot-password"><a id="Fe_login_password" href="#">Forgot password?</a></span>
+                                        <span class="forgot-password"><a id="Fe_login_password" href="#" class="swap_ctrl" wintarget="form-password">Forgot password?</a></span>
                                     </div>
                                     @endif
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
 
                         @if(config('Fe_Login.appconfig.HasForgotPassword'))
-                        <form class="form-password" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordReset')}}" style="display:{{ 
+                        <form class="form-password Fe_ctrl_windows" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordResetEmail')}}" style="display:{{ 
                             ( 
                                 (   session('target')=='getpassword' 
                                     || 
@@ -69,17 +69,17 @@
                             @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
                             <div class="append-icon m-b-20">
-                                <input type="text" name="reset_email" class="form-control form-white" placeholder="Email" required>
+                                <input type="text" name="email" class="form-control form-white" placeholder="Email" required value="{{ old('email') }}">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
+                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
-                                    <a id="Fe_login" href="#">Have an account? Sign In</a>
+                                    <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
                                 </div>
                                 <div class="sub_trls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
-                                    <a href="#" class="fe_btn_signup">New here? Sign up</a>
+                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">New here? Sign up</a>
                                     @endif
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                         @endif
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
-                        <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
+                        <form class="form-signup Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
                             ( 
                                 (
                                     session('target')=='register' 
@@ -150,11 +150,53 @@
 
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
-                                    <a class="btn_signIn" href="#">Already have an account? Sign In</a>
+                                    <a class="btn_signIn swap_ctrl" href="#" wintarget="form-login">Already have an account? Sign In</a>
                                 </div>
                             </div>
                         </form>
                         @endif
+
+                        <form class="form-pswreset Fe_ctrl_windows" role="form" action="{{isset($FormAction_resetURL)?$FormAction_resetURL:route('Fe_PasswordReset')}}" style="display:{{ 
+                            ( 
+                                (   session('target')=='reset' 
+                                    || 
+                                    (
+                                        app('request')->has('target') 
+                                        && 
+                                        app('request')->input('target')=='reset'
+                                    )
+                                )?'block':'none'
+                            ) }}">
+                            @csrf
+                            <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="append-icon m-b-20">
+                                        <input type="password" name="password" class="form-control form-white" placeholder="Password ..." required>
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="append-icon m-b-20">
+                                        <input type="password" name="password_confirmation" class="form-control form-white" placeholder="Confirm Password ..." required>
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Reset My Password</button>
+                            <div class="Fe_sub_controls m-t-60">
+                                <div class="sub_trls">
+                                    <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
+                                </div>
+                                <div class="sub_trls">
+                                    @if(config('Fe_Login.appconfig.HasRegister'))
+                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">New here? Sign up</a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

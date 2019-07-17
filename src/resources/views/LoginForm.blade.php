@@ -32,7 +32,7 @@
                                 <div id="Fe_sub_controls" class="Fe_sub_controls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
                                     <div class="sub_trls">
-                                        <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">Sign up</a>
+                                        <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">Sign up</a>
                                     </div>
                                     @endif
                                     @if(config('Fe_Login.appconfig.HasForgotPassword'))
@@ -75,11 +75,11 @@
                             <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
-                                    <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
+                                    <a href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
                                 </div>
                                 <div class="sub_trls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
-                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">New here? Sign up</a>
+                                    <a href="#" class="swap_ctrl" wintarget="form-register">New here? Sign up</a>
                                     @endif
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                         @endif
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
-                        <form class="form-signup Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
+                        <form class="form-register Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
                             ( 
                                 (
                                     session('target')=='register' 
@@ -192,7 +192,7 @@
                                 </div>
                                 <div class="sub_trls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
-                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-signup">New here? Sign up</a>
+                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">New here? Sign up</a>
                                     @endif
                                 </div>
                             </div>

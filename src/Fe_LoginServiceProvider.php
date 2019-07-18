@@ -2,6 +2,7 @@
     namespace FeIron\Fe_Login;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Support\Facades\Blade;
+    use Illuminate\Support\Facades\Validator;
 
     class Fe_LoginServiceProvider extends ServiceProvider{
         public function boot(){
@@ -16,7 +17,6 @@
             $this->publishes([
                 __DIR__ . '/assets' => public_path('FeIron/Fe_Login'),
             ], 'fe_login_public');
-        
         }
 
         public function register(){

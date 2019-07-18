@@ -5,6 +5,7 @@ namespace FeIron\Fe_Login\http\controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class FePasswordRetrieval extends Controller
@@ -37,6 +38,18 @@ class FePasswordRetrieval extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Overriding password reset form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showResetForm()
+    {
+        return view('Fe_Login::LoginWindow', [
+            'target' => 'getpassword'
+        ]);
     }
 
     //Overriding validation rules
@@ -78,8 +91,8 @@ class FePasswordRetrieval extends Controller
     protected function sendResetLinkResponse(Request $request, $response)
     {
         return back()->with([
-            'status' => trans($response),
-            'target', 'getpassword'
+            'message' => trans($response),
+            'status'=>'success'
             ]);
     }
 

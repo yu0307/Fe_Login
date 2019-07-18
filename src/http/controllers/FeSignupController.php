@@ -3,12 +3,14 @@
 namespace FeIron\Fe_Login\http\controllers;
 
 use FeIron\Fe_Login\models\fe_users;
+use FeIron\Fe_Login\resources\RouterParser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
+
 
 class FeSignupController extends Controller
 {
@@ -48,7 +50,9 @@ class FeSignupController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('Fe_Login::LoginWindow');
+        return view('Fe_Login::LoginWindow',[
+            'target' => 'register'
+        ]);
     }
 
     /**

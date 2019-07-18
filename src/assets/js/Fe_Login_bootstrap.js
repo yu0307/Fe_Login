@@ -20,7 +20,7 @@ $(document).ready(function(){
     if (jQuery('link[href*="fontawesome"]').length <= 0) {
         var style = document.createElement('link');
         style.rel = "stylesheet";
-        style.href = 'FeIron/Fe_Login/ThirdParty/fontawesome5.9.0/css/all.min.css';
+        style.href = '/FeIron/Fe_Login/ThirdParty/fontawesome5.9.0/css/all.min.css';
         head.appendChild(style);
     }
 });

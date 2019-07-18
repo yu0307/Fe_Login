@@ -14,9 +14,9 @@
                 </div>
                 <div class="col-md-7 col-sm-12 col">
                     <div class="account-form">
-                        <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( (app('request')->has('target') || session('target') )?'none':'block') }}">
+                        <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( isset($target)?'none':'block') }}">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
-                            <form class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
+                            <form method="post" class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
                                 @csrf
                                 <h3>{!! (isset($SignInTitle)?$SignInTitle:"<strong>Sign in</strong> to your account") !!} </h3>
                                 <div class="append-icon m-b-20">
@@ -55,17 +55,7 @@
                         </div>
 
                         @if(config('Fe_Login.appconfig.HasForgotPassword'))
-                        <form class="form-password Fe_ctrl_windows" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordResetEmail')}}" style="display:{{ 
-                            ( 
-                                (   session('target')=='getpassword' 
-                                    || 
-                                    (
-                                        app('request')->has('target') 
-                                        && 
-                                        app('request')->input('target')=='getpassword'
-                                    )
-                                )?'block':'none'
-                            ) }}">
+                        <form method="post" class="form-password Fe_ctrl_windows" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordResetEmail')}}" style="display:{{ (($target=='getpassword')?'block':'none') }}">
                             @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
                             <div class="append-icon m-b-20">
@@ -87,18 +77,7 @@
                         @endif
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
-                        <form class="form-register Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ 
-                            ( 
-                                (
-                                    session('target')=='register' 
-                                    || 
-                                    (
-                                        app('request')->has('target') 
-                                        && 
-                                        app('request')->input('target')=='register'
-                                    )
-                                ) ?'block':'none'
-                            ) }}">
+                        <form method="post" class="form-register Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ (($target=='register')?'block':'none')}}">
                             @csrf
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
                             <div class="row">
@@ -156,19 +135,11 @@
                         </form>
                         @endif
 
-                        <form class="form-pswreset Fe_ctrl_windows" role="form" action="{{isset($FormAction_resetURL)?$FormAction_resetURL:route('Fe_PasswordReset')}}" style="display:{{ 
-                            ( 
-                                (   session('target')=='reset' 
-                                    || 
-                                    (
-                                        app('request')->has('target') 
-                                        && 
-                                        app('request')->input('target')=='reset'
-                                    )
-                                )?'block':'none'
-                            ) }}">
+                        <form method="post" class="form-pswreset Fe_ctrl_windows" role="form" action="{{isset($FormAction_resetURL)?$FormAction_resetURL:route('Fe_PasswordReset')}}" style="display:{{ (($target=='reset')?'block':'none')}}">
                             @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
+                            <input type="hidden" name="token" value="{{ (app('request')->input('token')??'') }}" required>
+                            <input type="hidden" name="email" value="{{ (app('request')->input('email') ?? '') }}" required>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
@@ -211,6 +182,12 @@
                     <li>{{ $error }}</li>
                     @endforeach
                 </ul>
+            </div>
+            @endif
+
+            @if(session('status'))
+            <div class="alert alert-{{session('status')}} info">
+                {{session('message')}}
             </div>
             @endif
         </div>

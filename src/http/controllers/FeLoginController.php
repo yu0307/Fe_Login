@@ -7,6 +7,7 @@ use Socialite;
 use Auth;
 use TheSeer\Tokenizer\Exception;
 use FeIron\Fe_Login\models\fe_users;
+use FeIron\Fe_Login\resources\RouterParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -21,7 +22,7 @@ class FeLoginController extends Controller
     |--------------------------------------------------------------------------
     |
     */
-
+    use RouterParser;
     /**
      * Where to redirect users after login.
      *
@@ -45,7 +46,7 @@ class FeLoginController extends Controller
     }
     
     public function RenderLoginWindow(Request $request){
-        return view('Fe_Login::LoginWindow');
+        return view('Fe_Login::LoginWindow')->with(['target'=>$this->ParseTarget($request)]);
     }
 
     public function TryLogin($AuthType = null, Request $request){

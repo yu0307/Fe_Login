@@ -1,4 +1,3 @@
-@section('title', 'Login Window')
 <div class="container" id="Fe_login-block" style="display:none">
     <div class="row justify-content-md-center">
         <div class="col-md-auto col-md-7 col-sm-12">
@@ -15,12 +14,13 @@
                 </div>
                 <div class="col-md-7 col-sm-12 col">
                     <div class="account-form">
-                        <div id="Fe_Login_container">
+                        <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( isset($target)?'none':'block') }}">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
-                            <form class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
+                            <form method="post" class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
+                                @csrf
                                 <h3>{!! (isset($SignInTitle)?$SignInTitle:"<strong>Sign in</strong> to your account") !!} </h3>
                                 <div class="append-icon m-b-20">
-                                    <input type="text" name="username" aria-label="Username" aria-describedby="Fe_ctrl_usr" id="Fe_login_name" class="form-control form-white username" placeholder="Username" required>
+                                    <input type="text" name="email" aria-label="email" aria-describedby="Fe_ctrl_usr" id="Fe_login_name" class="form-control form-white username" placeholder="Email ..." required>
                                     <i class="far fa-user-circle"></i>
                                 </div>
 
@@ -32,12 +32,12 @@
                                 <div id="Fe_sub_controls" class="Fe_sub_controls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
                                     <div class="sub_trls">
-                                        <a href="#" class="fe_btn_signup">Sign up</a>
+                                        <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">Sign up</a>
                                     </div>
                                     @endif
                                     @if(config('Fe_Login.appconfig.HasForgotPassword'))
                                     <div class="sub_trls">
-                                        <span class="forgot-password"><a id="Fe_login_password" href="#">Forgot password?</a></span>
+                                        <span class="forgot-password"><a id="Fe_login_password" href="#" class="swap_ctrl" wintarget="form-password">Forgot password?</a></span>
                                     </div>
                                     @endif
                                 </div>
@@ -55,20 +55,21 @@
                         </div>
 
                         @if(config('Fe_Login.appconfig.HasForgotPassword'))
-                        <form class="form-password" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordReset')}}">
+                        <form method="post" class="form-password Fe_ctrl_windows" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordResetEmail')}}" style="display:{{ (($target=='getpassword')?'block':'none') }}">
+                            @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
                             <div class="append-icon m-b-20">
-                                <input type="text" name="reset_email" class="form-control form-white" placeholder="Email" required>
+                                <input type="text" name="email" class="form-control form-white" placeholder="Email" required value="{{ old('email') }}">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
+                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
-                                    <a id="Fe_login" href="#">Have an account? Sign In</a>
+                                    <a href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
                                 </div>
                                 <div class="sub_trls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
-                                    <a href="#" class="fe_btn_signup">New here? Sign up</a>
+                                    <a href="#" class="swap_ctrl" wintarget="form-register">New here? Sign up</a>
                                     @endif
                                 </div>
                             </div>
@@ -76,12 +77,13 @@
                         @endif
 
                         @if(config('Fe_Login.appconfig.HasRegister'))
-                        <form class="form-signup" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}">
+                        <form method="post" class="form-register Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ (($target=='register')?'block':'none')}}">
+                            @csrf
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="Name" class="form-control form-white" placeholder="Name ..." required>
+                                        <input type="text" name="usr_name" class="form-control form-white" placeholder="Name ..." required value="{{ old('usr_name') }}">
                                         <i class="fas fa-user-plus"></i>
                                     </div>
                                 </div>
@@ -89,7 +91,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_email" class="form-control form-white" placeholder="Email ..." required>
+                                        <input type="text" name="email" class="form-control form-white" placeholder="Email ..." required required value="{{ old('email') }}">
                                         <i class="fas fa-envelope"></i>
                                     </div>
                                 </div>
@@ -97,7 +99,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password" class="form-control form-white" placeholder="Password ..." required>
+                                        <input type="password" name="password" class="form-control form-white" placeholder="Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>
@@ -105,7 +107,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="append-icon m-b-20">
-                                        <input type="text" name="usr_password_cfm" class="form-control form-white" placeholder="Confirm Password ..." required>
+                                        <input type="password" name="password_confirmation" class="form-control form-white" placeholder="Confirm Password ..." required>
                                         <i class="fas fa-key"></i>
                                     </div>
                                 </div>
@@ -127,32 +129,85 @@
 
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
-                                    <a class="btn_signIn" href="#">Already have an account? Sign In</a>
+                                    <a class="btn_signIn swap_ctrl" href="#" wintarget="form-login">Already have an account? Sign In</a>
                                 </div>
                             </div>
                         </form>
                         @endif
+
+                        <form method="post" class="form-pswreset Fe_ctrl_windows" role="form" action="{{isset($FormAction_resetURL)?$FormAction_resetURL:route('Fe_PasswordReset')}}" style="display:{{ (($target=='reset')?'block':'none')}}">
+                            @csrf
+                            <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
+                            <input type="hidden" name="token" value="{{ (app('request')->input('token')??'') }}" required>
+                            <input type="hidden" name="email" value="{{ (app('request')->input('email') ?? '') }}" required>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="append-icon m-b-20">
+                                        <input type="password" name="password" class="form-control form-white" placeholder="Password ..." required>
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="append-icon m-b-20">
+                                        <input type="password" name="password_confirmation" class="form-control form-white" placeholder="Confirm Password ..." required>
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Reset My Password</button>
+                            <div class="Fe_sub_controls m-t-60">
+                                <div class="sub_trls">
+                                    <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
+                                </div>
+                                <div class="sub_trls">
+                                    @if(config('Fe_Login.appconfig.HasRegister'))
+                                    <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">New here? Sign up</a>
+                                    @endif
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row justify-content-md-center" id="info_Section">
+        <div class="col col-md-auto col-md-7 col-sm-12">
+            @if ($errors->any())
+            <div class="alert alert-danger info">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
 
+            @if(session('status'))
+            <div class="alert alert-{{session('status')}} info">
+                {{session('message')}}
+            </div>
+            @endif
+        </div>
+    </div>
 </div>
 
-@push('Fe_Login_public')
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}" rel="stylesheet">
-@endpush
-
-@push('Fe_Login_styles')
-<link href="{{asset('FeIron/Fe_Login/css/Fe_Login.css')}}" rel="stylesheet">
-<link href="{{asset('FeIron/Fe_Login/ThirdParty/fontawesome5.9.0/css/all.min.css')}}" rel="stylesheet">
-@endpush
+@section('title', 'Login Window')
 
 @push('Fe_Login_scripts')
+@if (file_exists(public_path('css/app.css')))
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
+@endif
+
+@if (file_exists(public_path('js/app.js')))
+<script src="{{asset('js/app.js')}}"></script>
+@else
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
+@endif
+<link rel="stylesheet" href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}">
+<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_bootstrap.js')}}"></script>
 <script src="{{asset('FeIron/Fe_Login/js/Fe_Login.js')}}"></script>
 @endpush

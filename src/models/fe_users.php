@@ -12,7 +12,7 @@ class fe_users extends Authenticatable
 
     protected $table = 'users';
     /**
-     * The attributes that are mass assignable.
+     * The attributes that not are mass assignable.
      *
      * @var array
      */

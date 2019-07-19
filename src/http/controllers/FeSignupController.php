@@ -40,7 +40,7 @@ class FeSignupController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('Fe_Guest');
     }
 
     /**
@@ -74,6 +74,7 @@ class FeSignupController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
         $this->guard()->login($user);
+        $user->sendEmailVerificationNotification();
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
     }

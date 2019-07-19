@@ -27,7 +27,7 @@ class FePasswordReset extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('Fe_Guest');
     }
 
     public function showWindow(Request $request, $token,$email){

@@ -28,7 +28,22 @@
                                     <input type="password" name="password" class="form-control form-white password" placeholder="Password" required>
                                     <i class="fas fa-user-lock"></i>
                                 </div>
-                                <button type="submit" id="Fe_login_submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">Sign In</button>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <button type="submit" id="Fe_login_submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Sign In</button>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 p-2 text-center">
+                                        @if(config('Fe_Login.appconfig.RememberLogin'))
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="true" id="fe_login_remember" name="rememberMe">
+                                            <label class="form-check-label" for="fe_login_remember">
+                                                Remember Me
+                                            </label>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div id="Fe_sub_controls" class="Fe_sub_controls">
                                     @if(config('Fe_Login.appconfig.HasRegister'))
                                     <div class="sub_trls">
@@ -62,7 +77,7 @@
                                 <input type="text" name="email" class="form-control form-white" placeholder="Email" required value="{{ old('email') }}">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
+                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Send Password Reset Link</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
                                     <a href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
@@ -125,7 +140,7 @@
                             </div>
                             @endif
                             <hr>
-                            <button type="submit" id="Fe_login_signup-form" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">Sign up</button>
+                            <button type="submit" id="Fe_login_signup-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Sign up</button>
 
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
@@ -156,7 +171,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-info btn-block ladda-button" data-style="expand-left">Reset My Password</button>
+                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Reset My Password</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
                                     <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>

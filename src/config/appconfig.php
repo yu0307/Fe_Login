@@ -18,6 +18,7 @@
         'HasFormLogin'=>true,
         'HasForgotPassword'=>true,
         'HasSocialSignin'=>true,
+        'RememberLogin' => true,
         'HasTermURL'=>null
     ];
 

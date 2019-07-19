@@ -18,7 +18,9 @@
         //email reset link
         Route::get('forgetPass', 'FePasswordRetrieval@showResetForm')->name('Fe_Passwordwindow');
         Route::post('emailresetlink', 'FePasswordRetrieval@sendResetLinkEmail')->name('Fe_PasswordResetEmail');
-        
+
+        //Email Verification
+        Route::get('emailverify', 'FeEmailVerification@verify')->name('verification.verify');
                 
         Route::get('logout', 'FeLoginController@logout')->name('Fe_Logout');
     });

@@ -37,7 +37,7 @@ class FeLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('Fe_Guest')->except('logout');
     }
 
     public function index()
@@ -59,17 +59,16 @@ class FeLoginController extends Controller
                 'password.required'  => 'Password is required',
             ];
             if($AuthType== 'webform'){
-                $validatedData = $request->validate([
+                $request->validate([
                     'email' => 'required|email',
                     'password' => 'required',
                 ], $customMessages);
                 $credentials = $request->only('email', 'password');
-                if (Auth::attempt($credentials)) {
+                if (Auth::attempt($credentials, ($request->rememberMe ?? false) )) {
                     Auth::user()->last_login = now();
                     Auth::user()->save();
                     return redirect()->back();
                 }else{
-                    // $request->session()->flash('error', 'Task was successful!');
                     return redirect()->back()->withErrors(['authentication' => 'Login info is incorrect.']);
                 }
             }else{
@@ -115,7 +114,11 @@ class FeLoginController extends Controller
                             $newUser->password        = Hash::make(str_random(16));
                             $newUser->save();
                             auth()->login($newUser, true);
+                            if (!$newUser->hasVerifiedEmail()) {
+                                $newUser->sendEmailVerificationNotification();
+                            }                        
                         }
+
                         return redirect()->back();
                     }else{
                         return redirect()->route('Fe_LoginWindow')->withErrors(['TwitterAuthError'=>"Account Email not found"]);

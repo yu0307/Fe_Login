@@ -96,24 +96,31 @@ class FeLoginController extends Controller
             try {
                     config([('services.'.$AuthType)=>config('Fe_Login.appconfig.DefaultLoginProviders.'.$AuthType)]);
                     $user = Socialite::driver($AuthType)->user();
-                    $existingUser = fe_users::where('email', $user->email)->first();
-                    if ($existingUser) {
-                        $existingUser->last_login=now();
-                        $existingUser->save();
-                        auth()->login($existingUser, true);
-                    } else {
-                        // create a new user
-                        $newUser                  = new fe_users;
-                        $newUser->name            = $user->name;
-                        $newUser->email           = $user->email;
-                        $newUser->provider_id     = $user->id;
-                        $newUser->provider_type   = $AuthType;
-                        $newUser->last_login      = now();
-                        $newUser->password        = Hash::make(str_random(16));
-                        $newUser->save();
-                        auth()->login($newUser, true);
+                    if(isset($user->email)){
+                        $existingUser = fe_users::where('email', $user->email)->first();
+                        if ($existingUser) {
+                            $existingUser->last_login = now();
+                            $existingUser->provider_id     = $user->id;
+                            $existingUser->provider_type   = $AuthType;
+                            $existingUser->save();
+                            auth()->login($existingUser, true);
+                        } else {
+                            // create a new user
+                            $newUser                  = new fe_users;
+                            $newUser->name            = $user->name;
+                            $newUser->email           = $user->email;
+                            $newUser->provider_id     = $user->id;
+                            $newUser->provider_type   = $AuthType;
+                            $newUser->last_login      = now();
+                            $newUser->password        = Hash::make(str_random(16));
+                            $newUser->save();
+                            auth()->login($newUser, true);
+                        }
+                        return redirect()->back();
+                    }else{
+                        return redirect()->route('Fe_LoginWindow')->withErrors(['TwitterAuthError'=>"Account Email not found"]);
                     }
-                    return redirect()->back();
+                    
                 } catch (\Exception $e) {
                     if(config('app.debug')!==false){
                         dd($e);

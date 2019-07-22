@@ -65,7 +65,8 @@ class FeSignupController extends Controller
     {
         $validator= $this->validator($request->all());
         if($validator->fails()){
-            return redirect()
+            return $request->ajax() ?  ['status' => 'error', 'message' => $validator->getMessageBag()->toArray()] : 
+                    redirect()
                     ->back()
                     ->withInput($request->only('usr_name', 'email'))
                     ->with('target', 'register')
@@ -76,7 +77,7 @@ class FeSignupController extends Controller
         $this->guard()->login($user);
         $user->sendEmailVerificationNotification();
         return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+                        ?: ($request->ajax() ?  ['status' => 'success', 'message' => 'Registration Successfull'] : redirect($this->redirectPath()));
     }
 
     /**

@@ -45,7 +45,7 @@ class FePasswordReset extends Controller
                 ->withErrors($validator);
         }
         $request->request->add(['token' => $token,'email'=>$email]);
-        return view('Fe_Login::LoginWindow')->with(['target'=> 'reset']);
+        return view('Fe_Login::LoginWindow')->withInput(['target'=> 'reset']);
     }
 
     /**

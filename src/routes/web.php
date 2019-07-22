@@ -23,5 +23,11 @@
         Route::get('emailverify', 'FeEmailVerification@verify')->name('verification.verify');
                 
         Route::get('logout', 'FeLoginController@logout')->name('Fe_Logout');
+
+
+
+        Route::get('test',function(){
+            return view('Fe_Login::testview');
+        });
     });
 ?>

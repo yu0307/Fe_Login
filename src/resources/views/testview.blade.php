@@ -11,8 +11,10 @@
 
 <body class="usr_login_form" data-page="login">
     @Fe_LoginForm([
-        'ajax'=>true,
-        'SignInTitle'=>'Please <strong>Sign</strong> In Here ...'
+    'ajax'=>true,
+    'linkType'=>'link',
+    'linkText'=>'Login Here',
+    'SignInTitle'=>'Please <strong>Sign</strong> In Here ...'
     ])
     Something Amazing is coming ...
     @endFe_LoginForm

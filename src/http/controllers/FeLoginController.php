@@ -46,7 +46,7 @@ class FeLoginController extends Controller
     }
     
     public function RenderLoginWindow(Request $request){
-        return view('Fe_Login::LoginWindow')->with(['target'=>$this->ParseTarget($request)]);
+        return view('Fe_Login::LoginWindow');
     }
 
     public function TryLogin($AuthType = null, Request $request){
@@ -67,9 +67,9 @@ class FeLoginController extends Controller
                 if (Auth::attempt($credentials, ($request->rememberMe ?? false) )) {
                     Auth::user()->last_login = now();
                     Auth::user()->save();
-                    return redirect()->back();
+                    return $request->ajax()?  ['status'=>'success','message' => 'Login Successfull']:redirect()->back();
                 }else{
-                    return redirect()->back()->withErrors(['authentication' => 'Login info is incorrect.']);
+                    return $request->ajax() ? ['status' => 'error', 'message' => 'Login info is incorrect.'] : redirect()->back()->withErrors(['authentication' => 'Login info is incorrect.']);
                 }
             }else{
                 try {

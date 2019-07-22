@@ -57,11 +57,12 @@ class FePasswordRetrieval extends Controller
     {
         $validator = $this->validator($request->only('email'));
         if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withInput($request->only('email'))
-                ->with('target', 'getpassword')
-                ->withErrors($validator);
+            return $request->ajax() ?  ['status' => 'error', 'message' => $validator->getMessageBag()->toArray()] : 
+                    redirect()
+                    ->back()
+                    ->withInput($request->only('email'))
+                    ->with('target', 'getpassword')
+                    ->withErrors($validator);
         }
     }
     
@@ -90,10 +91,10 @@ class FePasswordRetrieval extends Controller
      */
     protected function sendResetLinkResponse(Request $request, $response)
     {
-        return back()->with([
+        return ($request->ajax() ?  ['status' => 'success', 'message' => 'Password reset link is sent.'] : back()->with([
             'message' => trans($response),
             'status'=>'success'
-            ]);
+            ]));
     }
 
     /**
@@ -105,7 +106,8 @@ class FePasswordRetrieval extends Controller
      */
     protected function sendResetLinkFailedResponse(Request $request, $response)
     {
-        return back()
+        return $request->ajax() ?  ['status' => 'error', 'message' => ['email' => trans($response)]] : 
+            back()
             ->withInput($request->only('email'))
             ->with('target', 'getpassword')
             ->withErrors(['email' => trans($response)]);

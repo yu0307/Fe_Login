@@ -21,6 +21,7 @@
         }
     </style>
 </head>
+
 <body class="usr_login_form" data-page="login">
     @Fe_LoginForm([
     'target'=>$target,
@@ -34,6 +35,8 @@
             jQuery('#Fe_login-block').fadeIn(700, 'linear');
         });
     </script>
+    <script src="{{asset('FeIron/Fe_Login/ThirdParty/backstretch/jquery.backstretch.min.js')}}"></script>
+    <script src="{{asset('FeIron/Fe_Login/js/backstretch.js')}}"></script>
 </body>
 
 </html>

@@ -27,10 +27,10 @@ $ajax=(isset($ajax) && $ajax === true);
 @endif
 <div class="container" id="Fe_login-block" style="display:{{$ajax?'block':'none'}}">
     <div class="row justify-content-md-center">
-        <div class=" {{$ajax?'w-75 mw-100':'col-md-auto col-md-7 col-sm-12'}}">
+        <div class=" {{$ajax?'w-75 mw-100':'col-md-auto col-md-7 col-sm-12 col-12'}}">
             {!! $ajax?'':'<i class="far fa-id-badge fa-5x user-img"></i>' !!}
             <div class="row" id="Fe_login_area">
-                <div class="col-md-5 col-sm-0 col">
+                <div class="col-md-5 d-none d-sm-none d-md-block  col">
                     <div class="account-info">
                         <a href="/" class="logo">{{isset($Logo)?$Logo:config('app.name')}}</a>
                         <h3>{{isset($FormTitle)?$FormTitle:config('app.name')}}</h3>
@@ -39,7 +39,7 @@ $ajax=(isset($ajax) && $ajax === true);
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-12 col">
+                <div class="col-md-7 col-sm-12 col-12 col">
                     <div class="account-form">
                         <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( isset($target)?'none':'block') }}">
                             @if (config('Fe_Login.appconfig.HasFormLogin'))
@@ -56,10 +56,10 @@ $ajax=(isset($ajax) && $ajax === true);
                                     <i class="fas fa-user-lock"></i>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <button type="submit" id="Fe_login_submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Sign In</button>
+                                    <div class="col-md-6 col-sm-12 col-12">
+                                        <button type="submit" id="Fe_login_submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12 col-12" data-style="expand-left">Sign In</button>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 p-2 text-center">
+                                    <div class="col-md-6 col-sm-12 col-12 p-2 text-center">
                                         @if(config('Fe_Login.appconfig.RememberLogin'))
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="true" id="fe_login_remember" name="rememberMe">
@@ -104,7 +104,7 @@ $ajax=(isset($ajax) && $ajax === true);
                                 <input type="text" name="email" class="form-control form-white" placeholder="Email" required value="{{ old('email') }}">
                                 <i class="fas fa-envelope"></i>
                             </div>
-                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Send Password Reset Link</button>
+                            <button type="submit" id="Fe_login_send_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12 col-12" data-style="expand-left">Send Password Reset Link</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
                                     <a href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
@@ -167,7 +167,7 @@ $ajax=(isset($ajax) && $ajax === true);
                             </div>
                             @endif
                             <hr>
-                            <button type="submit" id="Fe_login_signup-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Sign up</button>
+                            <button type="submit" id="Fe_login_signup-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12 col-12" data-style="expand-left">Sign up</button>
 
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
@@ -198,7 +198,7 @@ $ajax=(isset($ajax) && $ajax === true);
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12" data-style="expand-left">Reset My Password</button>
+                            <button type="submit" id="Fe_login_submit_reset" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12 col-12" data-style="expand-left">Reset My Password</button>
                             <div class="Fe_sub_controls m-t-60">
                                 <div class="sub_trls">
                                     <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
@@ -216,7 +216,7 @@ $ajax=(isset($ajax) && $ajax === true);
         </div>
     </div>
     <div class="row justify-content-md-center" id="info_Section">
-        <div class="col col-md-auto col-md-7 col-sm-12">
+        <div class="col col-md-auto col-md-7 col-sm-12 col-12">
             @if ($errors->any())
             <div class="alert alert-danger info">
                 <ul>

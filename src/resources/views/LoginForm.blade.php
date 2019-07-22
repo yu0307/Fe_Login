@@ -1,3 +1,10 @@
+@php
+    $target=session('target')?? (app('request')->input('target')??null)
+@endphp
+
+@if (isset($ajax) && $ajax === true)
+@section('LoginForm')
+@endif
 <div class="container" id="Fe_login-block" style="display:none">
     <div class="row justify-content-md-center">
         <div class="col-md-auto col-md-7 col-sm-12">
@@ -208,6 +215,10 @@
         </div>
     </div>
 </div>
+@if (isset($ajax) && $ajax === true)
+@endsection
+@endif
+
 
 @section('title', 'Login Window')
 

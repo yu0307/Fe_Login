@@ -1,3 +1,19 @@
+@push('Fe_Login_scripts')
+@if (file_exists(public_path('css/app.css')))
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
+@endif
+
+@if (file_exists(public_path('js/app.js')))
+<script src="{{asset('js/app.js')}}"></script>
+@else
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
+@endif
+<link rel="stylesheet" href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}">
+<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_bootstrap.js')}}"></script>
+<script src="{{asset('FeIron/Fe_Login/js/Fe_Login.js')}}"></script>
+@endpush
+
 @php
 //This approach is not seperating controllers away from views. anyone with better ways to pass in this target var is welcomed to contribute.
 //Drop me a line and we get this improved.
@@ -6,8 +22,7 @@ $target=$target??(session('target')?? (app('request')->input('target')??null));
 $ajax=(isset($ajax) && $ajax === true);
 @endphp
 
-@if ($ajax)
-@extends('Fe_Login::ModalFrame')
+@if(isset($ajax) && $ajax === true)
 @section('LoginForm')
 @endif
 <div class="container" id="Fe_login-block" style="display:{{$ajax?'block':'none'}}">
@@ -222,23 +237,8 @@ $ajax=(isset($ajax) && $ajax === true);
 </div>
 @if (isset($ajax) && $ajax === true)
 @endsection
+@include('Fe_Login::ModalFrame')
 @endif
 
 
 @section('title', 'Login Window')
-
-@push('Fe_Login_scripts')
-@if (file_exists(public_path('css/app.css')))
-<link rel="stylesheet" href="{{asset('css/app.css')}}">
-@endif
-
-@if (file_exists(public_path('js/app.js')))
-<script src="{{asset('js/app.js')}}"></script>
-@else
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
-@endif
-<link rel="stylesheet" href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}">
-<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_bootstrap.js')}}"></script>
-<script src="{{asset('FeIron/Fe_Login/js/Fe_Login.js')}}"></script>
-@endpush

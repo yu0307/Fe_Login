@@ -1,11 +1,23 @@
-<div class="container" id="Fe_login-block" style="display:none">
+@php
+//This approach is not seperating controllers away from views. anyone with better ways to pass in this target var is welcomed to contribute.
+//Drop me a line and we get this improved.
+
+$target=$target??(session('target')?? (app('request')->input('target')??null));
+$ajax=(isset($ajax) && $ajax === true);
+@endphp
+
+@if ($ajax)
+@extends('Fe_Login::ModalFrame')
+@section('LoginForm')
+@endif
+<div class="container" id="Fe_login-block" style="display:{{$ajax?'block':'none'}}">
     <div class="row justify-content-md-center">
-        <div class="col-md-auto col-md-7 col-sm-12">
-            <i class="far fa-id-badge fa-5x user-img"></i>
+        <div class=" {{$ajax?'w-75 mw-100':'col-md-auto col-md-7 col-sm-12'}}">
+            {!! $ajax?'':'<i class="far fa-id-badge fa-5x user-img"></i>' !!}
             <div class="row" id="Fe_login_area">
                 <div class="col-md-5 col-sm-0 col">
                     <div class="account-info">
-                        <a href="#" class="logo">{{isset($Logo)?$Logo:config('app.name')}}</a>
+                        <a href="/" class="logo">{{isset($Logo)?$Logo:config('app.name')}}</a>
                         <h3>{{isset($FormTitle)?$FormTitle:config('app.name')}}</h3>
                         <div>
                             {{isset($slot)?$slot:''}}
@@ -201,13 +213,17 @@
             @endif
 
             @if(session('status'))
-            <div class="alert alert-{{session('status')}} info">
+            <div class="alert alert-{{session('status')}} info general">
                 {{session('message')}}
             </div>
             @endif
         </div>
     </div>
 </div>
+@if (isset($ajax) && $ajax === true)
+@endsection
+@endif
+
 
 @section('title', 'Login Window')
 

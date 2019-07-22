@@ -286,17 +286,6 @@
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-body {
-  height: 100%;
-  background: #F5F5F5;
-  color: #5B5B5B;
-  font-family: 'Lato', 'Open Sans', Helvetica, sans-serif !important;
-  line-height: 1.42857143;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  font-size: 14px;
-}
 #Fe_login-block{
     display: none;
 }
@@ -516,4 +505,14 @@ body {
 }
 #Fe_login-block #info_Section li{
   list-style: none;
+}
+a.Fe_login_link, a.Fe_login_link:hover{
+  text-decoration: none;
+}
+
+.modal #Fe_login-block i.fa-id-badge{
+  margin-top: 0px;
+}
+.modal #Fe_login-block button{
+  padding: 10px !important;
 }

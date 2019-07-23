@@ -4,11 +4,13 @@ namespace FeIron\Fe_Login\models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use FeIron\Fe_Login\resources\PasswordResetNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class fe_users extends Authenticatable
 {
     use Notifiable;
+    use PasswordResetNotification;
 
     protected $table = 'users';
     /**

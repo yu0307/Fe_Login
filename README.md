@@ -1,37 +1,199 @@
-## Welcome to GitHub Pages
+## Welcome to Fe_Login Repo
 
-You can use the [editor on GitHub](https://github.com/yu0307/Fe_Login/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+###This package allows users to 
+- Authenticate using social media providers, 
+- Traditional user and password logins,
+- Register new users, 
+- Send email confirmation and password resets,
+- Resetting password with tokenized link,
+- Providing 2 versions of the login screens. 1: individual login screen/page 2: Modal window on homepage
+- Authenticate using either page redirects or ajax
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+###Dependencies:
+- Composer [Visit vendor](https://getcomposer.org/)
+- Laravel 5+
+- Socialite [Visit vendor](https://github.com/laravel/socialite)
 
-### Markdown
+###Installation:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. Please make sure composer is installed on your machine. For installation of composer, please visit [This Link](https://getcomposer.org/doc/00-intro.md)
+2. Once composer is installed properly, please make sure Larave is up to date. 
+3. Navigate to your project root directory
+```
+composer install FeIron\Fe_Login
+```
+4. This package is going to publish several files to the following path
+- config/Fe_Login/
+- public/FeIron/Fe_Login/
+5. **Important!** This package is also going to perform several migrations. Please refer to the following changes and make backups of your tables if they are present. 
+```
+Schema to be Created/Modified to be like
+[users]:
+id int(10) UN AI PK 
+name varchar(200) 
+email varchar(200) 
+password varchar(200) 
+remember_token varchar(100) 
+created_at timestamp 
+updated_at timestamp 
+last_login datetime 
+provider_id varchar(255) 
+provider_type char(225) 
+activated tinyint(1) 
+email_verified_at datetime
+------------------------------------------
+[password_resets]:
+id bigint(20) UN AI PK 
+email varchar(200) 
+token varchar(200) 
+created_at timestamp
+```
+**Note**: During migration, if you encounter error showing "Specified key was too long"
+This was due to MySQL version being older than 5.7.7, if you don't wish to upgrade MySQL server, consider the following.
 
-```markdown
-Syntax highlighted code block
+Within your AppServiceProvider 
+```
+use Illuminate\Support\Facades\Schema;
 
-# Header 1
-## Header 2
-### Header 3
+/**
+ * Bootstrap any application services.
+ *
+ * @return void
+ */
 
-- Bulleted
-- List
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+```
+Further reading on this could be found at [This Link](https://laravel.com/docs/master/migrations#creating-indexes)
 
-1. Numbered
-2. List
+###Basic Usage:
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+General Usage:
+Within any php/blade files
+```
+@Fe_LoginForm()
+```
+**Important**, Make sure to insert the following at template header tags or the last line of body tag to import the necessary js and css. 
+```
+-------------header.blade.php-------------------
+<head>
+@stack('Fe_Login_scripts')
+</head>
+------------------------------------------------
+OR
+-------------home.blade.php-------------------
+<body>
+...some other codes ...
+@stack('Fe_Login_scripts')
+</body>
+------------------------------------------------
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+You may also put everything all together like the following
+```
+@Fe_LoginForm()
+@stack('Fe_Login_scripts')
+```
 
-### Jekyll Themes
+###configuration:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/yu0307/Fe_Login/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+**Important**. There is a configuration file being published to /config/Fe_Login/appconfig.php. Proper configuration is required. 
+Sample config:
+```
+return [
+        'DefaultLoginProviders'=>[
+            'google'=>[
+                'client_id' => 'google_client_id',
+                'client_secret' => 'client_secret',
+                'redirect' => '/login/google/callback'
+            ],
+            'twitter'=>[
+                'client_id' => 'twitter_client_id',
+                'client_secret' => 'client_secret',
+                'redirect' => '/login/twitter/callback'
+            ]
+        ],
+        'HasRegister'=>true,
+        'HasFormLogin'=>true,
+        'HasForgotPassword'=>true,
+        'HasSocialSignin'=>true,
+        'RememberLogin' => true,    
+        'HasTermURL'=>null
+    ];
+```
+Explainations:
+1. DefaultLoginProviders is an array that defines the social media authentication providers. You can define as many providers as needed. a list of supported providers are provided at socialite website. 
+- client_id is required and can be obtained from the provider's developer site. 
+- client_secret is required and can be obtained from the provider's developer site.
+- redirect can be modified but not recommended. This is called once authentication from the provider is finished.
+2. Other config settings:
+| option name | Values | Description | Default |
+| --- | --- | --- | --- |
+| HasRegister | boolean | If user registration option is displayed and available to user. | true |
+| HasFormLogin | boolean | If traditional username and password authentication option is displayed and available to user. | true |
+| HasForgotPassword | boolean | If password retrieval option is displayed and available to user. | true |
+| HasSocialSignin | boolean | If social media authentication option is displayed and available to user. | true |
+| RememberLogin | boolean | If remember login option is displayed and available to user. | true |
+| HasTermURL | URL | If this URL is set, a link to term of use is diaplayed when showing user registration table  | null |
 
-### Support or Contact
+**note**
+Registration and password retrieval are not available when **HasFormLogin is disabled**
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+###Options and parameters:
+- Use the following syntax to pass in options,
+```
+@Fe_LoginForm([
+    'option'=>'value'
+])
+```
+- Available options:
+**All parameters are optional**
+| option name | Values | Description | Default |
+| --- | --- | --- | --- |
+| ajax | boolean | Enable ajax mode.<br/>This will disable single page mode and use modal to display login windows in one page. | null |
+| target | string | Choose to render target section when displaying login window | null |
+| logo | URL | pass in full img tag to display logo on the login screen. | app.name |
+| FormTitle | string | Title to be shown on the login sreen | app.name |
+| Slot | string | Caption/statements displayed under title | null |
+| SignInTitle | string | title or statement displayed for sign in section | <strong>Sign in</strong> to your account |
+| ResetTitle | string | title or statement displayed for password resetting section | <strong>Reset</strong> your password |
+| SignUpTitle | string | title or statement displayed for registration section | <strong>Create</strong> your account |
+| linkType | link/button | When Ajax is enabled, display login menu as link or button | false |
+| FormAction | URL | URL for submiting sign in request | /login/webform |
+| FormAction_forgotPass | URL | URL for processing password retrieval | /emailresetlink |
+| SignUpURL | URL | URL for processing user registration | /register |
+| FormAction_resetURL | URL | URL for processing password reset | /passreset |
+
+Examples:
+1. Display login control as modal and process requests using ajax. Also having link displayed as button
+```
+@Fe_LoginForm([
+    'ajax'=>true,
+    'linkType'=>'button'
+])
+```
+2. Change logo displayed on the login screen. and have title displayed as "Welcome to my website" while stating "Something Amazing is coming..." under the title.
+```
+@Fe_LoginForm([
+    'logo'=>'<img src="/imgs/logo.png"/>',
+    'FormTitle'=>'Welcome to my website',
+    'Slot'=>'Something Amazing is coming...'
+])
+```
+3. Change Registration URL.
+```
+@Fe_LoginForm([
+    'SignUpURL'=>'/signUp'
+])
+
+OR
+
+@Fe_LoginForm([
+    'SignUpURL'=>route('MySignupURL')
+])
+
+```
+
+

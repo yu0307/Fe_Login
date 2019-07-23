@@ -24,11 +24,9 @@
 
 <body class="usr_login_form" data-page="login">
     @Fe_LoginForm([
-    'target'=>$target,
-    'SignInTitle'=>'Please <strong>Sign</strong> In Here ...'
+    'SignInTitle'=>'Please <strong>Sign</strong> In Here ...',
+    'Slot'=>'Something Amazing is coming ...'
     ])
-    Something Amazing is coming ...
-    @endFe_LoginForm
     @stack('Fe_Login_scripts')
     <script type="text/javascript">
         jQuery(document).ready(function() {

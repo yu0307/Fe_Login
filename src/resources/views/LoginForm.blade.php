@@ -22,7 +22,7 @@ $target=$target??(session('target')?? (app('request')->input('target')??null));
 $ajax=(isset($ajax) && $ajax === true);
 @endphp
 
-@if(isset($ajax) && $ajax === true)
+@if($ajax)
 @section('LoginForm')
 @endif
 <div class="container" id="Fe_login-block" style="display:{{$ajax?'block':'none'}}">
@@ -35,7 +35,7 @@ $ajax=(isset($ajax) && $ajax === true);
                         <a href="/" class="logo">{{isset($Logo)?$Logo:config('app.name')}}</a>
                         <h3>{{isset($FormTitle)?$FormTitle:config('app.name')}}</h3>
                         <div>
-                            {{isset($slot)?$slot:''}}
+                            {{isset($Slot)?$Slot:''}}
                         </div>
                     </div>
                 </div>
@@ -235,7 +235,7 @@ $ajax=(isset($ajax) && $ajax === true);
         </div>
     </div>
 </div>
-@if (isset($ajax) && $ajax === true)
+@if ($ajax)
 @endsection
 @include('Fe_Login::ModalFrame')
 @endif

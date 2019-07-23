@@ -129,6 +129,7 @@ Explainations:
 - client_secret is required and can be obtained from the provider's developer site.
 - redirect can be modified but not recommended. This is called once authentication from the provider is finished.
 2. Other config settings:
+
 | option name | Values | Description | Default |
 | --- | --- | --- | --- |
 | HasRegister | boolean | If user registration option is displayed and available to user. | true |
@@ -150,6 +151,7 @@ Registration and password retrieval are not available when **HasFormLogin is dis
 ```
 - Available options:
 **All parameters are optional**
+
 | option name | Values | Description | Default |
 | --- | --- | --- | --- |
 | ajax | boolean | Enable ajax mode.<br/>This will disable single page mode and use modal to display login windows in one page. | null |

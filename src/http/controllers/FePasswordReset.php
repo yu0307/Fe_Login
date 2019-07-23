@@ -5,14 +5,15 @@ namespace FeIron\Fe_Login\http\controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
+use FeIron\Fe_Login\resources\notification\PasswordResetNotification;
 
 class FePasswordReset extends Controller
 {
     
     use ResetsPasswords;
-
     /**
      * Where to redirect users after resetting their password.
      *
@@ -93,6 +94,7 @@ class FePasswordReset extends Controller
             $this->credentials($request),
             function ($user, $password) {
                 $this->resetPassword($user, $password);
+                Notification::send($user, new PasswordResetNotification());
             }
         );
 

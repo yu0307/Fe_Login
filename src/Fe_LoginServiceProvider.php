@@ -11,8 +11,10 @@
             $this->loadViewsFrom(__DIR__ . '/resources/views', 'Fe_Login');
             //loading migration scripts
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
             //registering blade components 
-            Blade::component('Fe_Login::LoginForm', 'Fe_LoginForm');
+            // Blade::component('Fe_Login::LoginForm', 'Fe_LoginForm');
+            Blade::include('Fe_Login::LoginForm', 'Fe_LoginForm');
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);

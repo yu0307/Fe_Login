@@ -20,7 +20,7 @@
 2. Once composer is installed properly, please make sure Larave is up to date. 
 3. Navigate to your project root directory
 ```
-composer install FeIron\Fe_Login
+composer require FeIron/Fe_Login
 ```
 4. This package is going to publish several files to the following path
 - config/Fe_Login/

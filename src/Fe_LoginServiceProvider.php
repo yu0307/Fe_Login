@@ -30,6 +30,20 @@
         }
 
         public function register(){
+            // Auth::provider('lwcustomer', function ($app, array $config) {
+            //     return new LWCustomer();
+            // });
+
+            // instruct the system to use fe_users when authenticating.
+            config(['auth.guards.web.provider' => 'fe_users']);
+            config([
+                'auth.providers.fe_users' => [
+                    'driver' => 'eloquent',
+                    'model' => \FeIron\Fe_Login\models\fe_users::class,
+                ]
+            ]);
+            //instruct the system to use password_resets as reset table
+            config(['auth.passwords.users' => ['provider'=>'fe_users','table'=> 'password_resets', 'expire'=>120]]);
             //append package config files to global pool for users to customize
             $this->mergeConfigFrom(
                 __DIR__ . '/config/appconfig.php',

@@ -33,11 +33,11 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
+        "post-package-install": [
+            "php ../../../artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
         ],
-        "post-update-cmd": [
-            "php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
+        "post-package-update": [
+            "php ../../../artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ]
     }
 }

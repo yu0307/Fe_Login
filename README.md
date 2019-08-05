@@ -1,6 +1,6 @@
 ## Welcome to Fe_Login Repo
 
-###This package allows users to 
+### This package allows users to 
 - Authenticate using social media providers, 
 - Traditional user and password logins,
 - Register new users, 
@@ -9,18 +9,18 @@
 - Providing 2 versions of the login screens. 1: individual login screen/page 2: Modal window on homepage
 - Authenticate using either page redirects or ajax
 
-###Dependencies:
+### Dependencies:
 - Composer [Visit vendor](https://getcomposer.org/)
 - Laravel 5+
 - Socialite [Visit vendor](https://github.com/laravel/socialite)
 
-###Installation:
+### Installation:
 
 1. Please make sure composer is installed on your machine. For installation of composer, please visit [This Link](https://getcomposer.org/doc/00-intro.md)
 2. Once composer is installed properly, please make sure Larave is up to date. 
 3. Navigate to your project root directory
 ```
-composer install FeIron\Fe_Login
+composer require FeIron/Fe_Login
 ```
 4. This package is going to publish several files to the following path
 - config/Fe_Login/
@@ -68,7 +68,7 @@ public function boot()
 ```
 Further reading on this could be found at [This Link](https://laravel.com/docs/master/migrations#creating-indexes)
 
-###Basic Usage:
+### Basic Usage:
 
 General Usage:
 Within any php/blade files
@@ -97,7 +97,7 @@ You may also put everything all together like the following
 @stack('Fe_Login_scripts')
 ```
 
-###configuration:
+### configuration:
 
 **Important**. There is a configuration file being published to /config/Fe_Login/appconfig.php. Proper configuration is required. 
 Sample config:
@@ -129,6 +129,7 @@ Explainations:
 - client_secret is required and can be obtained from the provider's developer site.
 - redirect can be modified but not recommended. This is called once authentication from the provider is finished.
 2. Other config settings:
+
 | option name | Values | Description | Default |
 | --- | --- | --- | --- |
 | HasRegister | boolean | If user registration option is displayed and available to user. | true |
@@ -141,7 +142,7 @@ Explainations:
 **note**
 Registration and password retrieval are not available when **HasFormLogin is disabled**
 
-###Options and parameters:
+### Options and parameters:
 - Use the following syntax to pass in options,
 ```
 @Fe_LoginForm([
@@ -150,6 +151,7 @@ Registration and password retrieval are not available when **HasFormLogin is dis
 ```
 - Available options:
 **All parameters are optional**
+
 | option name | Values | Description | Default |
 | --- | --- | --- | --- |
 | ajax | boolean | Enable ajax mode.<br/>This will disable single page mode and use modal to display login windows in one page. | null |

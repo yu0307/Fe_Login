@@ -113,12 +113,12 @@ class FeLoginController extends Controller
                             $newUser->last_login      = now();
                             $newUser->password        = Hash::make(str_random(16));
                             $newUser->save();
+                            event(new UserCreated($newUser));
                             auth()->login($newUser, true);
                             if (!$newUser->hasVerifiedEmail()) {
                                 $newUser->sendEmailVerificationNotification();
                             }                        
                         }
-
                         return redirect()->back();
                     }else{
                         return redirect()->route('Fe_LoginWindow')->withErrors(['TwitterAuthError'=>"Account Email not found"]);

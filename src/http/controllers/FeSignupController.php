@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Auth\Events\Registered;
+use FeIron\Fe_Login\lib\events\UserCreated;
 
 
 class FeSignupController extends Controller
@@ -72,8 +72,8 @@ class FeSignupController extends Controller
                     ->with('target', 'register')
                     ->withErrors($validator);
         }
-
-        event(new Registered($user = $this->create($request->all())));
+        $user = $this->create($request->all());
+        event(new UserCreated($user));
         $this->guard()->login($user);
         $user->sendEmailVerificationNotification();
         return $this->registered($request, $user)

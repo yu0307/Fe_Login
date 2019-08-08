@@ -30,7 +30,7 @@
     @stack('fe_login_scripts')
     <script type="text/javascript">
         jQuery(document).ready(function() {
-            jQuery('#Fe_login-block').fadeIn(700, 'linear');
+            jQuery('#fe_login-block').fadeIn(700, 'linear');
         });
     </script>
     <script src="{{asset('feiron/fe_login/ThirdParty/backstretch/jquery.backstretch.min.js')}}"></script>

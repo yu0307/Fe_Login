@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $("#Fe_login-block #info_Section").hide();
-    $("#Fe_login-block form").submit(function (e) {
+    $("#fe_login-block #info_Section").hide();
+    $("#fe_login-block form").submit(function (e) {
         e.preventDefault();
-        var submitButton = $("#Fe_login-block form input[type=submit]");
-        $("#Fe_login-block #info_Section:visible").slideUp(100);
+        var submitButton = $("#fe_login-block form input[type=submit]");
+        $("#fe_login-block #info_Section:visible").slideUp(100);
         $.ajax({
             type: 'POST',
             url: $(this).prop('action'),
@@ -31,10 +31,10 @@ $(document).ready(function () {
                 } else {
 
                 }
-                $("#Fe_login-block #info_Section >div").html('<div class="alert alert-' + data.status + ' info general">' + html + "</div>");
-                $("#Fe_login-block #info_Section").slideDown(300, 'linear', function () {
+                $("#fe_login-block #info_Section >div").html('<div class="alert alert-' + data.status + ' info general">' + html + "</div>");
+                $("#fe_login-block #info_Section").slideDown(300, 'linear', function () {
                     if (data.status == 'success') {
-                        $("#Fe_login-block #info_Section div.alert:last").append('<div>Redirecting in 2 seconds...</div>');
+                        $("#fe_login-block #info_Section div.alert:last").append('<div>Redirecting in 2 seconds...</div>');
                         setTimeout(() => {
                             location.reload();
                         }, 2000);
@@ -46,8 +46,8 @@ $(document).ready(function () {
         });
         return false;
     });
-    $('#Fe_login_modal_window').on('hidden.bs.modal', function (e) {
-        $('#Fe_login-block .Fe_ctrl_windows').hide();
-        $('#Fe_login-block #Fe_Login_container').show();
+    $('#fe_login_modal_window').on('hidden.bs.modal', function (e) {
+        $('#fe_login-block .Fe_ctrl_windows').hide();
+        $('#fe_login-block #Fe_Login_container').show();
     })
 });

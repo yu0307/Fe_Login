@@ -9,9 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
-<link rel="stylesheet" href="{{asset('/fe_login/css/fe_login_ui.css')}}">
-<script src="{{asset('feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
-<script src="{{asset('feiron/fe_login/js/fe_login.js')}}"></script>
+<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/fe_login_ui.css')}}">
+<script src="{{asset('/feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
+<script src="{{asset('/feiron/fe_login/js/fe_login.js')}}"></script>
 @endpush
 
 @php
@@ -25,7 +25,7 @@ $ajax=(isset($ajax) && $ajax === true);
 @if($ajax)
 @section('LoginForm')
 @endif
-<div class="container" id="Fe_login-block" style="display:{{$ajax?'block':'none'}}">
+<div class="container" id="fe_login-block" style="display:{{$ajax?'block':'none'}}">
     <div class="row justify-content-md-center">
         <div class=" {{$ajax?'w-75 mw-100':'col-md-auto col-md-7 col-sm-12 col-12'}}">
             {!! $ajax?'':'<i class="far fa-id-badge fa-5x user-img"></i>' !!}
@@ -89,7 +89,7 @@ $ajax=(isset($ajax) && $ajax === true);
                             <div class="form-footer" id="SocialSignIn">
                                 <div class="social-btn">
                                     @foreach (config('fe_login.appconfig.DefaultLoginProviders') as $provider=>$configs)
-                                    <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
+                                    <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/feiron/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
                                     @endforeach
                                 </div>
                             </div>

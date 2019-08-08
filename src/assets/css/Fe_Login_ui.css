@@ -286,10 +286,10 @@
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v16/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-#Fe_login-block{
+#fe_login-block{
     display: none;
 }
-#Fe_login-block .user-img {
+#fe_login-block .user-img {
     display: block;
     font-size: 70px;
     margin-bottom: 20px;
@@ -298,23 +298,22 @@
     text-align: center;
     top: 0px;
 }
-#Fe_login-block .col{
+#fe_login-block .col{
     padding: 0px;
 }
-#Fe_login-block .social-btn img{
+#fe_login-block .social-btn img{
     max-width: 45px;
 }
-#Fe_login-block .account-info {
+#fe_login-block .account-info {
     background: #319DB5;
     color: #ffffff;
     display: block;
     height: 100%;
     padding: 30px;
     text-align: left;
-    vertical-align: top;
     margin: 0px;
 }
-#Fe_login-block .account-info .logo {
+#fe_login-block .account-info .logo {
     color: #ffffff;
     font-family: 'Lato', arial, sans-serif;
     font-weight: 900;
@@ -322,15 +321,15 @@
     line-height: 40px;
     display: block;
 }
-#Fe_login-block .account-info h3 {
+#fe_login-block .account-info h3 {
     font-family: 'Open Sans';
     font-size: 17px;
     margin-top: 5px;
 }
-#Fe_login-block .account-info h3:first-of-type{
+#fe_login-block .account-info h3:first-of-type{
     margin-bottom: 15px;
 }
-#Fe_login-block .account-form {
+#fe_login-block .account-form {
     background: #ffffff;
     display: block;
     padding: 30px;
@@ -339,7 +338,7 @@
     overflow: hidden;
     margin: 0px;
 }
-#Fe_login-block .account-form h3 {
+#fe_login-block .account-form h3 {
     font-family: 'Lato';
     font-weight: 100;
     font-size: 15px;
@@ -349,7 +348,7 @@
     text-transform: uppercase;
 }
 
-#Fe_login-block .form-control {
+#fe_login-block .form-control {
     background-image: none;
     -webkit-box-shadow: none !important;
     background-color: #ECEDEE;
@@ -372,23 +371,23 @@
     -ms-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
 }
-#Fe_login-block .form-control.form-white {
+#fe_login-block .form-control.form-white {
     background-color: #ffffff;
     border: 1px solid #ECEDEE;
     color: #555555;
 }
-#Fe_login-block .form-signin input {
+#fe_login-block .form-signin input {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
 }
 
-#Fe_login-block .append-icon input {
+#fe_login-block .append-icon input {
     padding-right: 36px;
 }
-#Fe_login-block .m-b-20 {
+#fe_login-block .m-b-20 {
     margin-bottom: 20px !important;
 }
-#Fe_login-block .append-icon {
+#fe_login-block .append-icon {
     position: relative;
 }
 .append-icon i {
@@ -404,7 +403,7 @@
     top: 0;
     width: 36px;
 }
-#Fe_login-block .btn {
+#fe_login-block .btn {
     -webkit-font-smoothing: subpixel-antialiased;
     -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
     border: none;
@@ -418,51 +417,51 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-#Fe_login-block .btn-lg {
+#fe_login-block .btn-lg {
     font-size: 17px;
     line-height: 1.471;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     border-radius: 6px;
 }
-#Fe_login-block .btn-dark {
+#fe_login-block .btn-dark {
     background-color: #353940;
     color: #fff;
 }
-#Fe_login-block .ladda-button {
+#fe_login-block .ladda-button {
     position: relative;
 }
-#Fe_login-block .ladda-button,#Fe_login-block .ladda-button .ladda-label,#Fe_login-block .ladda-button .ladda-spinner {
+#fe_login-block .ladda-button,#fe_login-block .ladda-button .ladda-label,#fe_login-block .ladda-button .ladda-spinner {
     -webkit-transition: .3s cubic-bezier(0.175,.885,.32,1.275) all!important;
     -moz-transition: .3s cubic-bezier(0.175,.885,.32,1.275) all!important;
     -ms-transition: .3s cubic-bezier(0.175,.885,.32,1.275) all!important;
     -o-transition: 2.3s cubic-bezier(0.175,.885,.32,1.275) all!important;
     transition: .3s cubic-bezier(0.175,.885,.32,1.275) all!important;
 }
-#Fe_login-block .btn.btn-lg {
+#fe_login-block .btn.btn-lg {
     font-size: 16px;
     padding: 11px;
 }
-#Fe_login-block .btn.btn-rounded {
+#fe_login-block .btn.btn-rounded {
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
 }
-#Fe_login-block .btn.btn-lg {
+#fe_login-block .btn.btn-lg {
     font-size: 15px;
 }
-#Fe_login-block .Fe_sub_controls{
+#fe_login-block .Fe_sub_controls{
     text-align: center;
 }
-#Fe_login-block .Fe_sub_controls .sub_trls {
+#fe_login-block .Fe_sub_controls .sub_trls {
     margin-top: 10px;
     display: inline-block;
     padding: 0px 10px;
 }
-#Fe_login-block .account-form a {
+#fe_login-block .account-form a {
     color: #A7A7A7;
 }
-#Fe_login-block a,#Fe_login-block a:focus,#Fe_login-block a:hover,#Fe_login-block a:active {
+#fe_login-block a,#fe_login-block a:focus,#fe_login-block a:hover,#fe_login-block a:active {
     outline: 0;
 }
 #SocialSignIn{
@@ -481,33 +480,33 @@
     border-radius: 40px;
     border: none;
 }
-#Fe_login-block .form-password,#Fe_login-block .form-signup {
+#fe_login-block .form-password,#fe_login-block .form-signup {
     display: none;
 }
-#Fe_login-block #info_Section{
+#fe_login-block #info_Section{
     text-align: center;
     padding: 15px 0px;
 }
-#Fe_login-block #info_Section .info{
+#fe_login-block #info_Section .info{
     border: 1px solid #c5c5c5;
     padding: 10px;
     font-size: 14px;
     background: snow;
 }
 
-#Fe_login-block #info_Section ul{
+#fe_login-block #info_Section ul{
   padding: 0px;
 }
-#Fe_login-block #info_Section li{
+#fe_login-block #info_Section li{
   list-style: none;
 }
-a.Fe_login_link, a.Fe_login_link:hover{
+a.fe_login_link, a.fe_login_link:hover{
   text-decoration: none;
 }
 
-.modal #Fe_login-block i.fa-id-badge{
+.modal #fe_login-block i.fa-id-badge{
   margin-top: 0px;
 }
-.modal #Fe_login-block button{
+.modal #fe_login-block button{
   padding: 10px !important;
 }

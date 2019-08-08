@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\http\controllers;
+namespace feiron\fe_login\http\controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class FePasswordRetrieval extends Controller
      */
     public function showResetForm()
     {
-        return view('Fe_Login::LoginWindow', [
+        return view('fe_login::LoginWindow', [
             'target' => 'getpassword'
         ]);
     }

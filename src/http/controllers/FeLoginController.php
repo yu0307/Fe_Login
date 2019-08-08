@@ -1,13 +1,13 @@
 <?php
 
-namespace FeIron\Fe_Login\http\controllers;
+namespace feiron\fe_login\http\controllers;
 
 use App\Http\Controllers\Controller;
 use Socialite;
 use Auth;
 use TheSeer\Tokenizer\Exception;
-use FeIron\Fe_Login\models\fe_users;
-use FeIron\Fe_Login\resources\RouterParser;
+use feiron\fe_login\models\fe_users;
+use feiron\fe_login\resources\RouterParser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
@@ -46,12 +46,12 @@ class FeLoginController extends Controller
     }
     
     public function RenderLoginWindow(Request $request){
-        return view('Fe_Login::LoginWindow')->with(['target' => $this->ParseTarget($request)]);
+        return view('fe_login::LoginWindow')->with(['target' => $this->ParseTarget($request)]);
     }
 
     public function TryLogin($AuthType = null, Request $request){
         if (!isset($AuthType)) {
-            return redirect()->route('Fe_LoginWindow');
+            return redirect()->route('fe_loginWindow');
         } else {
             $customMessages = [
                 'email.required' => 'Email cannot be empty',
@@ -73,7 +73,7 @@ class FeLoginController extends Controller
                 }
             }else{
                 try {
-                    config([('services.' . $AuthType) => config('Fe_Login.appconfig.DefaultLoginProviders.' . $AuthType)]);
+                    config([('services.' . $AuthType) => config('fe_login.appconfig.DefaultLoginProviders.' . $AuthType)]);
                     return Socialite::driver($AuthType)->redirect();
                 } catch (Exception $e) {
                     return 'Authentication Error' . (config('app.debug') === false ? '' : ('<br/>' . $e));
@@ -90,10 +90,10 @@ class FeLoginController extends Controller
 
     public function handleProviderCallback($AuthType=null){
         if (!isset($AuthType)) {
-            return redirect()->route('Fe_LoginWindow');
+            return redirect()->route('fe_loginWindow');
         } else {
             try {
-                    config([('services.'.$AuthType)=>config('Fe_Login.appconfig.DefaultLoginProviders.'.$AuthType)]);
+                    config([('services.'.$AuthType)=>config('fe_login.appconfig.DefaultLoginProviders.'.$AuthType)]);
                     $user = Socialite::driver($AuthType)->user();
                     if(isset($user->email)){
                         $existingUser = fe_users::where('email', $user->email)->first();
@@ -121,14 +121,14 @@ class FeLoginController extends Controller
                         }
                         return redirect()->back();
                     }else{
-                        return redirect()->route('Fe_LoginWindow')->withErrors(['TwitterAuthError'=>"Account Email not found"]);
+                        return redirect()->route('fe_loginWindow')->withErrors(['TwitterAuthError'=>"Account Email not found"]);
                     }
                     
                 } catch (\Exception $e) {
                     if(config('app.debug')!==false){
                         dd($e);
                     }
-                    return redirect()->route('Fe_LoginWindow')->withErrors(['authentication' => 'Authentication with third party failed.']);
+                    return redirect()->route('fe_loginWindow')->withErrors(['authentication' => 'Authentication with third party failed.']);
                 }
         }
         return false;

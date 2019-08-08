@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\middleware;
+namespace feiron\fe_login\middleware;
 
 use App\Http\Middleware\Authenticate;
 
@@ -15,7 +15,7 @@ class FeAuthenticate extends Authenticate
     protected function redirectTo($request)
     {
         if (!$request->expectsJson()) {
-            return route('Fe_LoginWindow');
+            return route('fe_loginWindow');
         }
     }
 }

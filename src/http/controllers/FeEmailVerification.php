@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\http\controllers;
+namespace feiron\fe_login\http\controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
@@ -38,13 +38,13 @@ class FeEmailVerification extends Controller
     // public function show(Request $request)
     // {
     //     return $request->user()->hasVerifiedEmail()
-    //         ? view('Fe_Login::LoginWindow')->with(
+    //         ? view('fe_login::LoginWindow')->with(
     //         [
     //             'target' => 'info',
     //             'message' => 'Thank you for verifying your email',
     //             'status' => 'info'
     //         ])
-    //         : view('Fe_Login::LoginWindow')->with([
+    //         : view('fe_login::LoginWindow')->with([
     //             'target' => 'info',
     //             'message' => 'Invalid Verification Link',
     //             'status' => 'info'

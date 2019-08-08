@@ -1,4 +1,4 @@
-@push('Fe_Login_scripts')
+@push('fe_login_scripts')
 @if (file_exists(public_path('css/app.css')))
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 @endif
@@ -9,9 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
-<link rel="stylesheet" href="{{asset('FeIron/Fe_Login/css/Fe_Login_ui.css')}}">
-<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_bootstrap.js')}}"></script>
-<script src="{{asset('FeIron/Fe_Login/js/Fe_Login.js')}}"></script>
+<link rel="stylesheet" href="{{asset('/fe_login/css/fe_login_ui.css')}}">
+<script src="{{asset('/fe_login/js/fe_login_bootstrap.js')}}"></script>
+<script src="{{asset('/fe_login/js/fe_login.js')}}"></script>
 @endpush
 
 @php
@@ -41,9 +41,9 @@ $ajax=(isset($ajax) && $ajax === true);
                 </div>
                 <div class="col-md-7 col-sm-12 col-12 col">
                     <div class="account-form">
-                        <div class="form-login Fe_ctrl_windows" id="Fe_Login_container" style="display:{{ ( isset($target)?'none':'block') }}">
-                            @if (config('Fe_Login.appconfig.HasFormLogin'))
-                            <form method="post" class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('Fe_LoginControl', ['AuthType' =>'webform'])}}">
+                        <div class="form-login Fe_ctrl_windows" id="fe_login_container" style="display:{{ ( isset($target)?'none':'block') }}">
+                            @if (config('fe_login.appconfig.HasFormLogin'))
+                            <form method="post" class="form-signin" role="form" action="{{isset($FormAction)?$FormAction:route('fe_loginControl', ['AuthType' =>'webform'])}}">
                                 @csrf
                                 <h3>{!! (isset($SignInTitle)?$SignInTitle:"<strong>Sign in</strong> to your account") !!} </h3>
                                 <div class="append-icon m-b-20">
@@ -60,7 +60,7 @@ $ajax=(isset($ajax) && $ajax === true);
                                         <button type="submit" id="Fe_login_submit-form" class="btn btn-lg btn-dark btn-rounded ladda-button col-sm-12 col-12" data-style="expand-left">Sign In</button>
                                     </div>
                                     <div class="col-md-6 col-sm-12 col-12 p-2 text-center">
-                                        @if(config('Fe_Login.appconfig.RememberLogin'))
+                                        @if(config('fe_login.appconfig.RememberLogin'))
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="true" id="fe_login_remember" name="rememberMe">
                                             <label class="form-check-label" for="fe_login_remember">
@@ -72,12 +72,12 @@ $ajax=(isset($ajax) && $ajax === true);
                                 </div>
 
                                 <div id="Fe_sub_controls" class="Fe_sub_controls">
-                                    @if(config('Fe_Login.appconfig.HasRegister'))
+                                    @if(config('fe_login.appconfig.HasRegister'))
                                     <div class="sub_trls">
                                         <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">Sign up</a>
                                     </div>
                                     @endif
-                                    @if(config('Fe_Login.appconfig.HasForgotPassword'))
+                                    @if(config('fe_login.appconfig.HasForgotPassword'))
                                     <div class="sub_trls">
                                         <span class="forgot-password"><a id="Fe_login_password" href="#" class="swap_ctrl" wintarget="form-password">Forgot password?</a></span>
                                     </div>
@@ -85,18 +85,18 @@ $ajax=(isset($ajax) && $ajax === true);
                                 </div>
                             </form>
                             @endif
-                            @if (config('Fe_Login.appconfig.HasSocialSignin'))
+                            @if (config('fe_login.appconfig.HasSocialSignin'))
                             <div class="form-footer" id="SocialSignIn">
                                 <div class="social-btn">
-                                    @foreach (config('Fe_Login.appconfig.DefaultLoginProviders') as $provider=>$configs)
-                                    <a href="{{route('Fe_LoginControl', ['AuthType' => $provider])}}"><img src="{{ asset('FeIron/Fe_Login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
+                                    @foreach (config('fe_login.appconfig.DefaultLoginProviders') as $provider=>$configs)
+                                    <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
                                     @endforeach
                                 </div>
                             </div>
                             @endif
                         </div>
 
-                        @if(config('Fe_Login.appconfig.HasForgotPassword'))
+                        @if(config('fe_login.appconfig.HasForgotPassword'))
                         <form method="post" class="form-password Fe_ctrl_windows" role="form" action="{{isset($FormAction_forgotPass)?$FormAction_forgotPass:route('Fe_PasswordResetEmail')}}" style="display:{{ (($target=='getpassword')?'block':'none') }}">
                             @csrf
                             <h3>{!! isset($ResetTitle)?$ResetTitle:'<strong>Reset</strong> your password' !!}</h3>
@@ -110,7 +110,7 @@ $ajax=(isset($ajax) && $ajax === true);
                                     <a href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
                                 </div>
                                 <div class="sub_trls">
-                                    @if(config('Fe_Login.appconfig.HasRegister'))
+                                    @if(config('fe_login.appconfig.HasRegister'))
                                     <a href="#" class="swap_ctrl" wintarget="form-register">New here? Sign up</a>
                                     @endif
                                 </div>
@@ -118,7 +118,7 @@ $ajax=(isset($ajax) && $ajax === true);
                         </form>
                         @endif
 
-                        @if(config('Fe_Login.appconfig.HasRegister'))
+                        @if(config('fe_login.appconfig.HasRegister'))
                         <form method="post" class="form-register Fe_ctrl_windows" role="form" action="{{isset($SignUpURL)?$SignUpURL:route('Fe_SignUp')}}" style="display:{{ (($target=='register')?'block':'none')}}">
                             @csrf
                             <h3>{!! isset($SignUpTitle)?$SignUpTitle:'<strong>Create</strong> your account' !!}</h3>
@@ -154,13 +154,13 @@ $ajax=(isset($ajax) && $ajax === true);
                                     </div>
                                 </div>
                             </div>
-                            @if(config('Fe_Login.appconfig.HasTermURL'))
+                            @if(config('fe_login.appconfig.HasTermURL'))
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="fe_term_agreement">
                                         <label class="form-check-label" for="fe_term_agreement">
-                                            I agree with the <a href="{{config('Fe_Login.appconfig.HasTermURL')}}">terms and conditions</a>.
+                                            I agree with the <a href="{{config('fe_login.appconfig.HasTermURL')}}">terms and conditions</a>.
                                         </label>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@ $ajax=(isset($ajax) && $ajax === true);
                                     <a id="Fe_login" href="#" class="swap_ctrl" wintarget="form-login">Have an account? Sign In</a>
                                 </div>
                                 <div class="sub_trls">
-                                    @if(config('Fe_Login.appconfig.HasRegister'))
+                                    @if(config('fe_login.appconfig.HasRegister'))
                                     <a href="#" class="fe_btn_signup swap_ctrl" wintarget="form-register">New here? Sign up</a>
                                     @endif
                                 </div>
@@ -237,7 +237,7 @@ $ajax=(isset($ajax) && $ajax === true);
 </div>
 @if ($ajax)
 @endsection
-@include('Fe_Login::ModalFrame')
+@include('fe_login::ModalFrame')
 @endif
 
 

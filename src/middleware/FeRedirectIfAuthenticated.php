@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\middleware;
+namespace feiron\fe_login\middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

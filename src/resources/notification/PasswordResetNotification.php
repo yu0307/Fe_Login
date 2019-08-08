@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\resources\notification;
+namespace feiron\fe_login\resources\notification;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;

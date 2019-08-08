@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\http\controllers;
+namespace feiron\fe_login\http\controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Password;
-use FeIron\Fe_Login\resources\notification\PasswordResetNotification;
+use feiron\fe_login\resources\notification\PasswordResetNotification;
 
 class FePasswordReset extends Controller
 {
@@ -34,19 +34,19 @@ class FePasswordReset extends Controller
     public function showWindow(Request $request, $token,$email){
         if(null==$this->broker()->getUser(['email' => $email, 'token' => $token]) || !$this->broker()->getRepository()->exists($this->broker()->getUser(['email'=> $email,'token'=>$token]), $token)){
             return redirect()
-                ->route('Fe_LoginWindow')
+                ->route('fe_loginWindow')
                 ->withErrors(['InvalidToken'=>'Invalid Password Reset Link.']);
         }
         $validator = $this->validator(['token'=>$token, 'email'=>$email], true);
         if ($validator->fails()) {
             return redirect()
-                ->route('Fe_LoginWindow')
+                ->route('fe_loginWindow')
                 ->withInput($request->only('email'))
                 ->with('target', 'getpassword')
                 ->withErrors($validator);
         }
         $request->request->add(['token' => $token,'email'=>$email]);
-        return view('Fe_Login::LoginWindow')->with(['target'=> 'reset']);
+        return view('fe_login::LoginWindow')->with(['target'=> 'reset']);
     }
 
     /**
@@ -82,7 +82,7 @@ class FePasswordReset extends Controller
         $validator = $this->validator($request->only(['token','email']), true);
         if ($validator->fails()) {
             return redirect()
-                ->route('Fe_LoginWindow', $request->only(['token', 'email']))
+                ->route('fe_loginWindow', $request->only(['token', 'email']))
                 ->with('target', 'reset')
                 ->withErrors($validator);
         }

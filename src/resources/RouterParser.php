@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\resources;
+namespace feiron\fe_login\resources;
 use Illuminate\Http\Request;
 
 trait RouterParser

@@ -25,7 +25,7 @@
             ],'fe_login_config');
             //set the publishing target path for asset files. Run only during update and installation of the package. see composer.json of the package.
             $this->publishes([
-                __DIR__ . '/assets' => public_path('/fe_login'),
+                __DIR__ . '/assets' => public_path('feiron/fe_login'),
             ], 'fe_login_public');
         }
 

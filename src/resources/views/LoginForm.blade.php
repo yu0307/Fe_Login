@@ -10,8 +10,8 @@
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
 <link rel="stylesheet" href="{{asset('/fe_login/css/fe_login_ui.css')}}">
-<script src="{{asset('/fe_login/js/fe_login_bootstrap.js')}}"></script>
-<script src="{{asset('/fe_login/js/fe_login.js')}}"></script>
+<script src="{{asset('feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
+<script src="{{asset('feiron/fe_login/js/fe_login.js')}}"></script>
 @endpush
 
 @php

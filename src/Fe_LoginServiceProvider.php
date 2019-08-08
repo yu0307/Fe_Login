@@ -3,7 +3,7 @@
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Support\Facades\Blade;
 
-    class fe_loginServiceProvider extends ServiceProvider{
+    class Fe_LoginServiceProvider extends ServiceProvider{
         public function boot(){
             //locading package route files
             $this->loadRoutesFrom(__DIR__.'/routes/web.php');

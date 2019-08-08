@@ -1,10 +1,10 @@
 <?php
-    Route::group(['namespace' => 'FeIron\Fe_Login\Http\Controllers', 'middleware' => ['web']], function () {
+    Route::group(['namespace' => 'feiron\fe_login\Http\Controllers', 'middleware' => ['web']], function () {
 
         //Authenticaiton
-        Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('Fe_LoginWindow');
-        Route::get('login/{AuthType?}', 'FeLoginController@TryLogin')->name('Fe_LoginControl');
-        Route::post('login/{AuthType?}', 'FeLoginController@TryLogin')->name('Fe_LoginControl');
+        Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('fe_loginWindow');
+        Route::get('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
+        Route::post('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::get('login/{AuthType?}/callback', 'FeLoginController@handleProviderCallback');
 
         //Registration
@@ -27,7 +27,7 @@
 
 
         Route::get('test',function(){
-            return view('Fe_Login::testview');
+            return view('fe_login::testview');
         });
     });
 ?>

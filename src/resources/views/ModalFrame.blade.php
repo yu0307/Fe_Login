@@ -32,6 +32,6 @@ $linkType=$linkType??false;
   </div>
 </div>
 
-@push('Fe_Login_scripts')
-<script src="{{asset('FeIron/Fe_Login/js/Fe_Login_ajax.js')}}"></script>
+@push('fe_login_scripts')
+<script src="{{asset('/fe_login/js/fe_login_ajax.js')}}"></script>
 @endpush

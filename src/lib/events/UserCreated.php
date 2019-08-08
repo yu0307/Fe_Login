@@ -1,9 +1,9 @@
 <?php
-namespace FeIron\Fe_Login\lib\events;
+namespace feiron\fe_login\lib\events;
 
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
-use FeIron\Fe_Login\models\fe_users;
+use feiron\fe_login\models\fe_users;
 
 class UserCreated
 {

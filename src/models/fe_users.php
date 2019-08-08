@@ -1,6 +1,6 @@
 <?php
 
-namespace FeIron\Fe_Login\models;
+namespace feiron\fe_login\models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

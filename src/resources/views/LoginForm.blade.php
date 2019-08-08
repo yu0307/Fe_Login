@@ -9,9 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
-<link rel="stylesheet" href="{{asset('/fe_login/css/fe_login_ui.css')}}">
-<script src="{{asset('feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
-<script src="{{asset('feiron/fe_login/js/fe_login.js')}}"></script>
+<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/fe_login_ui.css')}}">
+<script src="{{asset('/feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
+<script src="{{asset('/feiron/fe_login/js/fe_login.js')}}"></script>
 @endpush
 
 @php
@@ -89,7 +89,7 @@ $ajax=(isset($ajax) && $ajax === true);
                             <div class="form-footer" id="SocialSignIn">
                                 <div class="social-btn">
                                     @foreach (config('fe_login.appconfig.DefaultLoginProviders') as $provider=>$configs)
-                                    <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
+                                    <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/feiron/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
                                     @endforeach
                                 </div>
                             </div>

@@ -33,8 +33,8 @@
             jQuery('#Fe_login-block').fadeIn(700, 'linear');
         });
     </script>
-    <script src="{{asset('feiron/fe_login/ThirdParty/backstretch/jquery.backstretch.min.js')}}"></script>
-    <script src="{{asset('feiron/fe_login/js/backstretch.js')}}"></script>
+    <script src="{{asset('/feiron/fe_login/ThirdParty/backstretch/jquery.backstretch.min.js')}}"></script>
+    <script src="{{asset('/feiron/fe_login/js/backstretch.js')}}"></script>
 </body>
 
 </html>

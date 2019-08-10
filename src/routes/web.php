@@ -1,5 +1,5 @@
 <?php
-    Route::group(['namespace' => 'feiron\fe_login\Http\Controllers', 'middleware' => ['web']], function () {
+    Route::group(['namespace' => 'feiron\fe_login\http\controllers', 'middleware' => ['web']], function () {
 
         //Authenticaiton
         Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('fe_loginWindow');

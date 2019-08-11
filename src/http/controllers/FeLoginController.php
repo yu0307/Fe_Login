@@ -8,6 +8,7 @@ use Auth;
 use TheSeer\Tokenizer\Exception;
 use feiron\fe_login\models\fe_users;
 use feiron\fe_login\resources\RouterParser;
+use feiron\fe_login\lib\events\UserCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;

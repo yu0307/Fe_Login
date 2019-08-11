@@ -9,9 +9,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
-<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/fe_login_ui.css')}}">
-<script src="{{asset('/feiron/fe_login/js/fe_login_bootstrap.js')}}"></script>
-<script src="{{asset('/feiron/fe_login/js/fe_login.js')}}"></script>
+<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/Fe_Login_ui.css')}}">
+<script src="{{asset('/feiron/fe_login/js/Fe_Login_bootstrap.js')}}"></script>
+<script src="{{asset('/feiron/fe_login/js/Fe_Login.js')}}"></script>
 @endpush
 
 @php

@@ -15,6 +15,7 @@
             //registering blade components 
             // Blade::component('fe_login::LoginForm', 'fe_loginForm');
             Blade::include('fe_login::LoginForm', 'fe_loginForm');
+            Blade::include('fe_login::LoginUsrManager', 'fe_UserManager');
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);

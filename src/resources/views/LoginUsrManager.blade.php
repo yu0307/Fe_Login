@@ -1,5 +1,6 @@
 
 @inject('UserManager', 'UserManagement')
+@IncludeOutlet($UserManager->OutletRenders('userCreation'))
 
 @push('fe_login_scripts')
 
@@ -42,6 +43,7 @@
             {{$Slot??''}}
         </div>
     </div>
+    @yield('userCreation')
 </div>
 
 @show

@@ -5,6 +5,7 @@ namespace feiron\fe_login\models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use \feiron\fe_login\models\fe_userMeta;
 
 class fe_users extends Authenticatable
 {
@@ -40,6 +41,10 @@ class fe_users extends Authenticatable
         'updated_at' => 'datetime',
         'last_login' => 'datetime',
     ];
+
+    public function metainfo(){
+        return $this->hasMany('\feiron\fe_login\models\fe_userMeta','user_id', 'id');
+    }
 }
 
 ?>

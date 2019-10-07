@@ -27,7 +27,7 @@
 
 
         Route::get('test',function(){
-            return view('fe_login::testview');
+            return view('fe_login::LoginUsrManagerWindow');
         });
     });
 ?>

@@ -13,9 +13,8 @@
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
             //registering blade components 
-            // Blade::component('fe_login::LoginForm', 'fe_loginForm');
             Blade::include('fe_login::LoginForm', 'fe_loginForm');
-            Blade::include('fe_login::LoginUsrManager', 'fe_UserManager');
+            Blade::component('fe_login::LoginUsrManager', 'fe_UserManager');
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);
@@ -31,9 +30,7 @@
         }
 
         public function register(){
-            // Auth::provider('lwcustomer', function ($app, array $config) {
-            //     return new LWCustomer();
-            // });
+            $this->app->register( '\feiron\fe_login\lib\UserManagementServiceProvider');
 
             // instruct the system to use fe_users when authenticating.
             config(['auth.guards.web.provider' => 'fe_users']);

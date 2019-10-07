@@ -27,6 +27,10 @@ class CreateUserTable extends Migration
                 $table->string('google_id')->nullable();
                 $table->string('facebook_id')->nullable();
                 $table->string('twitter_id')->nullable();
+
+                $table->engine = 'InnoDB';
+                $table->charset = 'utf8';
+                $table->collation = 'utf8_unicode_ci';
             });
         }else{
             Schema::table('users', function (Blueprint $table) {

@@ -23,14 +23,15 @@
 </head>
 
 
-<body class="usr_login_form" data-page="login">
+<body class="usr_login_form p-5" data-page="login">
     <div class="row">
-        <div class="col-md-3 d-none d-md-block">
+        <div class="col-md-2 d-none d-md-block">
         </div>
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-8 col-sm-12">
         @fe_UserManager()
+        @endfe_UserManager
         </div>
-        <div class="col-md-3 d-none d-md-block">
+        <div class="col-md-2 d-none d-md-block">
         </div>
     </div>
     @stack('fe_login_scripts')

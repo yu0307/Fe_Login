@@ -1,6 +1,6 @@
 
 @inject('UserManager', 'UserManagement')
-@IncludeOutlet($UserManager->OutletRenders('userCreation'))
+@IncludeOutlet($UserManager,'userManagement')
 
 @push('fe_login_scripts')
 
@@ -11,12 +11,11 @@
 <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
 @endif
 <script src="{{asset('/feiron/fe_login/js/Fe_Login_bootstrap.js')}}"></script>
-<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/Fe_Login_usrMnager_ui.css')}}">
-<script src="{{asset('/feiron/fe_login/js/Fe_Login_usrMnager_ui.js')}}"></script>
+<script src="{{asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js')}}"></script>
 @endpush
 
 @section('usrManager')
-<div id="usr_management_area">
+<div id="usr_management_area" actionTarget="{{route('Fe_UserManagement_save')}}">
     <div class="panel">
         <div class="panel-header bg-dark">
             <div class="row">
@@ -24,7 +23,7 @@
                     <h3><strong>User</strong> Management</h3>
                 </div>
                 <div class="col-md-6 col-sm-12 text-right">
-                    <button class="btn btn-success">Create User</button>
+                    <button class="btn btn-success" id="bt_usrCreate" data-toggle="modal" data-target="#usrManagementCtr">Create User</button>
                 </div>
             </div>
             
@@ -43,7 +42,6 @@
             {{$Slot??''}}
         </div>
     </div>
-    @yield('userCreation')
 </div>
 
 @show

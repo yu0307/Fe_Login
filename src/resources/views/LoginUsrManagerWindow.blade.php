@@ -34,7 +34,9 @@
         <div class="col-md-2 d-none d-md-block">
         </div>
     </div>
+    @yield('userManagement')
     @stack('fe_login_scripts')
+    @stack('userManagement')
 </body>
 
 </html>

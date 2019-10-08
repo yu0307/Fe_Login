@@ -7,7 +7,7 @@ use \feiron\fe_login\lib\outlet\feOutletContract;
 class feOutlet implements feOutletContract
 {
     protected $callback;//function call back for the outlet;
-    protected $resource;//array of path to resource files;
+    protected $resource=[];//array of path to resource files;
     protected $view;
     protected $myName;
     // private $type;//outlet type

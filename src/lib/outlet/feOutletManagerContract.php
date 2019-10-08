@@ -17,7 +17,7 @@ interface feOutletManagerContract{
 
     public function getAvailableOutlets();
 
-    public function OutletCalls($outletName);
+    public function OutletCalls($outletName, $params);
 
     public function OutletResources($outletName);
 

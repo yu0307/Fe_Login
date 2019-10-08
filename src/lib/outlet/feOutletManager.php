@@ -60,22 +60,43 @@ class feOutletManager implements feOutletManagerContract{
         return $this;
     }
 
-    public function OutletCalls($outletName){
+    public function OutletCalls($outletName,$params){
         foreach($this->OutletList[$outletName] as $key=>$outlet){
-            $outlet->CallOutlet();
+            $outlet->CallOutlet($params);
         }
     }
 
     public function OutletResources($outletName,$target=false,$formater=null){
         $resources = [];
-        if($target===fase){
+        if($target===false){
             foreach($this->OutletList[$outletName] as $key=>$outlet){
-                array_push($resources, $outlet->getResource());
+                $outlet= $outlet->getResource();
+                if(!empty($outlet) && is_array($outlet)){
+                    foreach($outlet as $res){
+                        array_push($resources, $this->toHTML(asset($res)));
+                    }
+                }
             }
         }else{
-            $resources= $this->OutletList[$outletName][$target];
+            $outlet = $this->OutletList[$outletName][$target]->getResource();
+            if (!empty($outlet) && is_array($outlet)) {
+                foreach ($outlet as $res) {
+                    array_push($resources, $this->toHTML(asset($res)));
+                }
+            }
         }
+
         return (is_callable($formater)? $formater($resources): $resources);
+    }
+
+    private function toHTML($asset){
+        $extension  = explode(".", $asset);
+        $extension  = end($extension);
+        if ($extension == 'js') {
+            return '<script type="text/javascript" src="' . $asset . '"></script>';
+        } else {
+            return '<link href="'. $asset.'" rel="stylesheet">';
+        }
     }
 
     public function OutletRenders($outletName,$asObjects=true){

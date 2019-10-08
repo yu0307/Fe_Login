@@ -5,7 +5,7 @@ use Auth;
 use \feiron\fe_login\models\fe_userMeta;
 use \feiron\fe_login\models\fe_users;
 use \feiron\fe_login\lib\outlet\feOutletManager;
-use \feiron\fe_login\lib\outlet\defaultOutlets\userCreation;
+use \feiron\fe_login\lib\outlet\defaultOutlets\userManagement as management;
 class UserManagement extends feOutletManager
 {
     private $UID;
@@ -13,11 +13,9 @@ class UserManagement extends feOutletManager
     public function __construct($UID=null){
         $this->UID=($UID??(Auth::user()->getKey()??Auth::user()->id))??null;
         //providing available outlet hooks
-        $this->registerOutlet('userCreation');
-        $this->registerOutlet('userRemoval');
-        $this->registerOutlet('userUpdate');
+        $this->registerOutlet('userManagement');
 
-        $this->bindOutlet('userCreation', new userCreation());
+        $this->bindOutlet('userManagement', new management());
     }
     
     public function getUsers($meta=[],$withMyself=false){

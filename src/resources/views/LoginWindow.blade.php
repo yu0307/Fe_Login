@@ -20,6 +20,7 @@
             font-size: 14px;
         }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="usr_login_form" data-page="login">

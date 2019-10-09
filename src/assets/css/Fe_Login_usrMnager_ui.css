@@ -33,7 +33,7 @@
   }
   #usr_management_area .panel .panel-content i {
     padding-left: 0;
-    padding-right: 6px;
+    padding-right: 0px;
   }
   #usr_management_area .panel .panel-content .btn i {
     padding-right: 0;
@@ -513,7 +513,9 @@
   .img-circle {
     border-radius: 50%;
   }
-
+  .hidden{
+    display: none;
+  }
   .user_list .users{
     display: inline-block;
     padding: 5px;
@@ -526,4 +528,27 @@
     border: 1px solid gray;
     padding: 2px;
     margin-bottom: 5px;
+  }
+  #usrManagementCtr .form-control{
+    margin: 0px 5px;
+  }
+  #usrManagementCtr .btn{
+    min-width: 130px;
+  }
+  
+  #usrManagementCtr .form-control.invalid{
+    border:1px solid red;
+  }
+  #usrManagementCtr .form-control.invalid ~.invalid-feedback:not(.custom) {
+    display: block;
+  }
+  #usrManagementCtr .form-control.DonotMatch ~.invalid-feedback.mustMatch{
+    display: block;
+  }
+  #usrManageWinMsg{
+    text-align: center;
+    padding: 10px;
+  }
+  #usrManageWinMsg .error{
+    color:#dc3545;
   }

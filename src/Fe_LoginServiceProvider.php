@@ -27,6 +27,16 @@
             $this->publishes([
                 __DIR__ . '/assets' => public_path('feiron/fe_login'),
             ], 'fe_login_public');
+
+            if (app()->resolved('frameOutlet')) {
+                app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
+                    'view'=> 'fe_login::LoginUsrManager',
+                    'myName'=>'User Management',
+                    'reousrce'=>[
+                        asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js')
+                    ]
+                ]));
+            }
         }
 
         public function register(){

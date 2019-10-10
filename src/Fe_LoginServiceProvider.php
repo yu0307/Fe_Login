@@ -34,6 +34,7 @@
                     'myName'=>'User Management',
                     'reousrce'=>[
                         asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js'),
+                        asset('/feiron/fe_login/js/Fe_Login_usrOutlet.js'),
                         asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
                     ]
                 ]));

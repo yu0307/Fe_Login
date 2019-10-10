@@ -7,7 +7,7 @@
     <div class="panel">
         <div class="panel-content p-3">
             <div class="text-right t-right">
-                <button class="btn btn-success outlet_CRUD" id="bt_usrCreate" data-toggle="modal" data-target="#usrManagementCtr" outlet-target="User_Management">Create User</button>
+                <button class="btn btn-success" id="btn_usrCreate" data-toggle="modal" data-target="#usrManagementCtr">Create User</button>
             </div>
             <hr class="m-t-5 m-b-5">
             @yield('feLogin_UsrList')

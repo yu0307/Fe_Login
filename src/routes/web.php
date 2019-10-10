@@ -28,7 +28,7 @@
         Route::get('usermanagement', 'FeUsrManagement@show')->name('Fe_UserManagementUI');
         Route::post('usermanagement', 'FeUsrManagement@SaveUser')->name('Fe_UserManagement_save');
         Route::post('usermanagement/load', 'FeUsrManagement@loadList')->name('Fe_UserManagement_load');
-        Route::post('usermanagement/{UID}', 'FeUsrManagement@GetUser')->name('Fe_UserManagement_get');
+        Route::get('usermanagement/{UID}', 'FeUsrManagement@GetUser')->name('Fe_UserManagement_get');
         Route::post('usermanagement/rm/{UID}', 'FeUsrManagement@RemoveUser')->name('Fe_UserManagement_delete');
     });
 ?>

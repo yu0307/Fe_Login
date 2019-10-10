@@ -63,15 +63,19 @@ class FeUsrManagement extends Controller
                 'password' => 'required|confirmed|between:8,255|string',
             ];
         }
-        $request->validate($rules, $customMessages);
         $updates = [
-            'email' =>$request->input('email'),
+            'email' => $request->input('email'),
             'name' => $request->input('usrName')
         ];
-        $message='User Created';
-        if ($request->filled('password')){
-            $updates['password']= Hash::make($request->input('password'));
+        $message = 'User Created';
+        if ($request->filled('password')) {
+            $updates['password'] = Hash::make($request->input('password'));
+        }else{
+            unset($request['password']);
+            unset($request['password_confirmation']);
         }
+        $request->validate($rules, $customMessages);
+        
         
         if ($request->filled('usr_ID')){
             $usr=fe_users::find($request->input('usr_ID'))->update($updates);
@@ -82,6 +86,15 @@ class FeUsrManagement extends Controller
         }
 
         return response()->json(['status' => 'success', 'message' => $message]);
+    }
+
+    public function GetUser(Request $request, $UID){
+        return response()->json(fe_users::find($UID,['name','email'])??[]);
+    }
+
+    public function RemoveUser(Request $request, $UID){
+        fe_users::find($UID)->delete();
+        return response()->json(['status' => 'success', 'message' => 'User removed.']);
     }
 
 }

@@ -30,10 +30,11 @@
 
             if (app()->resolved('frameOutlet')) {
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
-                    'view'=> 'fe_login::LoginUsrManager',
+                    'view'=> 'fe_login::LoginOutletUsrManager',
                     'myName'=>'User Management',
                     'reousrce'=>[
-                        asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js')
+                        asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js'),
+                        asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
                     ]
                 ]));
             }

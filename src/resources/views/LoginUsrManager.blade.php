@@ -1,9 +1,7 @@
 
 @inject('UserManager', 'UserManagement')
 @IncludeOutlet($UserManager,'userManagement')
-
-
-
+@includeIf('fe_login::LoginUsrList')
 @section('usrManager')
 <div id="usr_management_area" actionTarget="{{route('Fe_UserManagement_save')}}">
     <div class="panel">
@@ -16,19 +14,9 @@
                     <button class="btn btn-success" id="bt_usrCreate" data-toggle="modal" data-target="#usrManagementCtr">Create User</button>
                 </div>
             </div>
-            
         </div>
         <div class="panel-content p-3">
-            <div class="user_list">
-                @forelse ($UserManager->getUsers($usrMeta??[],($withMyself??false)) as $user)
-                    <div class="users">
-                        <div class="user_img"><img class="user_prof_pics img-circle" src="{{asset('feiron\fe_login\images\avatar_notif.png')}}"></div>
-                        <div class="user_names">{{ $user->name }}</div>
-                    </div>
-                @empty
-                    <p>There are no users...</p>
-                @endforelse
-            </div>
+            @yield('feLogin_UsrList')
             {{$Slot??''}}
         </div>
     </div>

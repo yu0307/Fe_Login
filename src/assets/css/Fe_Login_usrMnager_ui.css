@@ -521,13 +521,20 @@
     padding: 5px;
     text-align: center;
     margin: 5px;
-    cursor: pointer;
   }
 
   .user_list .users img{
     border: 1px solid gray;
     padding: 2px;
     margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .usr_remove >i{
+    visibility: hidden;
+    cursor: pointer;
+  }
+  .users:hover .usr_remove >i{
+    visibility:visible;
   }
   #usrManagementCtr .form-control{
     margin: 0px 5px;
@@ -552,3 +559,9 @@
   #usrManageWinMsg .error{
     color:#dc3545;
   }
+  .whenUpdate{
+    display: none;
+}
+.updating .whenUpdate{
+    display: block;
+}

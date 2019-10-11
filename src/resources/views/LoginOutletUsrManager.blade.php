@@ -1,11 +1,11 @@
-
 @inject('UserManager', 'UserManagement')
-@IncludeOutlet($UserManager,'userManagement')
+@FE_LoginIncludeOutlet(app()->UserManagementOutlet,'UserManageOutlet')
+
 @includeIf('fe_login::LoginUsrList')
 @section('usrManager')
 <div id="usr_management_area" actionTarget="{{route('Fe_UserManagement_save')}}">
     <div class="panel">
-        <div class="panel-content p-3">
+        <div class="panel-content p-3 p-t-0">
             <div class="text-right t-right">
                 <button class="btn btn-success" id="btn_usrCreate" data-toggle="modal" data-target="#usrManagementCtr">Create User</button>
             </div>

@@ -16,7 +16,6 @@ class userManagement extends feOutlet
         $this->setResource('/feiron/fe_login/css/Fe_Login_usrMnager_ui.css');
         return $this;
     }
-
 }
 
 ?>

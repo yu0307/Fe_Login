@@ -47,9 +47,9 @@
         <div class="col-md-2 d-none d-md-block">
         </div>
     </div>
-    @yield('userManagement')
+    @yield('UserManageOutlet')
     @stack('fe_login_scripts')
-    @stack('userManagement')
+    @stack('UserManageOutlet')
 </body>
 
 </html>

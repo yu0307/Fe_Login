@@ -42,5 +42,4 @@
         <h4 class="t-center text-center">Leave password fields empty to omit changing password. </h4>
     </div>
 </div>
-
 @yield('usrMeta')

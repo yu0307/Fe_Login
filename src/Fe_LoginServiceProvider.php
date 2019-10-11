@@ -43,7 +43,9 @@
 
         public function register(){
             $this->app->register( '\feiron\fe_login\lib\UserManagementServiceProvider');
-
+            $this->app->register( '\feiron\fe_login\lib\UserManagementOutletProvider');
+            //providing available outlet hooks
+            resolve('UserManagementOutlet')->registerOutlet('UserManageOutlet');
             // instruct the system to use fe_users when authenticating.
             config(['auth.guards.web.provider' => 'fe_users']);
             config([

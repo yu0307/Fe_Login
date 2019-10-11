@@ -34,10 +34,11 @@
     },
     "scripts": {
         "post-package-install": [
-            "php ../../../artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
+            "echo 'Publishing Package Resources...'",
+            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
         ],
         "post-package-update": [
-            "php ../../../artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
+            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ]
     }
 }

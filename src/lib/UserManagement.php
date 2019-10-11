@@ -11,11 +11,8 @@ class UserManagement extends feOutletManager
     private $UID;
 
     public function __construct($UID=null){
-        $this->UID=($UID??(Auth::user()->getKey()??Auth::user()->id))??null;
-        //providing available outlet hooks
-        $this->registerOutlet('userManagement');
-
-        $this->bindOutlet('userManagement', new management());
+        $this->UID=($UID??(Auth::user()->getKey()??Auth::user()->id))??null;        
+        app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new management());
     }
     
     public function getUsers($meta=[],$withMyself=false){

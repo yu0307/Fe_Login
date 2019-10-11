@@ -1,6 +1,5 @@
-
 @inject('UserManager', 'UserManagement')
-@IncludeOutlet($UserManager,'userManagement')
+@FE_LoginIncludeOutlet(app()->UserManagementOutlet,'UserManageOutlet')
 @includeIf('fe_login::LoginUsrList')
 @section('usrManager')
 <div id="usr_management_area" actionTarget="{{route('Fe_UserManagement_save')}}">

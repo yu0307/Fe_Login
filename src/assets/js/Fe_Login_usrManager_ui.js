@@ -73,13 +73,20 @@ function usrCheckInputs(target) {
     var valid = true;
     $('#usrManageWinMsg').empty();
     $(target).find('.form-control').removeClass('invalid DonotMatch');
-    $($(target).find('.form-control[required]').filter(function () { return this.value == ""; })).each(function () {
-        $(this).addClass('invalid');
-        valid = false;
-    });
-    if ($('#usrPassword').val() !== $('#password_confirmation').val()) {
-        valid = false;
-        $('#password_confirmation').addClass('DonotMatch');
+    if($('#usr_ID').val().length<=0){
+        $($(target).find('.form-control[required]').filter(function () { return this.value == ""; })).each(function () {
+            $(this).addClass('invalid');
+            valid = false;
+        });
+        if ($('#usrPassword').val() !== $('#password_confirmation').val()) {
+            valid = false;
+            $('#password_confirmation').addClass('DonotMatch');
+        }
+    }else{
+        $($(target).find('.form-control[required]:not([type="password"])').filter(function () { return this.value == ""; })).each(function () {
+            $(this).addClass('invalid');
+            valid = false;
+        });
     }
     return valid;
 }

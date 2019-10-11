@@ -10,6 +10,20 @@ $(document).ready(function () {
         $('#usrSave').text('Create User');
     });
 
+    $('.users .user_img').click(function (e) {
+        $('#usrManagementCtr .loading').addClass('show');
+        $('#usrManagementCtr .modal-title').text('Update User information');
+        $('#usrSave').text('Update User');
+        $('#usrManagementCtr').modal('show');
+
+        loadUsr($(this).parents('.users:first').attr('uid'),function(uid,data){
+            $('.User_Management #usr_ID').val(uid);
+            $('.User_Management #usrName').val(data.name);
+            $('.User_Management #email').val(data.email);
+            $('#usrManagementCtr .loading').removeClass('show');
+        });
+    });
+
     $('#usrSave').click(function () {
         if (usrCheckInputs($('#usrManagementCtr')) === true) {
             SaveUser([], function (data, message) {

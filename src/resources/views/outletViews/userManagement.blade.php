@@ -8,7 +8,13 @@
                 </button>
             </div>
             <div class="modal-body User_Management">
-                @include('fe_login::outletViews.userManagementCRUD')
+                <div class="text-center loading">
+                    <h4>Loading Contents...</h4>
+                    <i class="fas fa-circle-notch fa-spin fa-2x p-0"></i>
+                </div>
+                <div class="User_Management_Area">
+                    @include('fe_login::outletViews.userManagementCRUD')
+                </div>
             <div id="usrManageWinMsg" class="hidden">
 
             </div>

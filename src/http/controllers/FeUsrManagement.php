@@ -33,6 +33,7 @@ class FeUsrManagement extends Controller
     public function loadList(Request $request, UserManagement $UserManager, $usrMeta=null, $withMyself=false){
         $usr=[];
         foreach($UserManager->getUsers($usrMeta ?? [], ($withMyself ?? false))as $User){
+            $User= $User->toArray();
             $User['img']=asset('feiron/fe_login/images/avatar_notif.png');
             array_push($usr,$User);
         }
@@ -75,21 +76,28 @@ class FeUsrManagement extends Controller
             unset($request['password_confirmation']);
         }
         $request->validate($rules, $customMessages);
-        
-        
+
         if ($request->filled('usr_ID')){
-            $usr=fe_users::find($request->input('usr_ID'))->update($updates);
+            $usr=fe_users::find($request->input('usr_ID'));
+            $usr->update($updates);
             $message = 'User Updated';
         }else{
             $updates['provider_type']='local';
             $usr=fe_users::create($updates);
         }
 
+        if ($request->filled('metainfo')) {
+            foreach ($request->input('metainfo') as $key => $val) {
+                $usr->metainfo()->updateOrCreate(['meta_name' => $key],['meta_value' => $val]);
+            }
+        }
+        
+
         return response()->json(['status' => 'success', 'message' => $message]);
     }
 
     public function GetUser(Request $request, $UID){
-        return response()->json(fe_users::find($UID,['name','email'])??[]);
+        return response()->json(fe_users::find($UID)->load('metainfo')->makeVisible('metainfo')->toArray()??[]);
     }
 
     public function RemoveUser(Request $request, $UID){

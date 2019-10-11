@@ -23,7 +23,7 @@ function LoadList() {
                             $.each(data, function (key, elm) {
                                 $('.user_list').append(
                                     '<div class="users" UID="' + elm.id + '">' +
-                                    '<div class="usr_remove text-center t-center"><i class="animated fadeOutDown far fa fa-times-circle fa-times-circle-o c-red fa-2x p-0"></i></div>'+
+                                    '<div class="usr_remove text-center t-center"><i class="animated fadeOutDown far fa fa-times-circle fa-times-circle-o c-red fa-2x p-0"></i></div>' +
                                     '<div class="user_img" > <img class="user_prof_pics img-circle" src="' + elm.img + '"></div>' +
                                     '<div class="user_names t-center text-center">' + elm.name + '</div>' +
                                     '</div >');
@@ -42,8 +42,12 @@ function LoadList() {
 
 function SaveUser(ex_data = {}, after_call = null) {
     var data = {};
-    $.each($('.User_Management .form-control').serializeArray(), function (idx, elm) {
+    $.each($('#usrBasic .form-control').serializeArray(), function (idx, elm) {
         data[elm['name']] = elm['value'];
+    });
+    data.metainfo = {};
+    $.each($('#usrMeta .form-control').serializeArray(), function (idx, elm) {
+        data.metainfo[elm['name']] = elm['value'];
     });
     data = $.extend(data, ex_data);
     $.ajax({
@@ -61,7 +65,7 @@ function SaveUser(ex_data = {}, after_call = null) {
                 if (typeof (after_call) === 'function') {
                     after_call(data, message);
                 }
-                if (data.status === 'success'){
+                if (data.status === 'success') {
                     $('#usr_management_area').trigger('usr_manageRefreshList');
                 }
             }
@@ -73,7 +77,7 @@ function usrCheckInputs(target) {
     var valid = true;
     $('#usrManageWinMsg').empty();
     $(target).find('.form-control').removeClass('invalid DonotMatch');
-    if($('#usr_ID').val().length<=0){
+    if ($('#usr_ID').val().length <= 0) {
         $($(target).find('.form-control[required]').filter(function () { return this.value == ""; })).each(function () {
             $(this).addClass('invalid');
             valid = false;
@@ -82,7 +86,7 @@ function usrCheckInputs(target) {
             valid = false;
             $('#password_confirmation').addClass('DonotMatch');
         }
-    }else{
+    } else {
         $($(target).find('.form-control[required]:not([type="password"])').filter(function () { return this.value == ""; })).each(function () {
             $(this).addClass('invalid');
             valid = false;
@@ -91,23 +95,23 @@ function usrCheckInputs(target) {
     return valid;
 }
 
-function loadUsr(uid,callback){
+function loadUsr(uid, callback) {
     $.ajax({
         type: 'GET',
-        url: usrManagementTarget+'/'+uid,
+        url: usrManagementTarget + '/' + uid,
         dataType: 'json',
         complete: function (jqXHR, status) {
             var data = jqXHR.responseJSON;
             if (data !== undefined && !$.isEmptyObject(data)) {
                 if (typeof (callback) === 'function') {
-                    callback(uid,data);
+                    callback(uid, data);
                 }
             }
         }
     });
 }
 
-function removeUsr(uid, callback){
+function removeUsr(uid, callback) {
     $.ajax({
         type: 'POST',
         url: usrManagementTarget + '/rm/' + uid,

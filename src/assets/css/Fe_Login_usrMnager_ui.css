@@ -575,3 +575,10 @@ img {
 .updating .whenUpdate{
   display: block;
 }
+.User_Management_Area .tab-content{
+  border-top: 1px solid lightgray;
+  margin-top: 10px;
+}
+.User_Management_Area .tab-content .in{
+  opacity: 1;
+}

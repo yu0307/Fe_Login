@@ -17,7 +17,9 @@ class UserMetaTypes extends Migration
             $table->bigIncrements('id');
             $table->string('meta_name', 225);
             $table->string('meta_type', 225);
+            $table->string('meta_label', 225)->nullable();
             $table->text('meta_defaults')->nullable();
+            $table->text('meta_options')->nullable();
             $table->timestamps();
 
             $table->unique(['meta_name', 'meta_type']);

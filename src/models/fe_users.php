@@ -21,14 +21,7 @@ class fe_users extends Authenticatable
         'remember_token','updated_at'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $visible = ['id','name', 'email', 'last_login'];
 
     /**
      * The attributes that should be cast to native types.

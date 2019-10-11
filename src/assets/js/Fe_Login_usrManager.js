@@ -10,22 +10,25 @@ $(document).ready(function () {
         $('#usrSave').text('Create User');
     });
 
-    $('.users .user_img').click(function (e) {
+    $(document).on('click', '.users .user_img', function () {
         $('#usrManagementCtr .loading').addClass('show');
         $('#usrManagementCtr .modal-title').text('Update User information');
         $('#usrSave').text('Update User');
         $('#usrManagementCtr').modal('show');
 
-        loadUsr($(this).parents('.users:first').attr('uid'),function(uid,data){
+        loadUsr($(this).parents('.users:first').attr('uid'), function (uid, data) {
             $('.User_Management #usr_ID').val(uid);
             $('.User_Management #usrName').val(data.name);
             $('.User_Management #email').val(data.email);
+            $.each(data.metainfo, function (idx, meta) {
+                $('#usrMeta .form-control[name="' + meta.meta_name + '"]').val(meta.meta_value);
+            });
             $('#usrManagementCtr .loading').removeClass('show');
         });
     });
 
     $('#usrSave').click(function () {
-        if (usrCheckInputs($('#usrManagementCtr')) === true) {
+        if (usrCheckInputs($('#usrBasic')) === true) {
             SaveUser([], function (data, message) {
                 if (typeof Notify === 'function') {
                     Notify(message, (data.status !== undefined ? data.status : 'info'));

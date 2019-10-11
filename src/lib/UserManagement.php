@@ -4,6 +4,7 @@ namespace feiron\fe_login\lib;
 use Auth;
 use \feiron\fe_login\models\fe_userMeta;
 use \feiron\fe_login\models\fe_users;
+use \feiron\fe_login\models\fe_userMetaTypes;
 use \feiron\fe_login\lib\outlet\feOutletManager;
 use \feiron\fe_login\lib\outlet\defaultOutlets\userManagement as management;
 class UserManagement extends feOutletManager
@@ -41,6 +42,10 @@ class UserManagement extends feOutletManager
 
     public function removeMeta($metaKey,$UID=null){
         fe_userMeta::where([['meta_name', $metaKey],['user_id', ($UID??$this->UID)]])->delete();
+    }
+
+    public function getMetaFields(){
+        return fe_userMetaTypes::all()??[];
     }
 
 }

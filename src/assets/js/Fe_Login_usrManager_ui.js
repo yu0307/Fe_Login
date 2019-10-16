@@ -46,7 +46,7 @@ function SaveUser(ex_data = {}, after_call = null) {
         data[elm['name']] = elm['value'];
     });
     data.metainfo = {};
-    $.each($('#usrMeta .form-control').serializeArray(), function (idx, elm) {
+    $.each($('#Additional_Info .form-control').serializeArray(), function (idx, elm) {
         data.metainfo[elm['name']] = elm['value'];
     });
     data = $.extend(data, ex_data);

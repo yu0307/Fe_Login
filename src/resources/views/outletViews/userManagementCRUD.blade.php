@@ -1,10 +1,34 @@
+@section('feLogin_CRUD_tab_contents')
+    @php
+        $menu='';
+    @endphp
+    @foreach (app()->UserManagementOutlet->getOutlet('UserManageOutlet') as $OutletItem)
+        @php
+            $ID=str_replace(' ','_',$OutletItem->MyName());
+            $menu.='
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#'.$ID.'" role="tab" >'.$OutletItem->MyName().'</a>
+                    </li>';
+        @endphp
+        <div class="tab-pane fade p-2" id="{{$ID}}" role="tabpanel">
+            @php
+                $view=$OutletItem->getView();
+                if ($__env->exists($view->Name(),$view->getData())){
+                        echo $__env->make($view->Name(),$view->getData(), \Illuminate\Support\Arr::except(get_defined_vars(), ["__data", "__path"]))->render(); 
+                }
+            @endphp
+        </div>
+    @endforeach
+@endsection
+@push('OutletResource')
+    {!! join(app()->UserManagementOutlet->OutletResources('UserManageOutlet')) !!}
+@endpush
+
 <ul class="nav nav-pills nav-fill" role="tablist">
     <li class="nav-item active">
         <a class="nav-link active" id="usrBasic-tab" data-toggle="tab" href="#usrBasic" role="tab" aria-selected="true">Basic Info</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" id="usrMeta-tab" data-toggle="tab" href="#usrMeta" role="tab" aria-selected="false">Additional Info</a>
-    </li>
+    {!!$menu!!}
 </ul>
 <div class="tab-content" >
     <div class="tab-pane fade active in p-2" id="usrBasic" role="tabpanel">
@@ -57,12 +81,7 @@
             </div>
         </div>
     </div>
-    
-    <div class="tab-pane fade p-2" id="usrMeta" role="tabpanel">
-        <div class="form-row">
-            @yield('usrMeta')
-        </div>
-    </div>
+    @yield('feLogin_CRUD_tab_contents')
 </div>
 
 

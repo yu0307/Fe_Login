@@ -28,6 +28,11 @@
                 __DIR__ . '/assets' => public_path('feiron/fe_login'),
             ], 'fe_login_public');
 
+             app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new \feiron\fe_login\lib\outlet\feOutlet([
+                'view'=> 'fe_login::outletViews.userMetaInfo',
+                'myName'=> 'Additional Info'
+            ]));
+
             if (app()->resolved('frameOutlet')) {
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrManager',

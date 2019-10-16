@@ -23,7 +23,7 @@ $(document).ready(function () {
             $('.User_Management #usrName').val(data.name);
             $('.User_Management #email').val(data.email);
             $.each(data.metainfo, function (idx, meta) {
-                $('#usrMeta .form-control[name="' + meta.meta_name + '"]').val(meta.meta_value);
+                $('#Additional_Info .form-control[name="' + meta.meta_name + '"]').val(meta.meta_value);
             });
             $('#control_CRUD .loading').removeClass('show');
         });

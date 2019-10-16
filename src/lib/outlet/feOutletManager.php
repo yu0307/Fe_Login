@@ -22,6 +22,10 @@ class feOutletManager implements feOutletManagerContract{
         return $this;
     }
 
+    public function getOutlet($outletName){
+        return $this->OutletList[$outletName] ?? [];
+    }
+
     public function getAvailableOutlets(){
         return array_keys($this->OutletList);
     }

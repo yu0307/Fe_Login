@@ -55,6 +55,7 @@ class feOutlet implements feOutletContract
     }
 
     public function getView($flush=false){
+        $this->view=is_string($this->view)?view($this->view): $this->view;
         return ($flush===false)?$this->view: $this->view->render();
     }
 }

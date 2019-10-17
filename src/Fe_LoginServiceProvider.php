@@ -13,8 +13,8 @@
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
             //registering blade components 
-            // Blade::component('fe_login::LoginForm', 'fe_loginForm');
             Blade::include('fe_login::LoginForm', 'fe_loginForm');
+            Blade::component('fe_login::LoginUsrManager', 'fe_UserManager');
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);
@@ -27,13 +27,30 @@
             $this->publishes([
                 __DIR__ . '/assets' => public_path('feiron/fe_login'),
             ], 'fe_login_public');
+
+             app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new \feiron\fe_login\lib\outlet\feOutlet([
+                'view'=> 'fe_login::outletViews.userMetaInfo',
+                'myName'=> 'Additional Info'
+            ]));
+
+            if (app()->resolved('frameOutlet')) {
+                app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
+                    'view'=> 'fe_login::LoginOutletUsrManager',
+                    'myName'=>'User Management',
+                    'reousrce'=>[
+                        asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js'),
+                        asset('/feiron/fe_login/js/Fe_Login_usrOutlet.js'),
+                        asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
+                    ]
+                ]));
+            }
         }
 
         public function register(){
-            // Auth::provider('lwcustomer', function ($app, array $config) {
-            //     return new LWCustomer();
-            // });
-
+            $this->app->register( '\feiron\fe_login\lib\UserManagementServiceProvider');
+            $this->app->register( '\feiron\fe_login\lib\UserManagementOutletProvider');
+            //providing available outlet hooks
+            resolve('UserManagementOutlet')->registerOutlet('UserManageOutlet');
             // instruct the system to use fe_users when authenticating.
             config(['auth.guards.web.provider' => 'fe_users']);
             config([

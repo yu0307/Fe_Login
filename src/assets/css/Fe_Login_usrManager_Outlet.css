@@ -1,0 +1,37 @@
+.user_list .users{
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    
+}
+
+.user_list .users img{
+    border: 1px solid gray;
+    padding: 2px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.whenUpdate{
+    display: none;
+}
+.updating .whenUpdate{
+    display: block;
+}
+.usr_remove{
+    cursor: pointer;
+}
+
+.users:hover .usr_remove >i{
+    -webkit-animation-name: fadeInUp !important;
+    animation-name: fadeInUp !important;
+}
+.users .usr_remove >i{
+    opacity: 0;
+}
+.form-row{
+    margin-bottom: 5px;
+}
+
+.form-row > div{
+    margin-bottom: 5px;
+}

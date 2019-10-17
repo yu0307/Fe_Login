@@ -23,6 +23,7 @@ $(document).ready(function () {
             $.each(data.metainfo, function (idx, meta) {
                 $('#Additional_Info .form-control[name="' + meta.meta_name + '"]').val(meta.meta_value);
             });
+            $('#usrManagementCtr').trigger('usrInfoLoaded', data);
             $('#usrManagementCtr .loading').removeClass('show');
         });
     });

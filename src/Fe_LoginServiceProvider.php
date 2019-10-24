@@ -43,6 +43,16 @@
                         asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
                     ]
                 ]));
+                app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
+                    'view'=> 'fe_login::LoginOutletUserProfDetails',
+                    'myName'=> 'User Details',
+                    'reousrce'=>[]
+                ]));
+                app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
+                    'view'=> 'fe_login::LoginOutletUserProfSecurity',
+                    'myName'=> 'Security',
+                    'reousrce'=>[]
+                ]));
             }
         }
 

@@ -12,4 +12,8 @@ class fe_userMeta extends Model
     public function User(){
         return $this->belongsTo('\feiron\fe_login\models\fe_users','user_id', 'id');
     }
+    
+    public function MetaInfo(){
+        return $this->belongsTo('\feiron\fe_login\models\fe_userMetaTypes', 'meta_name', 'meta_name');
+    }
 }

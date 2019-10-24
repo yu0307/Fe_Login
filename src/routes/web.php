@@ -3,7 +3,7 @@
 
         //Authenticaiton
         Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('fe_loginWindow');
-        Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('login');
+        Route::get('UserLogin/', 'FeLoginController@RenderLoginWindow')->name('login');
         Route::get('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::post('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::get('login/{AuthType?}/callback', 'FeLoginController@handleProviderCallback');

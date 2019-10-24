@@ -9,7 +9,27 @@
 <div class="container-fluid h-100p">
     <div class="row h-100p">
         <div class="col-md-12 h-80p">
-            <div id="usrDetailArea" class="p-10">
+            <div id="usrDetailArea" class="p-10" data-target="{{route('Fe_userUpdate')}}">
+                <div id="usrDetail">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Name</label>
+                            <div class="prepend-icon">
+                                <input type="text" name="Name" class="form-control" placeholder="Name..." value="{{$User->name??''}}">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <div class="prepend-icon">
+                                <input type="email" name="email" class="form-control" placeholder="Email..." value="{{$User->email??''}}">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="usrDetailMetas">
                     @foreach (app()->UserManagement->getMetaFields() as $metaDataField)
                     <div class="col-md-6 col-sm-12 usr_metaData">
@@ -26,8 +46,11 @@
                             </select>
                             @break
                             @default
-                            <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
-                                value="{{$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults??''}}">
+                            <div class="prepend-icon">
+                                <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
+                                    value="{{$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults??''}}">
+                                <i class="fa fa-indent"></i>
+                            </div>
                             @endswitch
                         </div>
                     </div>
@@ -36,7 +59,7 @@
             </div>
         </div>
         <div class="col-md-12">
-            <button class="btn btn-primary pull-right">Update</button>
+            <button class="btn btn-primary pull-right saveChange ladda-button" data-style="expand-left"><span class="ladda-label">Update</span></button>
             <div class="clearfix"></div>
         </div>
     </div>

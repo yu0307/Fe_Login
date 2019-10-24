@@ -23,6 +23,7 @@ class UserMetaTypes extends Migration
             $table->timestamps();
 
             $table->unique(['meta_name', 'meta_type']);
+            $table->foreign('meta_name')->references('meta_name')->on('user_meta')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';

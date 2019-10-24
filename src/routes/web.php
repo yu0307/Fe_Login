@@ -30,5 +30,7 @@
         Route::post('usermanagement/load', 'FeUsrManagement@loadList')->name('Fe_UserManagement_load');
         Route::get('usermanagement/{UID}', 'FeUsrManagement@GetUser')->name('Fe_UserManagement_get');
         Route::post('usermanagement/rm/{UID}', 'FeUsrManagement@RemoveUser')->name('Fe_UserManagement_delete');
+
+        Route::post('userUpdate', 'FeUsrManagement@UpdateUser')->name('Fe_userUpdate');
     });
 ?>

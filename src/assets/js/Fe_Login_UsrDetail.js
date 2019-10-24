@@ -28,4 +28,5 @@ $(document).ready(function () {
             }
         });
     });
+    $('#Profile_Panel .usrProfile.editable').append('<div class="ctrls"><i class="fa fa-pencil-square-o">Edit</i></div>');
 });

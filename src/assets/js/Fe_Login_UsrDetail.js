@@ -29,4 +29,18 @@ $(document).ready(function () {
         });
     });
     $('#Profile_Panel .usrProfile.editable').append('<div class="ctrls"><i class="fa fa-pencil-square-o">Edit</i></div>');
+
+    $(document).on('click', '#Profile_Panel .usrProfile.editable .ctrls', function () {
+        $('#Fe_login_ProfImage .usrProfImg_Preview').attr('src', $(this).parent().find('img').attr('src'));
+        $('#Fe_login_ProfImage').modal('show');
+    });
+
+    $(document).on('change', '.FeLogin_ProfImgUpload .inputfile', function (e) {
+        var fileName = '';
+        if (e.target.value) {
+            fileName = e.target.value.split('\\').pop();
+        }
+        if (fileName)
+            $(this).next('label').find('span').html(fileName);
+    });
 });

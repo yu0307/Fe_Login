@@ -46,7 +46,10 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfDetails',
                     'myName'=> 'User Details',
-                    'reousrce'=>[ asset('/feiron/fe_login/js/Fe_Login_UsrDetail.js') ]
+                    'reousrce'=>[ 
+                        asset('/feiron/fe_login/js/Fe_Login_UsrDetail.js'),
+                        asset('/feiron/fe_login/css/Fe_Login_UsrDetail.css')
+                    ]
                 ]));
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfSecurity',

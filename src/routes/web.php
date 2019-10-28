@@ -32,6 +32,7 @@
         Route::post('usermanagement/rm/{UID}', 'FeUsrManagement@RemoveUser')->name('Fe_UserManagement_delete');
 
         Route::post('userUpdate', 'FeUsrManagement@UpdateUser')->name('Fe_userUpdate');
-        Route::post('uploadUsrProfileImg', 'fe_profileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
+        Route::post('uploadUsrProfileImg', 'FeProfileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
+        Route::post('uploadUsrProfileImg/remove', 'FeProfileController@removeProfImg')->name('FeLogin_ProfImgRemove');
     });
 ?>

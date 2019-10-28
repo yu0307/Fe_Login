@@ -25,3 +25,19 @@
     outline: 1px dotted #000;
 	outline: -webkit-focus-ring-color auto 5px;
 }
+
+#Fe_login_ProfImage .usrProfImg_Preview{
+    height: 120px;
+    width: 120px;
+}
+#Fe_login_ProfImage .edit_prof_img_area{
+    max-width: 120px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+#Fe_login_ProfImage .remove_prof_img{
+    position: absolute;
+    right: -15px;
+    cursor: pointer;
+}

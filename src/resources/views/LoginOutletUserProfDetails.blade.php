@@ -82,7 +82,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="t-center text-center">
-                                        <img class="usrProfImg_Preview img-circle" src="">
+                                        <div class="edit_prof_img_area">
+                                            <div class="remove_prof_img"><i class="fa fa-times fa-2x t-danger text-danger"></i></div>
+                                            <img class="usrProfImg_Preview img-circle img-thumbnail" src="">
+                                        </div>
                                         <form class="FeLogin_ProfImgUpload m-15" enctype="multipart/form-data" action="{{route('FeLogin_ProfImgUpload')}}" id="fm_FeLogin_ProfImgUpload">
                                             <input type="file" class="inputfile" name="FeLogin_ProfImgUpload" id="FeLogin_ProfImgUpload" accept="image/x-png,image/gif,image/jpeg"/>
                                             <label for="FeLogin_ProfImgUpload"><i class="fa fa-upload"></i><span>Choose a file</span></label>
@@ -90,11 +93,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="progress progress-striped active" style="display:none" >
+                                <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 0px">
+                                    <span class="percent">0%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer t-center text-center">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
+                    <button type="button" class="btn btn-primary btn-save">Update</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

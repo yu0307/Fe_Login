@@ -34,5 +34,7 @@
         Route::post('userUpdate', 'FeUsrManagement@UpdateUser')->name('Fe_userUpdate');
         Route::post('uploadUsrProfileImg', 'FeProfileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
         Route::post('uploadUsrProfileImg/remove', 'FeProfileController@removeProfImg')->name('FeLogin_ProfImgRemove');
+
+        Route::post('usermeta', 'FeUsrMetaManagement@save')->name('Fe_UserMetaManagement');
     });
 ?>

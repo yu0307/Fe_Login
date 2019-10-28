@@ -43,6 +43,16 @@
                         asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
                     ]
                 ]));
+                app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
+                    'view'=> 'fe_login::LoginOutletUsrMetaManager',
+                    'myName'=>'Meta Info Management',
+                    'reousrce'=>[
+                        asset('/feiron/felaraframe/plugins/datatables/dataTables.min.css'),
+                        asset('/feiron/felaraframe/plugins/datatables/jquery.dataTables.min.js'),
+                        asset('/feiron/fe_login/js/Fe_Login_usrMetaManager.js'),
+                        asset('/feiron/fe_login/css/Fe_Login_usrMetaManager.css')
+                    ]
+                ]));
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfDetails',
                     'myName'=> 'User Details',

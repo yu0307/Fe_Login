@@ -9,7 +9,7 @@
 
 @section('usrMeta_cntr_content')
 <div id="usrmeta_dt_list">
-    <table id="usrMeta_dt_table" width="100%" data_target="{{route('Fe_UserMetaManagement')}}" class="table table-striped table-hover table-sm dt_table">
+    <table id="usrMeta_dt_table" width="100%" data_target="{{route('Fe_UserMetalist')}}" class="table table-striped table-hover table-sm dt_table">
         <thead class="thead-dark">
             <tr>
                 <th>Field Name</th>
@@ -17,6 +17,7 @@
                 <th>Display Label</th>
                 <th>Defaults</th>
                 <th>Options</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -40,7 +41,7 @@
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <label class="control-label" for="meta_type">Meta Type</label>
-            <select name="meta_type" id="meta_type" style="display:block" class="p-b-10">
+            <select name="meta_type" id="meta_type" style="display:block" class="p-b-10 form-control">
                 <option value="text" selected>Text</option>
                 <option value="select">Select</option>
                 <option value="number">Number</option>
@@ -51,6 +52,8 @@
             </select>
         </div>
     </div>
+</div>
+<div class="row">
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
             <label class="control-label" for="meta_label">Meta Label</label>
@@ -62,11 +65,25 @@
     </div>
     <div class="col-md-6 col-sm-12">
         <div class="form-group">
-            <label class="control-label" for="meta_defaults">Default Values</label>
+            <label class="control-label" for="meta_defaults">Default Value</label>
             <div class="prepend-icon">
                 <input type="text" name="meta_defaults" id="meta_defaults" class="form-control" placeholder="Default values ..."value="">
                 <i class="fa fa-indent"></i>
             </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label class="control-label" for="meta_options">Control Options</label>
+            <div class="prepend-icon">
+                <input type="text" name="meta_options" id="meta_options" class="form-control" placeholder="control options ..." value="">
+                <i class="fa fa-indent"></i>
+            </div>
+        </div>
+        <div class="alert alert-info p-5">
+            <h6>Control Options are used for Select,checkbox,radios.<br/>Seperate each options with comma(,)</h6>
         </div>
     </div>
 </div>

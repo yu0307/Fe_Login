@@ -35,6 +35,9 @@
         Route::post('uploadUsrProfileImg', 'FeProfileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
         Route::post('uploadUsrProfileImg/remove', 'FeProfileController@removeProfImg')->name('FeLogin_ProfImgRemove');
 
-        Route::post('usermeta', 'FeUsrMetaManagement@save')->name('Fe_UserMetaManagement');
+        Route::post('usermeta', 'FeUsrMetaManagement@saveMeta')->name('Fe_UserMetaManagement');
+        Route::post('usermeta/list', 'FeUsrMetaManagement@listMetaFields')->name('Fe_UserMetalist');
+        Route::post('usermeta/delete/{MID}', 'FeUsrMetaManagement@removeMetaFields')->name('Fe_UserMetaRemove');
+        Route::post('usermeta/load/{MID}', 'FeUsrMetaManagement@load')->name('Fe_UserMetaload');
     });
 ?>

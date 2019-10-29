@@ -36,21 +36,28 @@
                         <div class="form-group input-group width-100p">
                             <label>{{$metaDataField->meta_label??$metaDataField->meta_name}}</label>
                             @switch($metaDataField->meta_type)
-                            @case('select')
-                            <select class="form-control" name="{{$metaDataField->meta_name}}">
-                                @foreach (json_decode($metaDataField->meta_options) as $options)
-                                <option {!!( ($options['value']==$metaVals[$metaDataField->meta_name]->meta_value ||
-                                    $options['value']==$metaDataField->meta_defaults) ?'selected="selected"':'')!!}
-                                    value="{{$options['value']}}">{{$options['label']}}</option>
-                                @endforeach
-                            </select>
-                            @break
-                            @default
-                            <div class="prepend-icon">
-                                <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
-                                    value="{{$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults??''}}">
-                                <i class="fa fa-indent"></i>
-                            </div>
+                                @case('select')
+                                <select class="form-control" name="{{$metaDataField->meta_name}}">
+                                    @foreach (($metaDataField->meta_options??[]) as $options)
+                                    <option {!!( ($options['value']==$metaVals[$metaDataField->meta_name]->meta_value ||
+                                        $options['value']==$metaDataField->meta_defaults) ?'selected="selected"':'')!!}
+                                        value="{{$options['value']}}">{{$options['label']}}</option>
+                                    @endforeach
+                                </select>
+                                @break
+                                @case('radio')
+                                <div class="icheck-inline">
+                                    @foreach (($metaDataField->meta_options??[]) as $options)
+                                        <label><input type="radio" {{(trim($options)==trim($metaDataField->meta_defaults))?'checked':''}} name="{{$metaDataField->meta_name}}" class="form-control" data-radio="iradio_minimal-blue" value="{!!$options!!}">{{$options}}</label>
+                                    @endforeach
+                                </div>
+                                @break
+                                @default
+                                <div class="prepend-icon">
+                                    <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
+                                        value="{{$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults??''}}">
+                                    <i class="fa fa-indent"></i>
+                                </div>
                             @endswitch
                         </div>
                     </div>

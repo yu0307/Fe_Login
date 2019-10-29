@@ -45,7 +45,7 @@
                 ]));
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrMetaManager',
-                    'myName'=>'Meta Info Management',
+                    'myName'=>'User Meta Info',
                     'reousrce'=>[
                         asset('/feiron/felaraframe/plugins/datatables/dataTables.min.css'),
                         asset('/feiron/felaraframe/plugins/datatables/jquery.dataTables.min.js'),

@@ -35,3 +35,9 @@
 .form-row > div{
     margin-bottom: 5px;
 }
+.usrroles.collapsed .fa-chevron-right{
+    display: block !important;
+}
+.usrroles[aria-expanded="true"] .fa-chevron-down{
+    display: block !important;
+}

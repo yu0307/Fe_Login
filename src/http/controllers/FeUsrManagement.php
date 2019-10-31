@@ -16,6 +16,8 @@ class FeUsrManagement extends Controller
      */
     protected $redirectTo = '/';
 
+    private $customMessages;
+
     /**
      * Create a new controller instance.
      *
@@ -24,6 +26,14 @@ class FeUsrManagement extends Controller
     public function __construct()
     {
         $this->middleware('FeAuthenticate');
+        $this->customMessages = [
+            'email.required'    => 'Email cannot be empty',
+            'email.e_mail'      => 'Not a valid email address',
+            'email.unique'      => 'Email is already taken',
+            'password.required' => 'Password is required',
+            'password.confirmed' => 'Passwords do not match',
+            'usr_ID.numeric'    => 'User Identification Format Error.'
+        ];
     }
 
     public function show(){
@@ -34,22 +44,35 @@ class FeUsrManagement extends Controller
         $usr=[];
         foreach($UserManager->getUsers($usrMeta ?? [], ($withMyself ?? false))as $User){
             $User= $User->toArray();
-            $User['img']=asset('feiron/fe_login/images/avatar_notif.png');
+            $User['img'] = !empty($User['profile_image']) ? Storage::url($User['profile_image']) : ("https://www.gravatar.com/avatar/" . md5(strtolower(trim($User['email']))) . "?d=mp&s=60");
             array_push($usr,$User);
         }
 
         return response()->json($usr);
     }
 
+    public function UpdateUser(Request $request){
+        $me= fe_users::find(auth()->user()->id);
+        $rules = [];
+        $message= 'Information Updated.';
+        if($request->has('password')){
+            $request->validate(['password'=> 'required|confirmed|between:8,255|string'], $this->customMessages);
+            $request->merge(['password'=>Hash::make($request->input('password'))]);
+            unset($request['password_confirmation']);
+            $message='Security Information Updated.';
+        }else{
+            $request->validate(['email'=> ('required|max:255|email|unique:users,email,' . $me->id . ',id')], $this->customMessages);
+        }
+        $me->update($request->except(['metainfo']));
+        if ($request->filled('metainfo')) {
+            foreach ($request->input('metainfo') as $key => $val) {
+                $me->metainfo()->updateOrCreate(['meta_name' => $key], ['meta_value' => $val]);
+            }
+        }
+        return response()->json(['status' => 'success', 'message' => $message]);
+    }
+
     public function SaveUser(Request $request){
-        $customMessages = [
-            'email.required'    => 'Email cannot be empty',
-            'email.e_mail'      => 'Not a valid email address',
-            'email.unique'      => 'Email is already taken',
-            'password.required' => 'Password is required',
-            'password.confirmed'=> 'Passwords do not match',
-            'usr_ID.numeric'    =>'User Identification Format Error.'
-        ];
         $rules=[];
         $usr = null;
         if ($request->filled('usr_ID')) {
@@ -75,7 +98,7 @@ class FeUsrManagement extends Controller
             unset($request['password']);
             unset($request['password_confirmation']);
         }
-        $request->validate($rules, $customMessages);
+        $request->validate($rules, $this->customMessages);
 
         if ($request->filled('usr_ID')){
             $usr=fe_users::find($request->input('usr_ID'));

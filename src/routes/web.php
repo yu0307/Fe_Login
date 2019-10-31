@@ -3,7 +3,7 @@
 
         //Authenticaiton
         Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('fe_loginWindow');
-        Route::get('login/', 'FeLoginController@RenderLoginWindow')->name('login');
+        Route::get('UserLogin/', 'FeLoginController@RenderLoginWindow')->name('login');
         Route::get('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::post('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::get('login/{AuthType?}/callback', 'FeLoginController@handleProviderCallback');
@@ -30,5 +30,14 @@
         Route::post('usermanagement/load', 'FeUsrManagement@loadList')->name('Fe_UserManagement_load');
         Route::get('usermanagement/{UID}', 'FeUsrManagement@GetUser')->name('Fe_UserManagement_get');
         Route::post('usermanagement/rm/{UID}', 'FeUsrManagement@RemoveUser')->name('Fe_UserManagement_delete');
+
+        Route::post('userUpdate', 'FeUsrManagement@UpdateUser')->name('Fe_userUpdate');
+        Route::post('uploadUsrProfileImg', 'FeProfileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
+        Route::post('uploadUsrProfileImg/remove', 'FeProfileController@removeProfImg')->name('FeLogin_ProfImgRemove');
+
+        Route::post('usermeta', 'FeUsrMetaManagement@saveMeta')->name('Fe_UserMetaManagement');
+        Route::post('usermeta/list', 'FeUsrMetaManagement@listMetaFields')->name('Fe_UserMetalist');
+        Route::post('usermeta/delete/{MID}', 'FeUsrMetaManagement@removeMetaFields')->name('Fe_UserMetaRemove');
+        Route::post('usermeta/load/{MID}', 'FeUsrMetaManagement@load')->name('Fe_UserMetaload');
     });
 ?>

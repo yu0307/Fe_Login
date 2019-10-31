@@ -10,5 +10,6 @@ class fe_userMetaTypes extends Model
     protected $fillable = ['meta_name', 'meta_type', 'meta_defaults', 'meta_label', 'meta_options'];
     protected $casts = [
         'meta_options' => 'array',
+        'meta_defaults' => 'array'
     ];
 }

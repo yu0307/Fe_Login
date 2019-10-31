@@ -12,7 +12,7 @@ class FeUsrMetaManagement extends Controller
     public function saveMeta(Request $request){
         $validator = Validator::make($request->all(), [
             'meta_name' => 'required|max:255|unique:user_metatypes,meta_name,' . $request->input('MetaID') . ',id',
-            'meta_type' => 'required|max:255|in:text,select,number,email,textarea,checkbox,radio'
+            'meta_type' => 'required|max:255|in:text,select,number,email,textarea,checkbox,radio,switch'
         ]);
         if ($validator->fails()) {
             return ['status' => 'error', 'errors' => $validator->getMessageBag()->toArray()];
@@ -21,7 +21,7 @@ class FeUsrMetaManagement extends Controller
                 'meta_name' => $request->input('meta_name'),
                 'meta_type' => $request->input('meta_type'),
                 'meta_label' => $request->input('meta_label') ?? $request->input('meta_name'),
-                'meta_defaults' => $request->input('meta_defaults'),
+                'meta_defaults' => (stripos($request->input('meta_defaults'),',')===false?$request->input('meta_defaults'):explode(',', $request->input('meta_defaults'))),
                 'meta_options' => (in_array($request->input('meta_type'), ['select', 'radio', 'checkbox']) === false) ? $request->input('meta_options') : explode(',', $request->input('meta_options'))
             ];
             if($request->filled('MetaID')){

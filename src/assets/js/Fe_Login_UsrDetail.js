@@ -8,7 +8,18 @@ $(document).ready(function () {
         });
         postdata.metainfo = {};
         $.each($('#usrDetailMetas .form-control').serializeArray(), function (idx, elm) {
-            postdata.metainfo[elm['name']] = elm['value'];
+            if (Array.isArray(postdata.metainfo[elm['name']]) === true) {
+                postdata.metainfo[elm['name']].push(elm['value']);
+            } else if (postdata.metainfo[elm['name']] && postdata.metainfo[elm['name']].length > 0) {
+                (postdata.metainfo[elm['name']] = [postdata.metainfo[elm['name']]]).push(elm['value']);
+            } else {
+                postdata.metainfo[elm['name']] = elm['value'];
+            }
+        });
+        $.each($('#usrDetailMetas .form-control[type="checkbox"]:not(:checked)'), function (idx, elm) {
+            if (!($(elm).attr('name') in postdata.metainfo)) {
+                postdata.metainfo[$(elm).attr('name')] = false;
+            }
         });
         $.ajax({
             'type': 'POST',

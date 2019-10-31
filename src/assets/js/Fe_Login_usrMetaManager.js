@@ -44,6 +44,7 @@ function usrMeta_load(target, callback) {
                 $('#User_Meta_Info_CRUD input[name="meta_name"]').val(data.meta_name);
                 $('#User_Meta_Info_CRUD input[name="meta_label"]').val(data.meta_label);
                 $('#User_Meta_Info_CRUD input[name="meta_defaults"]').val(data.meta_defaults);
+                $('#User_Meta_Info_CRUD input[name="meta_options"]').val(data.meta_options);
                 $('#User_Meta_Info_CRUD select[name="meta_type"]').val(data.meta_type).trigger('change');
                 if (typeof (callback) == "function") {
                     callback(data);

@@ -47,7 +47,18 @@ function SaveUser(ex_data = {}, after_call = null) {
     });
     data.metainfo = {};
     $.each($('#Additional_Info .form-control').serializeArray(), function (idx, elm) {
-        data.metainfo[elm['name']] = elm['value'];
+        if (Array.isArray(data.metainfo[elm['name']]) === true) {
+            data.metainfo[elm['name']].push(elm['value']);
+        } else if (data.metainfo[elm['name']] && data.metainfo[elm['name']].length > 0) {
+            (data.metainfo[elm['name']] = [data.metainfo[elm['name']]]).push(elm['value']);
+        } else {
+            data.metainfo[elm['name']] = elm['value'];
+        }
+    });
+    $.each($('#Additional_Info .form-control[type="checkbox"]:not(:checked)'), function (idx, elm) {
+        if (!($(elm).attr('name') in data.metainfo)) {
+            data.metainfo[$(elm).attr('name')] = false;
+        }
     });
     data = $.extend(data, ex_data);
     $.ajax({

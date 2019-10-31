@@ -49,6 +49,7 @@
                 <option value="textarea">Text(multi-lined)</option>
                 <option value="checkbox">CheckBox</option>
                 <option value="radio">Radio Box</option>
+                <option value="switch">Toggle</option>
             </select>
         </div>
     </div>

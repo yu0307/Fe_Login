@@ -44,7 +44,7 @@ class FeUsrManagement extends Controller
         $usr=[];
         foreach($UserManager->getUsers($usrMeta ?? [], ($withMyself ?? false))as $User){
             $User= $User->toArray();
-            $User['img']=asset('feiron/fe_login/images/avatar_notif.png');
+            $User['img'] = !empty($User['profile_image']) ? Storage::url($User['profile_image']) : ("https://www.gravatar.com/avatar/" . md5(strtolower(trim($User['email']))) . "?d=mp&s=60");
             array_push($usr,$User);
         }
 
@@ -52,7 +52,7 @@ class FeUsrManagement extends Controller
     }
 
     public function UpdateUser(Request $request){
-        $me= auth()->user();
+        $me= fe_users::find(auth()->user()->id);
         $rules = [];
         $message= 'Information Updated.';
         if($request->has('password')){

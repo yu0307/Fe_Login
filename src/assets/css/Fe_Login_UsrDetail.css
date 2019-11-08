@@ -41,3 +41,6 @@
     right: -15px;
     cursor: pointer;
 }
+#User_Details .ladda-button .ladda-spinner{
+    height: auto !important;
+}

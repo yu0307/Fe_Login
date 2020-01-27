@@ -19,7 +19,13 @@
         'HasForgotPassword'=>true,
         'HasSocialSignin'=>true,
         'RememberLogin' => true,
-        'HasTermURL'=>null
+        'HasTermURL'=>null,
+        // 'useSSOAuth'=>[
+        //     'Driver'=> '\feiron\fe_login\lib\thirdpartyDriver\some driver that implements the interface',
+        //     'URL'=> '',
+        //     'Label'=>'Single Sign-On',
+        //     'EscapeCookie'=>[''] unencrypt cookie names
+        // ]
     ];
 
 ?>

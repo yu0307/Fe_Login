@@ -85,12 +85,17 @@ $ajax=(isset($ajax) && $ajax === true);
                                 </div>
                             </form>
                             @endif
-                            @if (config('fe_login.appconfig.HasSocialSignin'))
+                            @if (config('fe_login.appconfig.HasSocialSignin') || config('fe_login.appconfig.useSSOAuth'))
                             <div class="form-footer" id="SocialSignIn">
                                 <div class="social-btn">
                                     @foreach (config('fe_login.appconfig.DefaultLoginProviders') as $provider=>$configs)
                                     <a href="{{route('fe_loginControl', ['AuthType' => $provider])}}"><img src="{{ asset('/feiron/fe_login/images/'.$provider.'.png') }}" alt="signInWith{{$provider}}"></a>
                                     @endforeach
+                                    @if (config('fe_login.appconfig.useSSOAuth'))
+                                        <a href="{{route('fe_SSOLogin')}}"><img
+                                                src="{{ asset(config('fe_login.appconfig.useSSOAuth')['image']??('/feiron/fe_login/images/SSO.png')) }}"
+                                                alt="Single Sign-On"></a>
+                                    @endif
                                 </div>
                             </div>
                             @endif

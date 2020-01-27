@@ -120,7 +120,14 @@ return [
         'HasForgotPassword'=>true,
         'HasSocialSignin'=>true,
         'RememberLogin' => true,    
-        'HasTermURL'=>null
+        'HasTermURL'=>null,
+        'useSSOAuth'=>[
+            'Driver'=> '\feiron\fe_login\lib\thirdpartyDriver\thirdpartydriver',
+            'URL'=> 'singleSignOn URL',
+            'Label'=>'Label for the button',
+            'EscapeCookie'=>['cookie name'],
+            'image'=>'relative path from public root to the image used on the button'
+        ]
     ];
 ```
 Explainations:
@@ -128,7 +135,15 @@ Explainations:
 - client_id is required and can be obtained from the provider's developer site. 
 - client_secret is required and can be obtained from the provider's developer site.
 - redirect can be modified but not recommended. This is called once authentication from the provider is finished.
-2. Other config settings:
+2. useSSOAuth settings:
+    This option provides the ability to use Other Single Sign-On providers. You can created third party/custom providers by implementing thirdpartyDriver interface, located at feiron\fe_login\lib\thirdpartyDriver.
+    - Driver is the path to the driver class to be used to handle the Single Sign-On Requests.
+    - URL is the SSO end point.
+    - Label is what shows on the Sign-On button.
+    - image is the relative path to the image from the public root. It's used as the sign-on button image. 
+**note**
+    Refer to the end of this file for General instructions on building custom driver. 
+3. Other config settings:
 
 | option name | Values | Description | Default |
 | --- | --- | --- | --- |
@@ -198,4 +213,40 @@ OR
 
 ```
 
+### User Management Feature
+This package provides many useful user management features along with the ability to extend management feature. 
+1. User management area can be access with URL "/usermanagement/" or route("Fe_UserManagementUI").
+2. This package also provide user Meta-info storage, and these information can be managed from the interface. 
+3. Outlet Feature:
+Outlet is a feature provided for developers to attach/extend more funtionalities into the management interface. 
+How to use Outlet: 
+    - "UserManagementOutlet" is an outlet instance defined and stored within the app's service container. This is what you will need for outlet registration. 
+    - Within Service Provider's boot method, attach an outlet instance as follow:
+```
+    app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new \feiron\fe_login\lib\outlet\feOutlet([
+        'view'=> 'fe_login::outletViews.userMetaInfo',
+        'myName'=> 'Additional Info'
+    ]));
+```
+    - "UserManageOutlet" is the outlet name made available by the package that you can register outlets with. This outlet is used by the management interface as well as other frameworks that is compatible with this package. 
+    - \feiron\fe_login\lib\outlet\feOutlet is the outlet definition. Feel free to create your own outlet by implementing interface (feiron\felaraframe\lib\outlet\feOutletContract).
+    - Constructor Parameters: 
+        i. view: the view class to be used by this outlet when rendering it's interface.
+        ii. myName: the label to be displayed when rendering this outlet section.
+        iii. resource: the resources used by this outlet and its interface. 
+    - Outlets are automatically attached and rendered from the user management interface according to the definitions. 
 
+## LaraFrame Support
+This package was tailored to work with [LaraFrame](https://github.com/yu0307/LaraFrame).
+- User management is easily done through the shared control panel provided by the framework. 
+- User meta field management is also provided by the framkework. You can build your list of meta fields from the framework's control panel. 
+- Users were also provided with profile pages. People can view and manage their own profile information, as well as view other's profile page. 
+- Outlets are automatically carried into the framework and making user information related management a breeze. 
+- Custom outlets are automatically transfered into framework's general control panel. 
+
+### General Instruction on Custom Driver:
+
+Drivers must implement feiron\fe_login\lib\thirdpartyDriver interface.
+1. Method "Login" will be called when user clicked on single singe-on button. From here you can assign values, build payloads, encrypt cookies or set session data. 
+2. Once the authentication is processed and returned with a valid status. It is routed to /login_SSO/callback. Method "handle" from the driver is subsequently called. From there, you can retrieve session data, cookies, etc. You may also want to set private variables that stores user information to be used when creating user when first signed in. 
+3. Getter methods like 'getName()' are used for user creation process. 

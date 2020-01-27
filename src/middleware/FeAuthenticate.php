@@ -16,6 +16,11 @@ class FeAuthenticate extends Authenticate
     {
         if (!$request->expectsJson()) {
             return route('fe_loginWindow');
+            // if(array_key_exists('useSSOAuth',config('fe_login.appconfig'))===false){
+            //     return route('fe_loginWindow');
+            // }else{
+            //     return route('fe_SSOLogin');
+            // }
         }
     }
 }

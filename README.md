@@ -1,5 +1,5 @@
 ## Welcome to Fe_Login Repo
-### **Recommanded to be used with [LaraFrame](https://github.com/yu0307/LaraFrame)**
+### **Recommended to be used with [LaraFrame](https://github.com/yu0307/LaraFrame)**
 ### This package allows users to 
 - Authenticate using social media providers, 
 - Traditional user and password logins,

@@ -3,11 +3,13 @@
 ### This package allows users to 
 - Authenticate using social media providers, 
 - Traditional user and password logins,
+- Single Sign-On,
 - Register new users, 
 - Send email confirmation and password resets,
 - Resetting password with tokenized link,
 - Providing 2 versions of the login screens. 1: individual login screen/page 2: Modal window on homepage
-- Authenticate using either page redirects or ajax
+- Authenticate using either page redirects or ajax, 
+- Manage user with interface.
 
 ### Dependencies:
 - Composer [Visit vendor](https://getcomposer.org/)
@@ -221,13 +223,6 @@ This package provides many useful user management features along with the abilit
 Outlet is a feature provided for developers to attach/extend more funtionalities into the management interface. 
 How to use Outlet: 
     - "UserManagementOutlet" is an outlet instance defined and stored within the app's service container. This is what you will need for outlet registration. 
-    - Within Service Provider's boot method, attach an outlet instance as follow:
-```
-    app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new \feiron\fe_login\lib\outlet\feOutlet([
-        'view'=> 'fe_login::outletViews.userMetaInfo',
-        'myName'=> 'Additional Info'
-    ]));
-```
     - "UserManageOutlet" is the outlet name made available by the package that you can register outlets with. This outlet is used by the management interface as well as other frameworks that is compatible with this package. 
     - \feiron\fe_login\lib\outlet\feOutlet is the outlet definition. Feel free to create your own outlet by implementing interface (feiron\felaraframe\lib\outlet\feOutletContract).
     - Constructor Parameters: 
@@ -235,6 +230,13 @@ How to use Outlet:
         ii. myName: the label to be displayed when rendering this outlet section.
         iii. resource: the resources used by this outlet and its interface. 
     - Outlets are automatically attached and rendered from the user management interface according to the definitions. 
+    - Within Service Provider's boot method, attach an outlet instance as follow:
+```
+    app()->UserManagementOutlet->bindOutlet('UserManageOutlet', new \feiron\fe_login\lib\outlet\feOutlet([
+        'view'=> 'fe_login::outletViews.userMetaInfo',
+        'myName'=> 'Additional Info'
+    ]));
+```
 
 ## LaraFrame Support
 This package was tailored to work with [LaraFrame](https://github.com/yu0307/LaraFrame).

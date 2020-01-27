@@ -32,6 +32,13 @@
                 'view'=> 'fe_login::outletViews.userMetaInfo',
                 'myName'=> 'Additional Info'
             ]));
+            $this->app->resolving(\App\Http\Middleware\EncryptCookies::class, function ($object) {
+                if(isset(config('fe_login.appconfig.useSSOAuth')['EscapeCookie'])){
+                    foreach (config('fe_login.appconfig.useSSOAuth')['EscapeCookie']??[] as $cookieField) {
+                        $object->disableFor($cookieField);
+                    }
+                }
+            });
 
             if (app()->resolved('frameOutlet')) {
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
@@ -72,6 +79,7 @@
         public function register(){
             $this->app->register( '\feiron\fe_login\lib\UserManagementServiceProvider');
             $this->app->register( '\feiron\fe_login\lib\UserManagementOutletProvider');
+            
             //providing available outlet hooks
             resolve('UserManagementOutlet')->registerOutlet('UserManageOutlet');
             // instruct the system to use fe_users when authenticating.

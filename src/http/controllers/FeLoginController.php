@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class FeLoginController extends Controller
@@ -112,7 +113,7 @@ class FeLoginController extends Controller
                             $newUser->provider_id     = $user->id;
                             $newUser->provider_type   = $AuthType;
                             $newUser->last_login      = now();
-                            $newUser->password        = Hash::make(str_random(16));
+                            $newUser->password        = Hash::make(Str::random(16));
                             $newUser->save();
                             event(new UserCreated($newUser));
                             auth()->login($newUser, true);
@@ -134,4 +135,73 @@ class FeLoginController extends Controller
         }
         return false;
     }
+
+    private function processUser(\feiron\fe_login\lib\contract\thirdpartyDriver $driver){
+        $userEmail= $driver->getEmail();
+        if(!empty($userEmail)){
+            $existingUser = fe_users::where('email', $userEmail)->first();
+            if ($existingUser) {
+                $existingUser->last_login = now();
+                $existingUser->provider_id     = $driver->getID();
+                $existingUser->provider_type   = $driver->getDriverType();
+                $existingUser->save();
+                auth()->login($existingUser, true);
+            } else {
+                // create a new user
+                $newUser                  = new fe_users;
+                $newUser->name            = $driver->getName()??'';
+                $newUser->email           = $userEmail;
+                $newUser->provider_id     = $driver->getID();
+                $newUser->provider_type   = $driver->getDriverType();
+                $newUser->last_login      = now();
+                $newUser->password        = Hash::make(Str::random(16));
+                $newUser->save();
+                event(new UserCreated($newUser));
+                auth()->login($newUser, true);
+                if (!$newUser->hasVerifiedEmail()) {
+                    $newUser->sendEmailVerificationNotification();
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private function handleSSO(\feiron\fe_login\lib\contract\thirdpartyDriver $driver, Request $request){
+        $response= $driver->handle($request);
+        if(false=== $response){
+            response('System Error.');
+        }else{
+            if(true===$this->processUser($response)){
+                return redirect()->back();
+            }
+        }
+        return response('Authentication Failed.');
+    }
+
+    public function handleSSOCallback(Request $request){
+        if(isset(config('fe_login.appconfig.useSSOAuth')['Driver'])){
+            $driver = config('fe_login.appconfig.useSSOAuth')['Driver'];
+            if (class_exists($driver)){
+                return $this->handleSSO(new $driver(),$request);
+            }else{
+                return response('Third Party Driver not found.');
+            }
+        }
+        return response('Authentication Failed.');
+    }
+
+    public function login_SSO(Request $request){        
+        if (isset(config('fe_login.appconfig.useSSOAuth')['Driver'])) {
+            $driver = config('fe_login.appconfig.useSSOAuth')['Driver'];
+            if (class_exists($driver)) {
+                $driver= new $driver();
+                return $driver->Login($request);
+            } else {
+                return response('Third Party Driver not found.');
+            }
+        }
+        return response('No configuration is set.');
+    }
+
 }

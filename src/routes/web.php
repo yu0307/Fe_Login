@@ -7,6 +7,8 @@
         Route::get('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::post('login/{AuthType?}', 'FeLoginController@TryLogin')->name('fe_loginControl');
         Route::get('login/{AuthType?}/callback', 'FeLoginController@handleProviderCallback');
+        Route::get('login_SSO/', 'FeLoginController@login_SSO')->name('fe_SSOLogin');
+        Route::get('login_SSO/callback', 'FeLoginController@handleSSOCallback')->name('fe_SSOLoginCallback');
 
         //Registration
         Route::get('register', 'FeSignupController@showRegistrationForm')->name('Fe_SignUpWin');

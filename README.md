@@ -254,3 +254,9 @@ Drivers must implement feiron\fe_login\lib\thirdpartyDriver interface.
 1. Method "Login" will be called when user clicked on single singe-on button. From here you can assign values, build payloads, encrypt cookies or set session data. 
 2. Once the authentication is processed and returned with a valid status. It is routed to /login_SSO/callback. Method "handle" from the driver is subsequently called. From there, you can retrieve session data, cookies, etc. You may also want to set private variables that stores user information to be used when creating user when first signed in. 
 3. Getter methods like 'getName()' are used for user creation process. 
+
+## Support us:
+
+If you like this project, Please, please, please consider put a Star⭐️ and tweet about it.
+
+I would love for any forms of supports and they are deeply appreciated👍! Thanks!

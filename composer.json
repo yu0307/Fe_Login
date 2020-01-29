@@ -34,18 +34,22 @@
     },
     "scripts": {
         "post-package-install": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "echo 'Publishing Package Resources...'",
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
         ],
         "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "echo 'Publishing Package Resources...'",
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ],
         "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "echo 'Updating Package Resources...'",
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ],
         "post-package-update": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ]
     }

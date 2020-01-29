@@ -30,6 +30,14 @@ composer require FeIron/Fe_Login
 - config/Fe_Login/
 - public/FeIron/Fe_Login/
 5. **Important!** This package is also going to perform several migrations. Please refer to the following changes and make backups of your tables if they are present. 
+6. **Since I can't seem to have package auto publish assets**. make sure you run the following command at the end and every updates of this package. 
+
+```
+    php artisan vendor:publish --provider="feiron\fe_login\Fe_LoginServiceProvider" --force
+
+```
+
+
 ```
 Schema to be Created/Modified to be like
 [users]:

@@ -37,6 +37,14 @@
             "echo 'Publishing Package Resources...'",
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
         ],
+        "post-install-cmd": [
+            "echo 'Publishing Package Resources...'",
+            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
+        ],
+        "post-update-cmd": [
+            "echo 'Updating Package Resources...'",
+            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
+        ],
         "post-package-update": [
             "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
         ]

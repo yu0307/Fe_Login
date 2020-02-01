@@ -35,7 +35,7 @@ class feOutletManager implements feOutletManagerContract{
     }
 
     public function bindOutlet($outletName, feOutletContract $outlet){
-        $name= ($outlet->MyName()?? $outlet->setName(($outletName.'_'.count($this->OutletList[$outletName])+1))->MyName());
+        $name= ($outlet->MyName()?? $outlet->setName(($outletName.'_'.(count($this->OutletList[$outletName])+1)))->MyName());
         $this->OutletList[$outletName][$name]=$outlet;
         return $outlet;
     }

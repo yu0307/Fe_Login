@@ -31,14 +31,5 @@
                 "feiron\\fe_login\\Fe_LoginServiceProvider"
             ]
         }
-    },
-    "scripts": {
-        "post-package-install": [
-            "echo 'Publishing Package Resources...'",
-            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\""
-        ],
-        "post-package-update": [
-            "@php artisan vendor:publish --provider=\"FeIron\\Fe_Login\\Fe_LoginServiceProvider\" --tag=fe_login_public --force"
-        ]
     }
 }

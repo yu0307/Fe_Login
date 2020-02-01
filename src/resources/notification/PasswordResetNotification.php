@@ -42,10 +42,10 @@ class PasswordResetNotification extends Notification
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Your password has been reset.'))
-            ->line(Lang::getFromJson('Your password was recently changed. If this is not you then your account may have been compromised.'))
-            ->line(Lang::getFromJson('Please log into your account and change your password. If you are unable to login, please try to reset your password.'))
-            ->line(Lang::getFromJson('If this is indeed your action, no further action is required.'));
+            ->subject(Lang::get('Your password has been reset.'))
+            ->line(Lang::get('Your password was recently changed. If this is not you then your account may have been compromised.'))
+            ->line(Lang::get('Please log into your account and change your password. If you are unable to login, please try to reset your password.'))
+            ->line(Lang::get('If this is indeed your action, no further action is required.'));
     }
 
     /**

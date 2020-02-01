@@ -33,6 +33,9 @@ class CreateUserTable extends Migration
                 $table->collation = 'utf8_unicode_ci';
             });
         }else{
+
+            DB::statement('ALTER TABLE users ENGINE = InnoDB');
+
             Schema::table('users', function (Blueprint $table) {
                 if (!Schema::hasColumn('users', 'name')) { $table->string('name')->nullable(); }
                 if (!Schema::hasColumn('users', 'email')) { $table->string('email')->unique(); }

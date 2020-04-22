@@ -28,14 +28,14 @@ $ajax=(isset($ajax) && $ajax === true);
 <div class="container" id="fe_login-block" style="display:{{$ajax?'block':'none'}}">
     <div class="row justify-content-md-center">
         <div class=" {{$ajax?'w-75 mw-100':'col-md-auto col-md-7 col-sm-12 col-12'}}">
-            {!! $ajax?'':'<i class="far fa-id-badge fa-5x user-img"></i>' !!}
+            {!! $ajax?'':((config('fe_login.appconfig.loginHeaderImg')==false)?'<div style="margin-top: 30%;"></div>':'<i class="far fa-id-badge fa-5x user-img"></i>') !!}
             <div class="row" id="Fe_login_area">
                 <div class="col-md-5 d-none d-sm-none d-md-block  col">
                     <div class="account-info">
-                        <a href="/" class="logo">{{isset($Logo)?$Logo:config('app.name')}}</a>
-                        <h3>{{isset($FormTitle)?$FormTitle:config('app.name')}}</h3>
+                        <a href="/" class="logo">{!!$Logo??config('fe_login.appconfig.loginLogo')??config('app.name')!!}</a>
+                        <h3>{!!config('fe_login.appconfig.loginTitle')??$FormTitle??config('app.name')!!}</h3>
                         <div>
-                            {{isset($Slot)?$Slot:''}}
+                            {!!config('fe_login.appconfig.loginDescription')??$Slot??''!!}
                         </div>
                     </div>
                 </div>

@@ -14,12 +14,15 @@
                 'redirect' => '/login/facebook/callback'
             ]
         ],
+        'loginTitle'=>'',
+        'loginDescription'=>'',
         'HasRegister'=>true,
         'HasFormLogin'=>true,
         'HasForgotPassword'=>true,
         'HasSocialSignin'=>true,
         'RememberLogin' => true,
         'HasTermURL'=>null,
+        ''
         // 'useSSOAuth'=>[
         //     'Driver'=> '\feiron\fe_login\lib\thirdpartyDriver\some driver that implements the interface',
         //     'URL'=> '',

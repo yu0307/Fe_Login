@@ -20,7 +20,7 @@ class FeRedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(Route::has('home') ? route('home') : (URL::to('/')));
+            return redirect()->intended(Route::has('home') ? route('home') : (URL::to('/')));
         }
 
         return $next($request);

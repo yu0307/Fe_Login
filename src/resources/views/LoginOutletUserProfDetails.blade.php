@@ -6,94 +6,102 @@
     $User->subtext='last activity: '.date('M-d Y',strtotime($profUser->last_login));
 @endphp
 
+@section('usrDetail')
+    <div id="usrDetail">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Display Name</label>
+                <div class="prepend-icon">
+                    <input type="text" name="Name" class="form-control" placeholder="Name..." value="{{$User->name??''}}">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <div class="prepend-icon">
+                    <input type="email" name="email" class="form-control" placeholder="Email..." value="{{$User->email??''}}">
+                    <i class="fa fa-envelope"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="usrDetailMetas">
+        @foreach (app()->UserManagement->getMetaFields() as $metaDataField)
+        @php
+            $metaValue=$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults;
+        @endphp
+        <div class="col-md-6 col-sm-12 usr_metaData">
+            <div class="form-group input-group width-100p">
+                <label>{{$metaDataField->meta_label??$metaDataField->meta_name}}</label>
+                @switch($metaDataField->meta_type)
+                    @case('select')
+                    <select class="form-control" name="{{$metaDataField->meta_name}}">
+                        @foreach (($metaDataField->meta_options??[]) as $options)
+                        <option {{( ($options==$metaValue) ?'selected="selected"':'')}}
+                            value="{{trim($options)}}">{{$options}}</option>
+                        @endforeach
+                    </select>
+                    @break
+                    @case('switch')
+                    <label  class="switch dis-block">
+                        <input type="checkbox" value="on" class="form-control switch-input" name="{{$metaDataField->meta_name}}" {{(($metaValue==='false')?'': 'checked')}}>
+                        <span class="switch-label" data-on="On" data-off="Off" ></span>
+                        <span class="switch-handle"></span>
+                    </label >
+                    @break
+                    @case('radio')
+                    <div class="icheck-inline">
+                        @foreach (($metaDataField->meta_options??[]) as $options)
+                            <label><input type="radio" {{
+                            (trim($options)==$metaValue)?'checked':''
+                            }} name="{{$metaDataField->meta_name}}" class="form-control" data-radio="iradio_minimal-blue" value="{{$options}}">{{$options}}</label>
+                        @endforeach
+                    </div>
+                    @break
+                    @case('checkbox')
+                    <div class="icheck-inline">
+                        @foreach (($metaDataField->meta_options??[]) as $options)
+                        <label><input type="checkbox" {{
+                            (
+                                (is_array($metaValue)===false)?
+                                ((trim($options)==trim($metaValue))?'checked':'')
+                                :(in_array(trim($options),$metaValue)===false?'':'checked')
+                                )
+                        }}
+                                name="{{$metaDataField->meta_name}}" class="form-control" data-radio="icheckbox_square-blue"
+                                value="{{trim($options)}}">{{$options}}</label>
+                        @endforeach
+                    </div>
+                    @break
+                    @default
+                    <div class="prepend-icon">
+                        <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
+                            value="{{$metaValue??''}}">
+                        <i class="fa fa-indent"></i>
+                    </div>
+                @endswitch
+            </div>
+        </div>
+        @endforeach
+    </div>
+@endsection
+
+@section('footer')
+    <button class="btn btn-primary pull-right saveChange ladda-button" data-style="expand-left"><span class="ladda-label">Update</span></button>
+    <div class="clearfix"></div>
+@endsection
+
 <div class="container-fluid h-100p">
     <div class="row h-100p">
         <div class="col-md-12 h-80p">
             <div id="usrDetailArea" class="p-10" data-target="{{route('Fe_userUpdate')}}">
-                <div id="usrDetail">
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <div class="prepend-icon">
-                                <input type="text" name="Name" class="form-control" placeholder="Name..." value="{{$User->name??''}}">
-                                <i class="fa fa-user"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label class="control-label">Email</label>
-                            <div class="prepend-icon">
-                                <input type="email" name="email" class="form-control" placeholder="Email..." value="{{$User->email??''}}">
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="usrDetailMetas">
-                    @foreach (app()->UserManagement->getMetaFields() as $metaDataField)
-                    @php
-                        $metaValue=$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults;
-                    @endphp
-                    <div class="col-md-6 col-sm-12 usr_metaData">
-                        <div class="form-group input-group width-100p">
-                            <label>{{$metaDataField->meta_label??$metaDataField->meta_name}}</label>
-                            @switch($metaDataField->meta_type)
-                                @case('select')
-                                <select class="form-control" name="{{$metaDataField->meta_name}}">
-                                    @foreach (($metaDataField->meta_options??[]) as $options)
-                                    <option {{( ($options==$metaValue) ?'selected="selected"':'')}}
-                                        value="{{trim($options)}}">{{$options}}</option>
-                                    @endforeach
-                                </select>
-                                @break
-                                @case('switch')
-                                <label  class="switch dis-block">
-                                    <input type="checkbox" value="on" class="form-control switch-input" name="{{$metaDataField->meta_name}}" {{(($metaValue==='false')?'': 'checked')}}>
-                                    <span class="switch-label" data-on="On" data-off="Off" ></span>
-                                    <span class="switch-handle"></span>
-                                </label >
-                                @break
-                                @case('radio')
-                                <div class="icheck-inline">
-                                    @foreach (($metaDataField->meta_options??[]) as $options)
-                                        <label><input type="radio" {{
-                                        (trim($options)==$metaValue)?'checked':''
-                                        }} name="{{$metaDataField->meta_name}}" class="form-control" data-radio="iradio_minimal-blue" value="{{$options}}">{{$options}}</label>
-                                    @endforeach
-                                </div>
-                                @break
-                                @case('checkbox')
-                                <div class="icheck-inline">
-                                    @foreach (($metaDataField->meta_options??[]) as $options)
-                                    <label><input type="checkbox" {{
-                                        (
-                                            (is_array($metaValue)===false)?
-                                            ((trim($options)==trim($metaValue))?'checked':'')
-                                            :(in_array(trim($options),$metaValue)===false?'':'checked')
-                                            )
-                                    }}
-                                            name="{{$metaDataField->meta_name}}" class="form-control" data-radio="icheckbox_square-blue"
-                                            value="{{trim($options)}}">{{$options}}</label>
-                                    @endforeach
-                                </div>
-                                @break
-                                @default
-                                <div class="prepend-icon">
-                                    <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
-                                        value="{{$metaValue??''}}">
-                                    <i class="fa fa-indent"></i>
-                                </div>
-                            @endswitch
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
+                @yield('usrDetail')
             </div>
         </div>
         <div class="col-md-12">
-            <button class="btn btn-primary pull-right saveChange ladda-button" data-style="expand-left"><span class="ladda-label">Update</span></button>
-            <div class="clearfix"></div>
+            @yield('footer')
         </div>
     </div>
 </div>

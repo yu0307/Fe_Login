@@ -13,8 +13,8 @@
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
             //registering blade components 
-            Blade::include('fe_login::LoginForm', 'fe_loginForm');
-            Blade::component('fe_login::LoginUsrManager', 'fe_UserManager');
+            Blade::include('fe_login::LoginForm', 'fe_loginForm');//aliasing, shortcut to include the view by only name "fe_loginForm" when used.
+            Blade::component('feusermanager', \feiron\fe_login\lib\view\components\feUserManager::class);
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);
@@ -32,6 +32,7 @@
                 'view'=> 'fe_login::outletViews.userMetaInfo',
                 'myName'=> 'Additional Info'
             ]));
+
             $this->app->resolving(\App\Http\Middleware\EncryptCookies::class, function ($object) {
                 if(isset(config('fe_login.appconfig.useSSOAuth')['EscapeCookie'])){
                     foreach (config('fe_login.appconfig.useSSOAuth')['EscapeCookie']??[] as $cookieField) {

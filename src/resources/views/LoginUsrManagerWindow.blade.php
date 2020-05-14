@@ -33,12 +33,11 @@
 
 
 <body class="usr_login_form p-5" data-page="login">
-    <div class="row">
+    <div class="row" id="app">
         <div class="col-md-2 d-none d-md-block">
         </div>
         <div class="col-md-8 col-sm-12">
-        @fe_UserManager()
-        @endfe_UserManager
+            <x-fe-user-manager/>
         </div>
         <div class="col-md-2 d-none d-md-block">
         </div>

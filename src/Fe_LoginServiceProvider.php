@@ -14,7 +14,7 @@
 
             //registering blade components 
             Blade::include('fe_login::LoginForm', 'fe_loginForm');//aliasing, shortcut to include the view by only name "fe_loginForm" when used.
-            Blade::component('feusermanager', \feiron\fe_login\lib\view\components\feUserManager::class);
+            Blade::component('fe-user-manager', \feiron\fe_login\lib\view\components\feUserManager::class);
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);

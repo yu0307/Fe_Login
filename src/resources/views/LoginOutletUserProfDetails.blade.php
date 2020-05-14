@@ -88,11 +88,6 @@
     </div>
 @endsection
 
-@section('footer')
-    <button class="btn btn-primary pull-right saveChange ladda-button" data-style="expand-left"><span class="ladda-label">Update</span></button>
-    <div class="clearfix"></div>
-@endsection
-
 <div class="container-fluid h-100p">
     <div class="row h-100p">
         <div class="col-md-12 h-80p">
@@ -101,7 +96,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            @yield('footer')
+            <button class="btn btn-primary pull-right saveChange ladda-button" data-style="expand-left"><span class="ladda-label">Update</span></button>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

@@ -63,7 +63,7 @@ class FeUsrManagement extends Controller
         }else{
             $request->validate(['email'=> ('required|max:255|email|unique:users,email,' . $me->id . ',id')], $this->customMessages);
         }
-        $me->update($request->except(['metainfo']));
+        $me->update($request->except(['metainfo','user_timezone']));
         if ($request->filled('metainfo')) {
             foreach ($request->input('metainfo') as $key => $val) {
                 $me->metainfo()->updateOrCreate(['meta_name' => $key], ['meta_value' => $val]);

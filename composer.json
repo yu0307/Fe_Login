@@ -4,13 +4,13 @@
     "type": "library",
     "license": "Apache-2.0",
     "require": {
-        "php": "^7.2.1",
+        "php": ">=7.2.1",
         "laravel/framework": ">=7.0",
         "laravel/socialite": "^5.0@dev",
         "laravel/ui":"^2.0"
     },
     "require-dev": {
-        "php": "^7.2.1",
+        "php": ">=7.2.1",
         "laravel/framework": ">=7.0",
         "laravel/socialite": "^5.0@dev"
     },

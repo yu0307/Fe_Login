@@ -7,12 +7,12 @@
 @endphp
 
 @section('usrDetail')
-    <div id="usrDetail">
+    <div id="usrDetail" class="row">
         <div class="col-md-6 col-sm-12">
             <div class="form-group">
                 <label class="control-label">Display Name</label>
                 <div class="prepend-icon">
-                    <input type="text" name="Name" class="form-control" placeholder="Name..." value="{{$User->name??''}}">
+                    <input type="text" name="name" class="form-control" placeholder="Name..." value="{{$User->name??''}}">
                     <i class="fa fa-user"></i>
                 </div>
             </div>
@@ -27,13 +27,13 @@
             </div>
         </div>
     </div>
-    <div id="usrDetailMetas">
+    <div id="usrDetailMetas" class="row">
         @foreach (app()->UserManagement->getMetaFields() as $metaDataField)
         @php
             $metaValue=$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults;
         @endphp
         <div class="col-md-6 col-sm-12 usr_metaData">
-            <div class="form-group input-group width-100p">
+            <div class="form-group input-group width-100">
                 <label>{{$metaDataField->meta_label??$metaDataField->meta_name}}</label>
                 @switch($metaDataField->meta_type)
                     @case('select')
@@ -93,61 +93,61 @@
 <div class="clearfix"></div>
 @endsection
 
-<div class="container-fluid h-100p">
-    <div class="row h-100p">
-        <div class="col-md-12 h-80p">
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col-md-12">
             <div id="usrDetailArea" class="p-10" data-target="{{route('Fe_userUpdate')}}">
                 @yield('usrDetail')
             </div>
         </div>
+    </div>
+    <div class="row my-2 my-sm-1 my-md-3">
         <div class="col-md-12">
             @yield('profile_footer')
         </div>
     </div>
 </div>
-@section('ExtraContents')
+
+@push('lastContent')
     <!-- Modal -->
-    <div class="modal fade" id="Fe_login_ProfImage" tabindex="-1" role="dialog" aria-labelledby="Profile Image"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title pull-left" id="exampleModalLabel">User Profile Image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="prof_img_editArea">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="t-center text-center">
-                                        <div class="edit_prof_img_area">
-                                            <div class="remove_prof_img"><i class="fa fa-times fa-2x t-danger text-danger"></i></div>
-                                            <img class="usrProfImg_Preview img-circle img-thumbnail" src="">
-                                        </div>
-                                        <form class="FeLogin_ProfImgUpload m-15" enctype="multipart/form-data" action="{{route('FeLogin_ProfImgUpload')}}" id="fm_FeLogin_ProfImgUpload">
-                                            <input type="file" class="inputfile" name="FeLogin_ProfImgUpload" id="FeLogin_ProfImgUpload" accept="image/x-png,image/gif,image/jpeg"/>
-                                            <label for="FeLogin_ProfImgUpload"><i class="fa fa-upload"></i><span>Choose a file</span></label>
-                                        </form>
+    <div class="modal fade" id="Fe_login_ProfImage" tabindex="-1" aria-labelledby="Profile_Image" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="Profile_Image">User Profile Image</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="prof_img_editArea">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="t-center text-center">
+                                    <div class="edit_prof_img_area">
+                                        <div class="remove_prof_img"><i class="fas fa-times fa-2x text-danger"></i></div>
+                                        <img class="usrProfImg_Preview img-circle img-thumbnail" src="">
                                     </div>
+                                    <form class="FeLogin_ProfImgUpload m-15" enctype="multipart/form-data" action="{{route('FeLogin_ProfImgUpload')}}" id="fm_FeLogin_ProfImgUpload">
+                                        <input type="file" class="inputfile" name="FeLogin_ProfImgUpload" id="FeLogin_ProfImgUpload" accept="image/x-png,image/gif,image/jpeg"/>
+                                        <label for="FeLogin_ProfImgUpload"><i class="fa fa-upload"></i><span>Choose a file</span></label>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="progress progress-striped active" style="display:none" >
-                                <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
-                                    aria-valuemax="100" style="width: 0px">
-                                    <span class="percent">0%</span>
-                                </div>
+                        </div>
+                        <div class="progress progress-striped active animate__animated animate__fadeIn" style="display:none" >
+                            <div class="progress-bar  progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 0px">
+                                <span class="percent">0%</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer t-center text-center">
-                    <button type="button" class="btn btn-primary btn-save">Update</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-save">Update</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+          </div>
         </div>
-    </div>
-@endsection
+      </div>
+@endpush

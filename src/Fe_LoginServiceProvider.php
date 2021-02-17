@@ -45,7 +45,7 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrManager',
                     'myName'=>'User Management',
-                    'reousrce'=>[
+                    'resource'=>[
                         asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js'),
                         asset('/feiron/fe_login/js/Fe_Login_usrOutlet.js'),
                         asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
@@ -54,7 +54,7 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrMetaManager',
                     'myName'=>'User Meta Info',
-                    'reousrce'=>[
+                    'resource'=>[
                         asset('/feiron/felaraframe/plugins/datatables/dataTables.min.css'),
                         asset('/feiron/felaraframe/plugins/datatables/jquery.dataTables.min.js'),
                         asset('/feiron/fe_login/js/Fe_Login_usrMetaManager.js'),
@@ -63,8 +63,8 @@
                 ]));
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfDetails',
-                    'myName'=> 'User Details',
-                    'reousrce'=>[ 
+                    'myName'=> 'User Detail',
+                    'resource'=>[ 
                         asset('/feiron/fe_login/js/Fe_Login_UsrDetail.js'),
                         asset('/feiron/fe_login/css/Fe_Login_UsrDetail.css')
                     ]
@@ -72,7 +72,7 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfSecurity',
                     'myName'=> 'Security',
-                    'reousrce'=>[asset('/feiron/fe_login/js/Fe_Login_UsrSecurity.js') ]
+                    'resource'=>[asset('/feiron/fe_login/js/Fe_Login_UsrSecurity.js') ]
                 ]));
             }
         }

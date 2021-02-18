@@ -83,8 +83,8 @@
                 <i class="fa fa-indent"></i>
             </div>
         </div>
-        <div class="alert alert-info p-5">
-            <h6>Control Options are used for Select,checkbox,radios.<br/>Seperate each options with comma(,)</h6>
+        <div class="alert alert-info my-2 py-1">
+            <h6 class="fw-light">Control Options are used for Select,checkbox,radios.<br/>Seperate each options with comma(,)</h6>
         </div>
     </div>
 </div>

@@ -55,8 +55,6 @@
                     'view'=> 'fe_login::LoginOutletUsrMetaManager',
                     'myName'=>'User Meta Info',
                     'resource'=>[
-                        asset('/feiron/felaraframe/plugins/datatables/dataTables.min.css'),
-                        asset('/feiron/felaraframe/plugins/datatables/jquery.dataTables.min.js'),
                         asset('/feiron/fe_login/js/Fe_Login_usrMetaManager.js'),
                         asset('/feiron/fe_login/css/Fe_Login_usrMetaManager.css')
                     ]

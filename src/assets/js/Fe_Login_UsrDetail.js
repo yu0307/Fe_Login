@@ -1,4 +1,16 @@
 var usrDetailModal;
+window.ready = window.ready|| function(refCall=null){
+    if(typeof refCall ==='function'){
+        if (
+            document.readyState === "complete" ||
+            (document.readyState !== "loading" && !document.documentElement.doScroll)
+        ) {
+            refCall();
+        } else {
+            document.addEventListener("DOMContentLoaded", refCall);
+        }
+    };    
+}
 window.ready(()=>{
     usrDetailModal = new bootstrap.Modal(document.getElementById('Fe_login_ProfImage'));
     document.querySelectorAll('#User_Detail .saveChange').forEach((elm)=>{

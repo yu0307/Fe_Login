@@ -1,28 +1,20 @@
 @section('usrMeta_cntr_header')
-<div class="col-md-4 col-sm-12">
-    <h4>User Meta Fields Management</h4>
-</div>
-<div class="col-md-8 col-sm-12">
-    <button class="btn btn-primary pull-right usrmeta_addNew" data-toggle="modal" data-target="#MetaInfo_CRUD">Add New</button>
+<div class="row">
+    <div class="col-md-4 col-sm-12">
+        <h4>User Meta Fields Management</h4>
+    </div>
+    <div class="col-md-8 col-sm-12">
+        <button class="btn btn-primary float-end usrmeta_addNew" data-toggle="modal" data-target="#MetaInfo_CRUD">Add New</button>
+    </div>
 </div>
 @endsection
 
 @section('usrMeta_cntr_content')
 <div id="usrmeta_dt_list">
-    <table id="usrMeta_dt_table" width="100%" data_target="{{route('Fe_UserMetalist')}}" class="table table-striped table-hover table-sm dt_table">
-        <thead class="thead-dark">
-            <tr>
-                <th>Field Name</th>
-                <th>Meta Type</th>
-                <th>Display Label</th>
-                <th>Defaults</th>
-                <th>Options</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div id="usrMeta_dt_table" width="100%" data_target="{{route('Fe_UserMetalist')}}" class="table-striped table-hover table-sm dt_table">
+
+    </div>
+
 </div>
 @endsection
 
@@ -84,7 +76,7 @@
             </div>
         </div>
         <div class="alert alert-info my-2 py-1">
-            <h6 class="fw-light">Control Options are used for Select,checkbox,radios.<br/>Seperate each options with comma(,)</h6>
+            <h6 class="fw-light ft-14">Control Options are used for Select,checkbox,radios.<br/>Seperate each options with comma(,)</h6>
         </div>
     </div>
 </div>

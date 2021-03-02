@@ -1,4 +1,23 @@
 import axios from "axios";
+var usrManagementTarget = '';
+window.ready = window.ready|| function(refCall=null){
+    if(typeof refCall ==='function'){
+        if (
+            document.readyState === "complete" ||
+            (document.readyState !== "loading" && !document.documentElement.doScroll)
+        ) {
+            refCall();
+        } else {
+            document.addEventListener("DOMContentLoaded", refCall);
+        }
+    };    
+}
+window.ready(()=>{
+    document.getElementById('usr_management_area').addEventListener('usr_manageRefreshList',()=>{
+        window.usrManagement.LoadList();
+    });
+    usrManagementTarget = document.getElementById('usr_management_area').getAttribute('actionTarget');
+});
 
 function SaveUser(ex_data = {}, after_call = null) {
     var data = {};
@@ -61,7 +80,7 @@ function usrCheckInputs(target) {
 }
 
 function loadUsr(uid, callback) {
-    axios.post(usrManagementTarget + '/' + uid).then((resp)=>{
+    axios.get(usrManagementTarget + '/' + uid).then((resp)=>{
         if (resp.data !== undefined && !_.isEmpty(resp.data)) {
             if (typeof (callback) === 'function') {
                 callback(uid, resp.data);

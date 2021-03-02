@@ -3,7 +3,7 @@
 
 @section('usrManager')
 <div id="usr_management_area" actionTarget="{{route('Fe_UserManagement_save')}}">
-    <div class="panel">
+    <div class="panel bg-white">
         <div class="panel-content p-3 p-t-0">
             <div class="text-right text-end">
                 <button class="btn btn-success" id="btn_usrCreate" data-toggle="modal" data-target="#usrManagementCtr">Create User</button>

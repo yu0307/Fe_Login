@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="whenUpdate col-md-12">
-                <h4 class="t-center text-center">Leave password fields empty to omit changing password. </h4>
+                <h4 class="t-center text-center alert alert-info ft-14 py-2">Leave password fields empty to omit changing password. </h4>
             </div>
         </div>
     </div>

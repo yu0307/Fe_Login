@@ -32,14 +32,24 @@ window.ready(()=>{
                 (data.metainfo||[]).forEach((meta)=>{
                     switch (document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').getAttribute('type')) {
                         case 'checkbox':
-                        case 'radio':
-                            if (Array.isArray(meta.meta_value) !== false) {
-                                (meta.meta_value||[]).forEach((metavalue)=>{
-                                    document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + metavalue + '"]').setAttribute('checked', 'checked');
+                            
+                            if(document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').hasAttribute('toggle')){
+                                document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').checked=(meta.meta_value=='on');
+                            }else{
+                                document.querySelectorAll('#Additional_Info .form-control[name="' + meta.meta_name + '"]').forEach((elm)=>{
+                                    elm.checked=false;
                                 });
-                            } else {
-                                document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + meta.meta_value + '"]').setAttribute('checked', 'checked');
+                                (meta.meta_value||'').split(',').forEach((val)=>{
+                                    document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + val + '"]').checked=true;
+                                });
                             }
+                            break;
+                        case 'radio':
+                            document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + meta.meta_value + '"]').setAttribute('checked', 'checked');
+                            break;
+                        case 'select':
+                            if(_.isNull(meta.meta_value)) document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').value=document.querySelector('#Additional_Info .form-control[name="select"] option[default]').value;
+                            else document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').value=meta.meta_value;
                             break;
                         default:
                             document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').value=meta.meta_value;

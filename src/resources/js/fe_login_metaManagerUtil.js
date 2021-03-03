@@ -54,12 +54,13 @@ function InitUsrMetaDtable(target) {
             {title:"Label", field:"meta_label", sorter:"string", width:150,headerFilter:"input"},
             {title:"Default", field:"meta_defaults", sorter:"string", width:160, headerSort:false},
             {title:"Options", field:"meta_options", sorter:"string", headerSort:false},
-            {title:"Actions", field:"actions", width:160, cssClass:'options', headerSort:false, formatter:(cell, formatterParams, onRendered)=>{
+            {title:"Actions", field:"actions", width:180, cssClass:'options', headerSort:false, formatter:(cell, formatterParams, onRendered)=>{
                 let id = cell.getRow().getCell("id").getValue();
-                return '<div class="row m-l-0 m-r-0"><div class="col-md-6 col-sm-12"><button class="btn btn-sm btn-primary btn-edit" data-source=' + id + '>View/Edit</button></div><div class="col-md-6 col-sm-12"><button class="btn btn-sm btn-danger btn-remove" data-source=' + id + '>Remove</button></div></div>'
+                return '<div class="container-fluid"><div class="row m-l-0 m-r-0"><div class="col-md-6 col-sm-12 px-1"><button class="btn btn-sm btn-primary btn-edit" data-source=' + id + '>View/Edit</button></div><div class="col-md-6 col-sm-12 px-1"><button class="btn btn-sm btn-danger btn-remove" data-source=' + id + '>Remove</button></div></div></div>'
             }}
         ],
         responsiveLayout:true,
+        resizableColumns:false,
         layout:"fitColumns",
         ajaxFiltering:true,
         ajaxSorting:true,

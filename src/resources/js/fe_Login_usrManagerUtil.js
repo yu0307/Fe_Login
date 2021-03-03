@@ -1,4 +1,5 @@
 import axios from "axios";
+import anime from 'animejs';
 var usrManagementTarget = '';
 window.ready = window.ready|| function(refCall=null){
     if(typeof refCall ==='function'){
@@ -25,18 +26,18 @@ function SaveUser(ex_data = {}, after_call = null) {
         data[elm['name']] = elm['value'];
     });
     data.metainfo = {};
-    document.querySelectorAll('#Additional_Info .form-control').forEach((elm)=>{
-        if (Array.isArray(data.metainfo[elm['name']]) === true) {
-            data.metainfo[elm['name']].push(elm['value']);
-        } else if (data.metainfo[elm['name']] && data.metainfo[elm['name']].length > 0) {
-            (data.metainfo[elm['name']] = [data.metainfo[elm['name']]]).push(elm['value']);
-        } else {
-            data.metainfo[elm['name']] = elm['value'];
-        }
+    document.querySelectorAll('#Additional_Info .form-control:not([type="radio"]):not([type="checkbox"])').forEach((elm)=>{
+        data.metainfo[elm['name']] = elm['value'];
+    });
+    document.querySelectorAll('#Additional_Info .form-control[type="radio"]:checked').forEach((elm)=>{
+        data.metainfo[elm['name']] = elm['value'];
+    });
+    document.querySelectorAll('#Additional_Info .form-control[type="checkbox"]:checked').forEach((elm)=>{
+        (data.metainfo[elm['name']]=(Array.isArray(data.metainfo[elm['name']]) === true)?data.metainfo[elm['name']]:[]).push(elm['value']);
     });
     document.querySelectorAll('#Additional_Info .form-control[type="checkbox"]:not(:checked)').forEach((elm)=>{
-        if (!($(elm).attr('name') in data.metainfo)) {
-            data.metainfo[$(elm).attr('name')] = false;
+        if (!(elm.getAttribute('name') in data.metainfo)) {
+            data.metainfo[elm.getAttribute('name')] = false;
         }
     });
     data = _.extend(data, ex_data);
@@ -126,7 +127,6 @@ function LoadList() {
                             complete: function() {
                                 var user_list = document.querySelector('#usr_management_area .user_list')
                                 user_list.innerHTML='';
-                                response=response.data;
                                 if (response.data !== undefined && response.data.length > 0) {
                                     response.data.forEach(elm => {
                                         user_list.innerHTML+='<div class="users" UID="' + elm.id + '">' +
@@ -138,7 +138,6 @@ function LoadList() {
                                 } else {
                                     user_list.innerHTML='<p>There are no users...</p>';
                                 }
-                                $('.user_list').fadeIn(300);
                             }.bind(response)
                         });
                     }).catch((error)=>{

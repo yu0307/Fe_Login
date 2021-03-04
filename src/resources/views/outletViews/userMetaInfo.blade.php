@@ -17,13 +17,13 @@
                         </select>
                     @break
                     @case('switch')
-                        <div class="form-check form-switch me-2">
+                        <div class="form-check-inline form-switch me-2">
                             <input class="form-check-input form-control" type="checkbox" toggle {{(($metaValue==='false')?'': 'checked')}} name="{{$metafield->meta_name}}" >
                         </div>
                     @break
                     @case('radio')
                             @foreach (($metafield->meta_options??[]) as $options)
-                                <div class="form-check me-2">
+                                <div class="form-check-inline me-2">
                                     <input value="{{trim($options)}}" class="form-check-input form-control" {{(trim($options)==$metaValue)?'checked':''}} type="radio" name="{{$metafield->meta_name}}">
                                     <label class="form-check-label">
                                         {{$options}}
@@ -33,7 +33,7 @@
                     @break
                     @case('checkbox')
                         @foreach (($metafield->meta_options??[]) as $options)
-                            <div class="form-check me-2">
+                            <div class="form-check-inline me-2">
                                 <input class="form-check-input form-control" {{ (
                                     (is_array($metaValue)===false)?
                                     ((trim($options)==trim($metaValue))?'checked':'')

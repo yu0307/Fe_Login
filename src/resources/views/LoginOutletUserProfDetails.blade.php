@@ -1,6 +1,7 @@
 @php
     $profUser=feiron\fe_login\models\fe_users::find($User->getKey())->load('metainfo')->makeVisible('metainfo');
     $User->title=$profUser->name;
+    $metaDataFeilds = app()->UserManagement->getMetaFields();
     $metaVals=$profUser->metainfo->keyBy('meta_name');
     $User->subtitle='';
     $User->subtext='last activity: '.date('M-d Y',strtotime($profUser->last_login));
@@ -27,65 +28,61 @@
             </div>
         </div>
     </div>
+    @if (count($metaDataFeilds)>0)
     <div id="usrDetailMetas" class="row">
-        @foreach (app()->UserManagement->getMetaFields() as $metaDataField)
+        <h4 class="alert alert-info p-2 ft-11rem">User Meta Information</h4>
+        @foreach ($metaDataFeilds as $metafield)
         @php
-            $metaValue=$metaVals[$metaDataField->meta_name]->meta_value??$metaDataField->meta_defaults;
+            $metaValue=$metaVals[$metafield->meta_name]->meta_value??$metafield->meta_defaults;
         @endphp
         <div class="col-md-6 col-sm-12 usr_metaData">
-            <div class="form-group input-group width-100">
-                <label>{{$metaDataField->meta_label??$metaDataField->meta_name}}</label>
-                @switch($metaDataField->meta_type)
-                    @case('select')
-                    <select class="form-control" name="{{$metaDataField->meta_name}}">
-                        @foreach (($metaDataField->meta_options??[]) as $options)
-                        <option {{( ($options==$metaValue) ?'selected="selected"':'')}}
-                            value="{{trim($options)}}">{{$options}}</option>
-                        @endforeach
-                    </select>
-                    @break
-                    @case('switch')
-                    <label  class="switch dis-block">
-                        <input type="checkbox" value="on" class="form-control switch-input" name="{{$metaDataField->meta_name}}" {{(($metaValue==='false')?'': 'checked')}}>
-                        <span class="switch-label" data-on="On" data-off="Off" ></span>
-                        <span class="switch-handle"></span>
-                    </label >
-                    @break
-                    @case('radio')
-                    <div class="icheck-inline">
-                        @foreach (($metaDataField->meta_options??[]) as $options)
-                            <label><input type="radio" {{
-                            (trim($options)==$metaValue)?'checked':''
-                            }} name="{{$metaDataField->meta_name}}" class="form-control" data-radio="iradio_minimal-blue" value="{{$options}}">{{$options}}</label>
-                        @endforeach
-                    </div>
-                    @break
-                    @case('checkbox')
-                    <div class="icheck-inline">
-                        @foreach (($metaDataField->meta_options??[]) as $options)
-                        <label><input type="checkbox" {{
-                            (
-                                (is_array($metaValue)===false)?
-                                ((trim($options)==trim($metaValue))?'checked':'')
-                                :(in_array(trim($options),$metaValue)===false?'':'checked')
-                                )
-                        }}
-                                name="{{$metaDataField->meta_name}}" class="form-control" data-radio="icheckbox_square-blue"
-                                value="{{trim($options)}}">{{$options}}</label>
-                        @endforeach
-                    </div>
-                    @break
-                    @default
-                    <div class="prepend-icon">
-                        <input class="form-control" type="{{$metaDataField->meta_type}}" name="{{$metaDataField->meta_name}}"
-                            value="{{$metaValue??''}}">
-                        <i class="fa fa-indent"></i>
-                    </div>
-                @endswitch
+            <div class="form-group">
+                <label>{{$metafield->meta_label??$metafield->meta_name}}</label>
+                <div class="input-group">
+                    @switch($metafield->meta_type)
+                        @case('select')
+                            <select class="form-control form-white form-select" name="{{$metafield->meta_name}}">
+                                @foreach (($metafield->meta_options??[]) as $options)
+                                    <option {{( ($options==$metaValue) ?'selected=selected default':'')}} value="{{trim($options)}}">{{$options}}</option>
+                                @endforeach
+                            </select>
+                        @break
+                        @case('switch')
+                            <div class="form-check-inline form-switch me-2">
+                                <input class="form-check-input form-control" type="checkbox" toggle {{(boolval($metaValue)?'checked': '')}} name="{{$metafield->meta_name}}" >
+                            </div>
+                        @break
+                        @case('radio')
+                                @foreach (($metafield->meta_options??[]) as $options)
+                                    <div class="form-check-inline me-2">
+                                        <input value="{{trim($options)}}" class="form-check-input form-control" {{(trim($options)==$metaValue)?'checked':''}} type="radio" name="{{$metafield->meta_name}}">
+                                        <label class="form-check-label">
+                                            {{$options}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                        @break
+                        @case('checkbox')
+                            @foreach (($metafield->meta_options??[]) as $options)
+                                <div class="form-check-inline me-2">
+                                    <input class="form-check-input form-control" {{ (
+                                        (is_array(explode(',',$metaValue))===false)?
+                                        ((trim($options)==trim($metaValue))?'checked':'')
+                                        :(in_array(trim($options),explode(',',$metaValue))===false?'':'checked')
+                                    )}} type="checkbox" value="{{trim($options)}}" name="{{$metafield->meta_name}}">
+                                    <label class="form-check-label">{{$options}}</label>
+                                </div>
+                            @endforeach
+                        @break
+                        @default
+                            <input class="form-control form-white" type="{{$metafield->meta_type}}" name="{{$metafield->meta_name}}" value="{{$metaValue??''}}">
+                    @endswitch
+                </div>
             </div>
         </div>
         @endforeach
     </div>
+    @endif
 @endsection
 
 @section('profile_footer')

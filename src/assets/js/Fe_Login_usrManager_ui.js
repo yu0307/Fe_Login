@@ -370,6 +370,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
+/***/ "./vendor/feiron/fe_widgets/src/resources/sass/dashboard.scss":
+/*!********************************************************************!*\
+  !*** ./vendor/feiron/fe_widgets/src/resources/sass/dashboard.scss ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi92ZW5kb3IvZmVpcm9uL2ZlX3dpZGdldHMvc3JjL3Jlc291cmNlcy9zYXNzL2Rhc2hib2FyZC5zY3NzPzgxZjAiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBIiwiZmlsZSI6Ii4vdmVuZG9yL2ZlaXJvbi9mZV93aWRnZXRzL3NyYy9yZXNvdXJjZXMvc2Fzcy9kYXNoYm9hcmQuc2Nzcy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpblxuZXhwb3J0IHt9OyJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./vendor/feiron/fe_widgets/src/resources/sass/dashboard.scss\n");
+
+/***/ }),
+
 /***/ "./node_modules/process/browser.js":
 /*!*****************************************!*\
   !*** ./node_modules/process/browser.js ***!
@@ -467,7 +478,8 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /******/ 			["./vendor/feiron/fe_login/src/resources/js/Fe_Login_usrManager_ui.js"],
 /******/ 			["./vendor/feiron/fe_theme/src/resources/sass/frame.scss"],
 /******/ 			["./vendor/feiron/fe_theme/src/resources/sass/util.scss"],
-/******/ 			["./vendor/feiron/fe_theme/src/resources/sass/controlpanel.scss"]
+/******/ 			["./vendor/feiron/fe_theme/src/resources/sass/controlpanel.scss"],
+/******/ 			["./vendor/feiron/fe_widgets/src/resources/sass/dashboard.scss"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

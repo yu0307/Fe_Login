@@ -56,7 +56,7 @@ window.ready(()=>{
                     }
                 });
                 document.querySelector('#control_CRUD .loading').classList.remove('show');
-                document.getElementById('User_Management_CRUD').dispatchEvent(new CustomEvent('usrInfoLoaded',data));
+                document.getElementById('User_Management_CRUD').dispatchEvent(new CustomEvent('usrInfoLoaded',{detail:{usrData:data}}));
             });
         }else if (e.target.classList.contains('usr_remove')) {
             if (confirm('Remove this User?')) {

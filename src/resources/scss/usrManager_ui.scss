@@ -1,0 +1,72 @@
+@use 'shared';
+@include shared.shared;
+
+.user_list{
+    .users {
+        display: inline-block;
+        padding: 5px;
+        text-align: center;
+        margin: 5px;
+        img {
+            border: 1px solid gray;
+            padding: 2px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        &:hover .usr_remove > i {
+            visibility: visible;
+        }
+    }
+}
+
+.usr_remove > i {
+    visibility: hidden;
+    cursor: pointer;
+}
+
+#usrManagementCtr{
+    .form-control {
+        margin: 0px 5px;
+        &.invalid {
+            border: 1px solid red;
+            ~ .invalid-feedback:not(.custom) {
+                display: block;
+            }
+        }
+        &.DonotMatch ~ .invalid-feedback.mustMatch {
+            display: block;
+        }
+    }
+    .btn {
+        min-width: 130px;
+    }
+    .loading {
+        display: none;
+        &.show {
+            display: block;
+            ~ .User_Management_Area {
+                display: none;
+            }
+        }
+    }
+}
+#usrManageWinMsg {
+    text-align: center;
+    padding: 10px;
+    .error {
+        color: #dc3545;
+    }
+}
+.whenUpdate {
+    display: none;
+}
+.updating .whenUpdate {
+    display: block;
+}
+.User_Management_Area .tab-content {
+    border-top: 1px solid lightgray;
+    margin-top: 10px;
+    .in {
+        opacity: 1;
+    }
+}

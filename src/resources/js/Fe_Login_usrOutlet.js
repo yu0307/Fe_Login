@@ -45,7 +45,7 @@ window.ready(()=>{
                             }
                             break;
                         case 'radio':
-                            document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + meta.meta_value + '"]').setAttribute('checked', 'checked');
+                            document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"][value="' + meta.meta_value + '"]').checked=true;
                             break;
                         case 'select':
                             if(_.isNull(meta.meta_value)) document.querySelector('#Additional_Info .form-control[name="' + meta.meta_name + '"]').value=document.querySelector('#Additional_Info .form-control[name="select"] option[default]').value;
@@ -74,7 +74,6 @@ window.ready(()=>{
         if (e.target.classList.contains('usrSave')) {
             e.stopPropagation();
             window.usrManagement.SaveUser([], function (data, message) {
-                window.frameUtil.Notify(message, (data.status !== undefined ? data.status : 'info'));
                 if (data.status === 'success') {
                     window.controlUtil.hideCRUD(function () {
                         document.querySelector('#control_CRUD .buttonSlot').innerHTML="";

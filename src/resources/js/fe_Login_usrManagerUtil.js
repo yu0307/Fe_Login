@@ -130,7 +130,7 @@ function LoadList() {
                                 if (response.data !== undefined && response.data.length > 0) {
                                     response.data.forEach(elm => {
                                         user_list.innerHTML+='<div class="users" UID="' + elm.id + '">' +
-                                        '<div class="usr_remove text-center t-center"><i class="animate__animated animate__fadeOutDown far fa-times-circle c-red fa-lg p-0"></i></div>' +
+                                        '<div class="usr_remove text-center t-center"><i class="animate__animated animate__fadeOutDown usr_remove far fa-times-circle c-red fa-lg p-0"></i></div>' +
                                         '<div class="user_img" > <img class="user_prof_pics img-circle rounded-circle" src="' + elm.img + '"></div>' +
                                         '<div class="user_names t-center text-center">' + elm.name + '</div>' +
                                         '</div >';

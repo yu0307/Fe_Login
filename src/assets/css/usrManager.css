@@ -1,0 +1,21 @@
+#usr_management_area {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.usr-manager {
+  z-index: 1000;
+}
+
+.usr_remove {
+  cursor: pointer;
+  color: #e26c6c;
+}
+
+.users:hover .usr_remove > i {
+  -webkit-animation-name: fadeInUp !important;
+  animation-name: fadeInUp !important;
+}
+.users .usr_remove > i {
+  opacity: 0;
+}

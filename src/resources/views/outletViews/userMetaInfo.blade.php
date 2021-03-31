@@ -18,13 +18,13 @@
                     @break
                     @case('switch')
                         <div class="form-check-inline form-switch me-2">
-                            <input class="form-check-input form-control" type="checkbox" toggle {{(($metaValue==='false')?'': 'checked')}} name="{{$metafield->meta_name}}" >
+                            <input class="form-check-input form-control {{(($metaValue==='false')?'': 'default')}}" type="checkbox" toggle {{(($metaValue==='false')?'': 'checked')}} name="{{$metafield->meta_name}}" >
                         </div>
                     @break
                     @case('radio')
                             @foreach (($metafield->meta_options??[]) as $options)
                                 <div class="form-check-inline me-2">
-                                    <input value="{{trim($options)}}" class="form-check-input form-control" {{(trim($options)==$metaValue)?'checked':''}} type="radio" name="{{$metafield->meta_name}}">
+                                    <input value="{{trim($options)}}" class="form-check-input form-control {{((trim($options)==$metaValue)?'default': '')}}" {{(trim($options)==$metaValue)?'checked':''}} type="radio" name="{{$metafield->meta_name}}">
                                     <label class="form-check-label">
                                         {{$options}}
                                     </label>
@@ -34,7 +34,11 @@
                     @case('checkbox')
                         @foreach (($metafield->meta_options??[]) as $options)
                             <div class="form-check-inline me-2">
-                                <input class="form-check-input form-control" {{ (
+                                <input class="form-check-input form-control {{ (
+                                    (is_array($metaValue)===false)?
+                                    ((trim($options)==trim($metaValue))?'default':'')
+                                    :(in_array(trim($options),$metaValue)===false?'':'default')
+                                )}}" {{ (
                                     (is_array($metaValue)===false)?
                                     ((trim($options)==trim($metaValue))?'checked':'')
                                     :(in_array(trim($options),$metaValue)===false?'':'checked')
@@ -44,7 +48,7 @@
                         @endforeach
                     @break
                     @default
-                        <input class="form-control form-white" type="{{$metafield->meta_type}}" name="{{$metafield->meta_name}}" value="{{$metaValue??''}}">
+                        <input class="form-control form-white" default-value="{{$metaValue??''}}" type="{{$metafield->meta_type}}" name="{{$metafield->meta_name}}" value="{{$metaValue??''}}">
                 @endswitch
                 </div>
             </div>

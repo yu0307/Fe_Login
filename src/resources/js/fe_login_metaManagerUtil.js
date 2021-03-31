@@ -33,10 +33,14 @@ function updateMeta() {
     axios.post(this.usrMetaURL, data).then((resp)=>{
         window.frameUtil.Notify(resp);
         if (resp.data.status === 'success') {
-            window.controlUtil.hideCRUD(function () {
-                document.querySelector('#control_CRUD .buttonSlot').innerHTML="";
+            if(window.controlUtil){
+                window.controlUtil.hideCRUD(function () {
+                    document.querySelector('#control_CRUD .buttonSlot').innerHTML="";
+                    self.UsrMetaTable.setData();
+                });
+            }else{
                 self.UsrMetaTable.setData();
-            });
+            }
         }
     }).catch((error)=>{
         window.frameUtil.Notify(error);

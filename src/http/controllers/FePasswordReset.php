@@ -61,10 +61,16 @@ class FePasswordReset extends Controller
             'email.e_mail' => 'Not a valid email address',
             'email.exists'  => 'No such user found',
             'token.required'  => 'Reset link expired',
+            'password.between' => 'Password should be 8 to 255 characters long',
+            'password.confirmed' => 'Passwords do not match'
         ];
 
         if($entry_check){
-            return Validator::make($data, ['token' => 'required', 'email' => 'required|email|exists:password_resets,email'], $customMessages);
+            return Validator::make($data, [
+                'token' => 'required', 
+                'email' => 'required|email|exists:password_resets,email', 
+                'password' => ['required', 'string', 'between:8,255', 'confirmed']
+            ], $customMessages);
         }else{
             return Validator::make($data, ['email' => 'required|email|exists:users,email'], $customMessages);
         }
@@ -79,8 +85,11 @@ class FePasswordReset extends Controller
      */
     public function passreset(Request $request)
     {
-        $validator = $this->validator($request->only(['token','email']), true);
+        $validator = $this->validator($request->only(['token','email','password','password_confirmation']), true);
         if ($validator->fails()) {
+            if($request->ajax()){
+                return ['status' => 'error', 'message' => $validator->getMessageBag()->toArray()];
+            }
             return redirect()
                 ->route('fe_loginWindow', $request->only(['token', 'email']))
                 ->with('target', 'reset')
@@ -101,9 +110,14 @@ class FePasswordReset extends Controller
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
+        if($request->ajax()){
+            return ($response == Password::PASSWORD_RESET)
+                    ?['status' => 'success', 'message' => 'Password reset successful']
+                    :['status' => 'error', 'message' => trans($response)];
+        }
         return $response == Password::PASSWORD_RESET
             ? $this->sendResetResponse($request, $response)
-            : $this->sendResetFailedResponse($request, $response);
+            : $this->sendResetFailedResponse($request, $response);        
     }
 
     /**

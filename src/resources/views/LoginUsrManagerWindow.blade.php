@@ -1,49 +1,58 @@
-<!DOCTYPE html>
-<html>
+@extends('fe_login::LoginFrame')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title','User Manager')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="" name="Lucas.F.Lu" />
-    <style>
-        body {
-            height: 100%;
-            background: #F5F5F5;
-            color: #5B5B5B;
-            font-family: 'Lato', 'Open Sans', Helvetica, sans-serif !important;
-            line-height: 1.42857143;
-            -webkit-font-smoothing: antialiased;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            font-size: 14px;
-        }
-    </style>
-    @if (file_exists(public_path('js/app.js')))
-    <script src="{{asset('js/app.js')}}"></script>
-    @else
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js" crossorigin="anonymous"></script>
-    @endif
-    <script src="{{asset('/feiron/fe_login/js/Fe_Login_bootstrap.js')}}"></script>
-    <script src="{{asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js')}}"></script>
-    @stack('usrManageHeader')
-</head>
+@push('headerstyles')
+<link rel="stylesheet" href="{{asset('/feiron/fe_login/css/usrManager.css')}}"/>
+@endpush
 
+@push('headerscripts')
+<script src="{{asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js')}}"></script>
+@stack('usrManageHeader')
+@endpush
+@section('main-content')
 
-<body class="usr_login_form p-5" data-page="login">
-    <div class="row" id="app">
-        <div class="col-md-2 d-none d-md-block">
-        </div>
-        <div class="col-md-8 col-sm-12">
-            <x-fe-user-manager/>
-        </div>
-        <div class="col-md-2 d-none d-md-block">
+<div class="usr-manager w-75 h-75 py-5 p-3 position-absolute start-50 top-50 translate-middle">
+    <div class="container-fluid">
+        <div class="row" id="app">
+            <div class="col-md-2 d-none d-md-block">
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <x-fe-user-manager />
+            </div>
+            <div class="col-md-2 d-none d-md-block">
+            </div>
         </div>
     </div>
-    @stack('usrManageFooter')
-    @stack('OutletResource')
-</body>
+</div>
 
-</html>
+@parent
+
+<div class="modal fade" id="usrManagementCtr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create a user</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body User_Management">
+                <div class="text-center loading">
+                    <h4>Loading Contents...</h4>
+                    <i class="fas fa-circle-notch fa-spin fa-2x p-0"></i>
+                </div>
+                <div class="User_Management_Area">
+                    @include('fe_login::outletViews.userManagementCRUD')
+                </div>
+                <div id="usrManageWinMsg" class="hidden">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="usrSave">Save changes</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stack('usrManageFooter')
+@stack('OutletResource')
+
+@endsection

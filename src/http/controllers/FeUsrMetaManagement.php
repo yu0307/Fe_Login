@@ -9,6 +9,11 @@ use feiron\fe_login\models\fe_userMetaTypes;
 
 class FeUsrMetaManagement extends Controller
 {
+
+    public function show(){
+        return view('fe_login::LoginUsrMetaManagerWindow');
+    }
+
     public function saveMeta(Request $request){
         $validator = Validator::make($request->all(), [
             'meta_name' => 'required|max:255|unique:user_metatypes,meta_name,' . $request->input('MetaID') . ',id',

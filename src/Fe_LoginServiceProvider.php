@@ -13,8 +13,8 @@
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
             //registering blade components 
-            Blade::include('fe_login::LoginForm', 'fe_loginForm');//aliasing, shortcut to include the view by only name "fe_loginForm" when used.
             Blade::component('fe-user-manager', \feiron\fe_login\lib\view\components\feUserManager::class);
+            Blade::component('fe-user-meta-manager', \feiron\fe_login\lib\view\components\feUserMetaManager::class);
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);

@@ -10,6 +10,11 @@ use feiron\fe_login\models\fe_userMetaTypes;
 class FeUsrMetaManagement extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('FeAuthenticate');
+    }
+
     public function show(){
         return view('fe_login::LoginUsrMetaManagerWindow');
     }

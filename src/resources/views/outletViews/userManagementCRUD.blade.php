@@ -35,7 +35,7 @@
     </li>
     {!!$menu!!}
 </ul>
-<div class="tab-content" >
+<div class="tab-content mt-3" >
     <div class="tab-pane fade active in p-2 show in" id="usrBasic" role="tabpanel">
         <input type="hidden" class="form-control" value="" id="usr_ID" name="usr_ID">
         <div class="form-row row">

@@ -55,6 +55,5 @@
 </div>
 
 @stack('usrMetaManageFooter')
-@stack('OutletResource')
 
 @endsection

@@ -30,7 +30,7 @@
 
         //protect these routes if you have role control or anyone could change user data.
 
-        Route::get('usermanagement', 'FeUsrManagement@show')->name('Fe_UserManagementUI');
+        // Route::get('usermanagement', 'FeUsrManagement@show')->name('Fe_UserManagementUI');
         Route::post('usermanagement', 'FeUsrManagement@SaveUser')->name('Fe_UserManagement_save');
         Route::post('usermanagement/load', 'FeUsrManagement@loadList')->name('Fe_UserManagement_load');
         Route::get('usermanagement/{UID}', 'FeUsrManagement@GetUser')->name('Fe_UserManagement_get');
@@ -40,7 +40,7 @@
         Route::post('uploadUsrProfileImg', 'FeProfileController@UploadProfImg')->name('FeLogin_ProfImgUpload');
         Route::post('uploadUsrProfileImg/remove', 'FeProfileController@removeProfImg')->name('FeLogin_ProfImgRemove');
 
-        Route::get('usermetamanagement', 'FeUsrMetaManagement@show')->name('Fe_UserMetaManagementUI');
+        // Route::get('usermetamanagement', 'FeUsrMetaManagement@show')->name('Fe_UserMetaManagementUI');
         Route::post('usermeta', 'FeUsrMetaManagement@saveMeta')->name('Fe_UserMetaManagement');
         Route::post('usermeta/list', 'FeUsrMetaManagement@listMetaFields')->name('Fe_UserMetalist');
         Route::post('usermeta/delete/{MID}', 'FeUsrMetaManagement@removeMetaFields')->name('Fe_UserMetaRemove');

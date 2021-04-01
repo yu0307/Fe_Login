@@ -403,6 +403,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
 
 /***/ }),
 
+/***/ "./vendor/feiron/fe_roles/src/resources/scss/roleManagement.scss":
+/*!***********************************************************************!*\
+  !*** ./vendor/feiron/fe_roles/src/resources/scss/roleManagement.scss ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi92ZW5kb3IvZmVpcm9uL2ZlX3JvbGVzL3NyYy9yZXNvdXJjZXMvc2Nzcy9yb2xlTWFuYWdlbWVudC5zY3NzPzRjNjYiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBIiwiZmlsZSI6Ii4vdmVuZG9yL2ZlaXJvbi9mZV9yb2xlcy9zcmMvcmVzb3VyY2VzL3Njc3Mvcm9sZU1hbmFnZW1lbnQuc2Nzcy5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vIGV4dHJhY3RlZCBieSBtaW5pLWNzcy1leHRyYWN0LXBsdWdpblxuZXhwb3J0IHt9OyJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./vendor/feiron/fe_roles/src/resources/scss/roleManagement.scss\n");
+
+/***/ }),
+
 /***/ "./vendor/feiron/fe_login/src/resources/scss/fe_LoginWindow.scss":
 /*!***********************************************************************!*\
   !*** ./vendor/feiron/fe_login/src/resources/scss/fe_LoginWindow.scss ***!
@@ -551,7 +562,8 @@ eval("// shim for using process in browser\nvar process = module.exports = {};\n
 /******/ 			["./vendor/feiron/fe_theme/src/resources/sass/util.scss"],
 /******/ 			["./vendor/feiron/fe_theme/src/resources/sass/controlpanel.scss"],
 /******/ 			["./vendor/feiron/fe_widgets/src/resources/sass/dashboard.scss"],
-/******/ 			["./vendor/feiron/fe_widgets/src/resources/sass/wg_weather.scss"]
+/******/ 			["./vendor/feiron/fe_widgets/src/resources/sass/wg_weather.scss"],
+/******/ 			["./vendor/feiron/fe_roles/src/resources/scss/roleManagement.scss"]
 /******/ 		];
 /******/ 		// no chunk on demand loading
 /******/ 		

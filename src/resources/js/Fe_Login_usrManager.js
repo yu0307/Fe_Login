@@ -1,11 +1,12 @@
+var usrModal;
 window.ready(()=>{
-    let usrModal = new bootstrap.Modal(document.getElementById('usrManagementCtr'));
+    usrModal = new bootstrap.Modal(document.getElementById('usrManagementCtr'));
     document.getElementById('usrManagementCtr').addEventListener('hidden.bs.modal',clearWorkingArea);
     document.getElementById('btn_usrCreate').addEventListener('click',()=>{
         new bootstrap.Tab(document.querySelector('#usrManagementCtr li.nav-item:first-child a')).show();
         document.querySelector('#usrManagementCtr .modal-title').innerText="Create a new user";
         document.querySelector('#usrSave').innerText="Create User";
-        usrModal.show();
+        showModal();
     });
     document.getElementById('usr_management_area').addEventListener('click',(e)=>{
         if (e.target.classList.contains('user_img') || e.target.classList.contains('user_prof_pics') ) {
@@ -13,7 +14,7 @@ window.ready(()=>{
             document.querySelector('#usrManagementCtr .loading').classList.add('show');
             document.querySelector('#usrManagementCtr .modal-title').innerText='Update User information';
             document.getElementById('usrSave').innerText='Update User';
-            usrModal.show();
+            showModal();
             window.usrManagement.loadUsr(e.target.closest('.users').getAttribute('uid'), function (uid, data) {
                 new bootstrap.Tab(document.querySelector('#usrManagementCtr li.nav-item:first-child a')).show();
                 document.getElementById('usr_ID').value=uid;
@@ -68,6 +69,11 @@ window.ready(()=>{
         });
     });
 });
+
+function showModal(){
+    usrModal.show();
+    document.querySelector('#usrManagementCtr').dispatchEvent(new CustomEvent('shown-User_Management'));
+}
 
 function clearWorkingArea(){
     document.querySelectorAll('#usrManagementCtr input:not([type="radio"],[type="checkbox"]), #usrManagementCtr textarea, #usrManagementCtr select').forEach((elm)=>{

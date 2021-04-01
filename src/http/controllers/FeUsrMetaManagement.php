@@ -9,6 +9,16 @@ use feiron\fe_login\models\fe_userMetaTypes;
 
 class FeUsrMetaManagement extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('FeAuthenticate');
+    }
+
+    public function show(){
+        return view('fe_login::LoginUsrMetaManagerWindow');
+    }
+
     public function saveMeta(Request $request){
         $validator = Validator::make($request->all(), [
             'meta_name' => 'required|max:255|unique:user_metatypes,meta_name,' . $request->input('MetaID') . ',id',
@@ -41,20 +51,19 @@ class FeUsrMetaManagement extends Controller
     public function listMetaFields(Request $request){
         $datainfo = [];
         $QueryBuilder = fe_userMetaTypes::query();
-        $columnIndex = $request->input('order')[0]['column']; // Column index
-        $columnName = $request->input('columns')[$columnIndex]['data']; // Column name
-        $columnSortOrder = $request->input('order')[0]['dir']; // asc or desc
+        $columnName = $request->has('sorters')?$request->input('sorters')[0]['field']:'meta_name'; // Column name
+        $columnSortOrder = $request->has('sorters')?$request->input('sorters')[0]['dir']:'asc'; // asc or desc
 
         $datainfo['recordsTotal'] = $QueryBuilder->count();
-        $datainfo['draw'] = $request->input('draw');
+        $datainfo['rowperpage'] = $request->input('size');
+        $datainfo['last_page'] = ceil($QueryBuilder->count()/$datainfo['rowperpage']);
         $datainfo['page'] = $request->input('page');
-        $datainfo['rowperpage'] = $request->input('length');
         // Building column specific search--------------------------
         $QueryBuilder->where(
             function ($query) use ($request) {
-                foreach ($request->input('columns') as $column) {
-                    if (isset($column['search']['value'])) {
-                        $query->where($column['data'], 'like', ('%' . $column['search']['value'] . '%'));
+                foreach ($request->input('filters')??[] as $column) {
+                    if (isset($column['value'])) {
+                        $query->where($column['field'], 'like', ('%' . $column['value'] . '%'));
                     }
                 }
             }

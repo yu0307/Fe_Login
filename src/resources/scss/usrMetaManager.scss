@@ -1,0 +1,35 @@
+@use 'shared';
+@include shared.shared;
+.usr-meta-manager {
+    z-index: 1000;
+}
+.form-control {
+    margin: 0px;
+    box-shadow: none !important;
+    display: inline-block !important;
+    font-size: 13px !important;
+    height: auto;
+    line-height: normal !important;
+    vertical-align: middle;
+    width: 100%;
+    border-radius: 2px;
+    transition: all 0.2s ease-out;
+}
+#usrMeta_management{
+    #usrmeta_dt_list{
+        .btn{
+            font-size: 11px;
+        }
+    }
+}
+#usrMetaManagementCtr{
+    .loading {
+        display: none;
+        &.show {
+            display: block;
+            ~ .User_Meta_Management_Area {
+                display: none;
+            }
+        }
+    }
+}

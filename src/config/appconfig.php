@@ -14,6 +14,7 @@
                 'redirect' => '/login/facebook/callback'
             ]
         ],
+        'useAjax'=>true,
         'loginTitle'=>'',
         'loginDescription'=>'',
         'HasRegister'=>true,

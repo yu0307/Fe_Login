@@ -55,7 +55,7 @@ class FeSignupController extends Controller
         return Validator::make($data, [
             'usr_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'between:8,255', 'confirmed'],
+            'password' => ['required', 'string', 'between:8,255', 'confirmed']
         ]);
     }
 

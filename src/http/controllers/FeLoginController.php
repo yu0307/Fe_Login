@@ -48,7 +48,7 @@ class FeLoginController extends Controller
     }
     
     public function RenderLoginWindow(Request $request){
-        return view('fe_login::LoginWindow')->with(['target' => $this->ParseTarget($request)]);
+        return view('fe_login::loginWindow')->with(['target' => $this->ParseTarget($request)]);
     }
 
     public function TryLogin($AuthType = null, Request $request){

@@ -13,8 +13,8 @@
             $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
             //registering blade components 
-            Blade::include('fe_login::LoginForm', 'fe_loginForm');//aliasing, shortcut to include the view by only name "fe_loginForm" when used.
             Blade::component('fe-user-manager', \feiron\fe_login\lib\view\components\feUserManager::class);
+            Blade::component('fe-user-meta-manager', \feiron\fe_login\lib\view\components\feUserMetaManager::class);
 
             $this->app['router']->aliasMiddleware('Fe_Guest', middleware\FeRedirectIfAuthenticated::class);
             $this->app['router']->aliasMiddleware('FeAuthenticate', middleware\FeAuthenticate::class);
@@ -45,7 +45,7 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrManager',
                     'myName'=>'User Management',
-                    'reousrce'=>[
+                    'resource'=>[
                         asset('/feiron/fe_login/js/Fe_Login_usrManager_ui.js'),
                         asset('/feiron/fe_login/js/Fe_Login_usrOutlet.js'),
                         asset('/feiron/fe_login/css/Fe_Login_usrManager_Outlet.css')
@@ -54,17 +54,15 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUsrMetaManager',
                     'myName'=>'User Meta Info',
-                    'reousrce'=>[
-                        asset('/feiron/felaraframe/plugins/datatables/dataTables.min.css'),
-                        asset('/feiron/felaraframe/plugins/datatables/jquery.dataTables.min.js'),
+                    'resource'=>[
                         asset('/feiron/fe_login/js/Fe_Login_usrMetaManager.js'),
                         asset('/feiron/fe_login/css/Fe_Login_usrMetaManager.css')
                     ]
                 ]));
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfDetails',
-                    'myName'=> 'User Details',
-                    'reousrce'=>[ 
+                    'myName'=> 'User Detail',
+                    'resource'=>[ 
                         asset('/feiron/fe_login/js/Fe_Login_UsrDetail.js'),
                         asset('/feiron/fe_login/css/Fe_Login_UsrDetail.css')
                     ]
@@ -72,7 +70,7 @@
                 app()->frameOutlet->bindOutlet('Fe_FrameProfileOutlet', new \feiron\felaraframe\lib\outlet\feOutlet([
                     'view'=> 'fe_login::LoginOutletUserProfSecurity',
                     'myName'=> 'Security',
-                    'reousrce'=>[asset('/feiron/fe_login/js/Fe_Login_UsrSecurity.js') ]
+                    'resource'=>[asset('/feiron/fe_login/js/Fe_Login_UsrSecurity.js') ]
                 ]));
             }
         }

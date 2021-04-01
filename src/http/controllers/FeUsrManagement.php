@@ -111,6 +111,7 @@ class FeUsrManagement extends Controller
 
         if ($request->filled('metainfo')) {
             foreach ($request->input('metainfo') as $key => $val) {
+                $val = is_array($val)?join(',',$val):$val;
                 $usr->metainfo()->updateOrCreate(['meta_name' => $key],['meta_value' => $val]);
             }
         }

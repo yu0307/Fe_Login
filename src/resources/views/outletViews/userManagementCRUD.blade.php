@@ -5,12 +5,16 @@
     @foreach (app()->UserManagementOutlet->getOutlet('UserManageOutlet') as $OutletItem)
         @php
             $ID=str_replace(' ','_',$OutletItem->MyName());
-            $menu.='
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#'.$ID.'" role="tab" >'.$OutletItem->MyName().'</a>
+            $menu.='<li class="nav-item" role="presentation">
+                        <a 
+                            class="nav-link"
+                            data-bs-target="#'.$ID.'" 
+                            role="tab" 
+                            href="#'.$ID.'" 
+                            data-bs-toggle="tab">'.$OutletItem->MyName().'</a>
                     </li>';
         @endphp
-        <div class="tab-pane fade p-2" id="{{$ID}}" role="tabpanel">
+        <div class="tab-pane fade py-1" id="{{$ID}}" role="tabpanel">
             @php
                 $view=$OutletItem->getView();
                 if ($__env->exists($view->Name(),$view->getData())){
@@ -25,50 +29,58 @@
     {!! join(app()->UserManagementOutlet->OutletResources('UserManageOutlet')) !!}
 @endpush
 
-<ul class="nav nav-pills nav-fill" role="tablist">
-    <li class="nav-item active">
-        <a class="nav-link active" id="usrBasic-tab" data-toggle="tab" href="#usrBasic" role="tab" aria-selected="true">Basic Info</a>
+<ul class="nav nav-pills nav-primary nav-fill f-16" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="usrBasic-tab" data-bs-toggle="tab" data-bs-target="#usrBasic" href="#usrBasic" role="tab" aria-selected="true">Basic Info</a>
     </li>
     {!!$menu!!}
 </ul>
-<div class="tab-content" >
-    <div class="tab-pane fade active in p-2" id="usrBasic" role="tabpanel">
-        <input type="hidden" class="form-control form-white" value="" id="usr_ID" name="usr_ID">
-        <div class="form-row">
+<div class="tab-content mt-3" >
+    <div class="tab-pane fade active in p-2 show in" id="usrBasic" role="tabpanel">
+        <input type="hidden" class="form-control" value="" id="usr_ID" name="usr_ID">
+        <div class="form-row row">
             <div class="col-md-6 col-sm-12">
-                <label for="usrName">Name</label>
-                <div class="input-group">
-                    <input class="form-control form-white" type="text" name="usrName" id="usrName" value=""
-                        placeholder="Name ...">
+                <div class="form-group">
+                    <label class="control-label" for="usrName">Name</label>
+                    <div class="prepend-icon input-group">
+                        <input class="form-control" type="text" name="usrName" id="usrName" value="" placeholder="Name ...">
+                        <i class="fa fa-indent"></i>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <label for="usrEmail">E-mail</label>
-                <div class="input-group mb-2">
-                    <input class="form-control form-white" type="email" name="email" id="email" value="" placeholder="Email ..."
-                        required>
+                <div class="form-group">
+                    <label class="control-label" for="usrEmail">E-mail</label>
+                    <div class="prepend-icon input-group">
+                        <input class="form-control" type="email" name="email" id="email" value="" placeholder="Email ..." required>
+                        <i class="fa fa-indent"></i>
+                    </div>
                     <div class="invalid-feedback">
                         Please choose a unique and valid username.
                     </div>
                 </div>
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row row">
             <div class="col-md-6 col-sm-12">
-                <label for="usrPassword">Password</label>
-                <div class="input-group">
-                    <input class="form-control form-white" type="password" name="password" id="usrPassword" value=""
-                        placeholder="Password ..." required>
+                <div class="form-group">
+                    <label class="control-label" for="usrPassword">Password</label>
+                    <div class="prepend-icon input-group">
+                        <input class="form-control" type="password" name="password" id="usrPassword" value="" placeholder="Password ..." required>
+                        <i class="fa fa-indent"></i>
+                    </div>
                     <div class="invalid-feedback">
                         Please provide a password.
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <label for="password_confirmation">Confirm Password</label>
-                <div class="input-group">
-                    <input class="form-control form-white" type="password" name="password_confirmation"
-                        id="password_confirmation" value="" placeholder="Confirm Password ..." required>
+                <div class="form-group">
+                    <label class="control-label" for="password_confirmation">Confirm Password</label>
+                    <div class="prepend-icon input-group">
+                        <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" placeholder="Confirm Password ..." required>
+                        <i class="fa fa-indent"></i>
+                    </div>
                     <div class="invalid-feedback">
                         Please provide a password.
                     </div>
@@ -78,7 +90,7 @@
                 </div>
             </div>
             <div class="whenUpdate col-md-12">
-                <h4 class="t-center text-center">Leave password fields empty to omit changing password. </h4>
+                <h4 class="t-center text-center alert alert-info ft-14 py-2">Leave password fields empty to omit changing password. </h4>
             </div>
         </div>
     </div>
